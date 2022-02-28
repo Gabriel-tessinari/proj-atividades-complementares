@@ -8,9 +8,7 @@ export class ServiceBase {
   protected urlBase = environment.endpoint;
   protected path = "";
 
-  constructor(protected http: HttpClient) {
- 
-  }
+  constructor(protected http: HttpClient) {}
 
   get(header?: any, params?: HttpParams): Observable<any>{
     const url = this.urlBase + "/" + this.path;

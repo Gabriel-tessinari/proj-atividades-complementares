@@ -1,4 +1,4 @@
-import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment'
@@ -10,42 +10,31 @@ export class ServiceBase {
 
   constructor(protected http: HttpClient) {}
 
-  get(header?: any, params?: HttpParams): Observable<any>{
+  get(header?: any, params?: HttpParams): Observable<any> {
     const url = this.urlBase + "/" + this.path;
     return this.http.get<any>(
-      url, 
-      { headers: header, 
-      params
-    });
+      url, { headers: header, params }
+    );
   }
-
 
   post(request: any, header?: any): Observable<any> {
     const url = this.urlBase + "/" + this.path;
-    return this
-      .http
-      .post<any>(
-        url,
-        request,
-        { headers: header
-      });
+    return this.http.post<any>(
+      url, request, { headers: header }
+    );
   }
 
   put(request: any, header?: any): Observable<any> {
     const url = this.urlBase + "/" + this.path;
     return this.http.put<void>(
-      url,
-      request,
-      { headers: header
-    });
-
+      url, request, { headers: header }
+    );
   }
 
   delete(id?: number, header?: any): Observable<void> {
     const url = this.urlBase + "/" + this.path + "/" + id;
     return this.http.delete<void>(
-      url, 
-      { headers: header
-    });
+      url, { headers: header }
+    );
   }
 }

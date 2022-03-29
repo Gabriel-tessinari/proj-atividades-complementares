@@ -1,6 +1,50 @@
+.container-fluid{
+  padding: 25px;
+}
+
 .card-header-cursos {
   background: #c4c4c4;
   color: white;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: bold;
+}
+
+.btn-primary{
+  color: #8a8989;
+  background-color: white;
+  font-weight: bold;
+  border-color: #8a8989;
+  border-radius: 8px;
+  width: fit-content;
+  height: fit-content;
+}
+
+.btn-primary:hover{
+  background-color: #8a8989;
+  color: white;
+}
+
+h1{
+padding-left: 20px;
+}
+
+h5{
+  color:#333333;
+  padding-top: 5px;
+  padding-right: 20px;
+  padding-left: 33%;
+}
+
+.card-body{
+  display: flex;
+  text-align:center;
+  background-color: #E0E0E0;
+  box-shadow: 1px 1px 9px grey;
+  padding: 40px;
+}
+
+.form-control{
+  display:inline;
+  width: 300px;
+  border-radius: 8px;
 }

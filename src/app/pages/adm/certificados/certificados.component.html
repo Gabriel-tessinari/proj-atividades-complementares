@@ -4,12 +4,10 @@
       FILTRAR ALUNOS POR CURSO
     </div>
     <div class="card-body">
-      <h5>Lista de cursos</h5>
-        <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Escolha um curso">         
-          <datalist id="datalistOptions">
-            <option value="Teste 1">
-            <option value="Teste 2">
-            <option value="Teste 3">
+      <h5>Cursos</h5>
+        <input class="form-control" list="lista-cursos" id="exampleDataList" placeholder="Escolha um curso">         
+          <datalist id="lista-cursos">
+            <option *ngFor="let curso of cursos" [value]= curso.name> {{curso.name}} </option>
           </datalist>
   <h1></h1>
   <a href="#" class="btn btn-primary">Buscar</a>

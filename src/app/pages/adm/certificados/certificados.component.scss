@@ -48,3 +48,24 @@ h5{
   width: 300px;
   border-radius: 8px;
 }
+
+.container-tabela{
+  padding: 25px;
+}
+
+table {
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th {
+  cursor: pointer;
+  background-color: #CBCBCB;
+
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+}

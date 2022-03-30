@@ -10,6 +10,28 @@
             <option *ngFor="let curso of cursos" [value]= curso.name> {{curso.name}} </option>
           </datalist>
   <h1></h1>
-  <a href="#" class="btn btn-primary">Buscar</a>
+  <a class="btn btn-primary" (click)="loadHorasComplementares()">Buscar</a>
+    </div>
+  </div>
+  <div class="container-tabela">
+    <div class="card">
+      <div class="card-header">
+        <i class="fas fa-user" style="margin-right: 10px;"></i>Alunos
+      </div>
+    <table id="myTable">
+      <tr>
+       <!--When a header is clicked, run the sortTable function, with a parameter, 0 for sorting by names, 1 for sorting by country:-->  
+        <th onclick="sortTable(0)">Nome</th>
+        <th onclick="sortTable(1)">Matrícula</th>
+        <th onclick="sortTable(2)">Certificados Pendentes</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let aluno of alunos">
+        <td>{{aluno.nome}}</td>
+        <td>{{aluno.matricula}}</td>
+        <td>{{aluno.certificadosPendentes}}</td>
+        <td><a class="btn btn-success">Validar Certificados</a></td>
+      </tr>
+    </table>
     </div>
   </div>

@@ -1,4 +1,8 @@
+import { AreaJson } from "./area.json";
+
 export class CursoJson {
   id: number;
-  nome: string;
+  name: string;
+  areaId: number;
+  area: AreaJson;
 }

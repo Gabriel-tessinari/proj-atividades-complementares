@@ -1,0 +1,57 @@
+.container-fluid{
+  padding: 25px;
+}
+
+.card-header-cursos {
+  background: #c4c4c4;
+  color: white;
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.btn-white {
+  color: #8a8989;
+  background-color: white;
+  font-weight: bold;
+  border-color: #8a8989;
+  border-radius: 8px;
+  width: fit-content;
+  height: fit-content;
+  margin-left: 20px;
+}
+
+.btn-white:hover {
+  background-color: #8a8989;
+  color: white;
+}
+
+h5 {
+  color:#333333;
+  padding-top: 5px;
+  padding-right: 20px;
+  padding-left: 33%;
+}
+
+.card-body{
+  display: flex;
+  text-align:center;
+  background-color: #E0E0E0;
+  padding: 40px;
+}
+
+.form-control{
+  display:inline;
+  width: 300px;
+  border-radius: 8px;
+}
+
+th {
+  cursor: pointer;
+  background-color: #CBCBCB;
+  padding: 16px;
+}
+
+th, td {
+  text-align: left;
+  border-color: #c4c4c4;
+}

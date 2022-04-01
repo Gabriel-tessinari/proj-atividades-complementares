@@ -2,5 +2,5 @@
 @import './assets/scss/structure.scss';
 
 body {
-  background: map-get($colors, _lightgray) !important;
+  background: map-get($colors, bgcolor) !important;
 }

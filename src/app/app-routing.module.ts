@@ -6,7 +6,7 @@ const routes: Routes = [
   { path: '', loadChildren: () => import('./pages/cursos/cursos.module').then(m => m.CursosModule) },
   { path: '', component: AdmDefaultComponent,
     children: [
-      { path: 'certificados', loadChildren: () => import('./pages/adm/adm.module').then(m => m.AdmModule) }
+      { path: '', loadChildren: () => import('./pages/adm/adm.module').then(m => m.AdmModule) }
     ]
   }
 ];

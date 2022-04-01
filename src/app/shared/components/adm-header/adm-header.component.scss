@@ -18,7 +18,22 @@
 
 .navheader-minor {
   background: map-get($colors, uvvblue) !important;
-  width: 100%;
-  height: 50px;
   color: white;
+  height: 50px;
+  width: 100%;
+
+  .row {
+    height: 50px;
+
+    .col-12 {
+      height: 50px;
+      padding-top: 10px;
+    }
+  }
+}
+
+a {
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
 }

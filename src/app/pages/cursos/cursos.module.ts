@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CursosRoutingModule } from './cursos-routing.module';
 import { CursosComponent } from './cursos/cursos.component';
-import { CursosService } from 'src/app/shared/services/cursos.service';
+import { TesteArqService } from 'src/app/shared/services/testeArq.service';
 
 @NgModule({
   declarations: [CursosComponent],
@@ -12,7 +12,7 @@ import { CursosService } from 'src/app/shared/services/cursos.service';
     CursosRoutingModule
   ],
   providers: [
-    CursosService
+    TesteArqService
   ]
 })
 export class CursosModule { }

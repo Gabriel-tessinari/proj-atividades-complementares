@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CursoJson } from 'src/app/shared/json/curso.json';
-import { CursosService } from 'src/app/shared/services/cursos.service';
+import { TesteArqService } from 'src/app/shared/services/testeArq.service';
 
 @Component({
   selector: 'app-cursos',
@@ -11,7 +11,7 @@ export class CursosComponent implements OnInit {
   cursos: Array<CursoJson>;
 
   constructor(
-    private cursosService: CursosService
+    private testeArqService: TesteArqService
   ) { }
 
   ngOnInit(): void {
@@ -20,6 +20,15 @@ export class CursosComponent implements OnInit {
   }
 
   loadCursos() {
-    this.cursos = this.cursosService.getCursosFake();
+    this.testeArqService.getCursos()
+    .subscribe(
+      response => {
+        this.cursos = response;
+        console.log(this.cursos);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AlunoJson } from '../json/aluno.json';
 import { CursoJson } from '../json/curso.json';
 import { HorasComplementaresJson } from '../json/horas-complementares.json';
-import { ServiceBase } from './service-base';
+import { ServiceBase } from './service.base';
 
 @Injectable()
 export class TesteArqService extends ServiceBase {

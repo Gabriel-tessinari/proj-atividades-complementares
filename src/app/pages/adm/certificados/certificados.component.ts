@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AreaJson } from 'src/app/shared/json/area.json';
 import { CursoJson } from 'src/app/shared/json/curso.json';
 import { HorasComplementaresJson } from 'src/app/shared/json/horas-complementares.json';
 import { PontuacaoJson } from 'src/app/shared/json/pontuacao.json';
@@ -33,9 +32,7 @@ export class CertificadosComponent implements OnInit {
         this.cursos = response;
       },
       error => {
-        this.cursos = [{id: 10, name: "abacaxi", areaId: 10, area: new AreaJson}, {id: 10, name: "limão", areaId: 10, area: new AreaJson},
-         {id: 10, name: "uva", areaId: 10, area: new AreaJson}]
-        //console.log(error);
+        console.log(error);
       }
     );
   }
@@ -47,39 +44,8 @@ export class CertificadosComponent implements OnInit {
         this.horasComplementares = response;
         this.loadAlunos();
       },
-      error => {
-        this.horasComplementares = [{id: 10,
-          certificado: 'string',
-          observacao: 'null',
-          horas: 10,
-          alunoId: 2,
-          aluno: {id: 2,
-            matricula: 334,
-            nome: 'string',
-            cursoId: 3,
-            curso: new CursoJson},
-          pontuacaoId: 4,
-          pontuacao: new PontuacaoJson,
-          statusId: 2,
-          status:{id: 3,
-            descricao: 'string',} },
-          {id: 10,
-            certificado: 'string',
-            observacao: 'null',
-            horas: 10,
-            alunoId: 2,
-            aluno: {id: 2,
-              matricula: 18,
-              nome: 'Gabriel Tessinari Carregozi Miranda',
-              cursoId: 3,
-              curso: new CursoJson},
-            pontuacaoId: 4,
-            pontuacao: new PontuacaoJson,
-            statusId: 2,
-            status:{id: 3,
-              descricao: 'string',} }]
-         this.loadAlunos();   
-        //console.log(error);
+      error => {  
+        console.log(error);
       }
     );
   }
@@ -104,8 +70,7 @@ export class CertificadosComponent implements OnInit {
         }
         this.alunos.push(aluno);
       }     
-    })
-    console.log(this.alunos);
+    });
   }
 }
 

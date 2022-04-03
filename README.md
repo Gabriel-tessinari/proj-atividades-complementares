@@ -19,4 +19,7 @@ Projeto da disciplina de Laboratório de Engenharia de Software 2022/1.
 
 ### Rodando o programa:
 1. Com o BACKEND e o banco de pé, usar o comando `npm start`. As chamadas serão feitas ao endpoint em src/environments/environment.ts;
-2. Enquanto apenas desenvolvendo, usar comando `npm start mock`. As chamadas serão direcionadas para os services com resultados aleatórios em src/app/shared/mock.
+2. Quanto apenas desenvolvendo, usar comando `npm start mock`. As chamadas serão direcionadas para os services com resultados aleatórios em src/app/shared/mock.
+
+### Links úteis para os colaboradores:
+1. Para funções novas no mock.util.ts: https://fakerjs.dev/guide/

@@ -4,8 +4,8 @@ import { CertificadosAlunoComponent } from './certificados-aluno/certificados-al
 import { CertificadosComponent } from './certificados/certificados.component';
 
 const routes: Routes = [
-  { path: '', component: CertificadosComponent },
-  { path: 'aluno', component: CertificadosAlunoComponent }
+  { path: 'certificados', component: CertificadosComponent },
+  { path: 'certificados/aluno', component: CertificadosAlunoComponent }
 ];
 
 @NgModule({

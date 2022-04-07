@@ -1,4 +1,6 @@
+import { not } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
+import { AlunoJson } from 'src/app/shared/json/aluno.json';
 import { CursoJson } from 'src/app/shared/json/curso.json';
 import { HorasComplementaresJson } from 'src/app/shared/json/horas-complementares.json';
 import { TesteArqService } from 'src/app/shared/services/testeArq.service';
@@ -13,7 +15,11 @@ export class CertificadosComponent implements OnInit {
   horasComplementares: Array<HorasComplementaresJson>;
   idCursoSelecionado: number;
   alunos: Array<Aluno>;
+  buttonFlag: boolean;
+  textValue: string;
+  tabelaAuxiliar: Array<Aluno>;
   
+
   constructor( 
     private testeArqService: TesteArqService
   ) { }
@@ -22,6 +28,7 @@ export class CertificadosComponent implements OnInit {
     this.cursos = [];
     this.loadCursos();
     this.alunos = [];
+    this.buttonFlag = true;
   }
 
   loadCursos() {   
@@ -36,7 +43,16 @@ export class CertificadosComponent implements OnInit {
     );
   }
 
+  loadButton(){
+   if( this.textValue == null|| this.textValue ==""){
+        this.buttonFlag= true; 
+      } else 
+        this.buttonFlag = false;
+
+  }
+
   loadHorasComplementares() {
+
     this.testeArqService.getHorasComplementaresByCurso(this.idCursoSelecionado)
     .subscribe(
       response => {
@@ -47,6 +63,7 @@ export class CertificadosComponent implements OnInit {
         console.log(error);
       }
     );
+    
   }
 
   loadAlunos() {   
@@ -71,6 +88,32 @@ export class CertificadosComponent implements OnInit {
       }     
     });
   }
+
+  sortTable(coluna: number) {
+    var table;
+    
+    if(this.alunos.length > 0){
+      if(coluna=0){
+        //ordenar por nome
+        for(var i=0; i< this.alunos.length; i++){
+          
+        }
+        this.alunos[0].nome
+      }
+      if(coluna=1){
+        //ordenar por matricula
+      }
+      if(coluna=2){
+        //ordenar por certificados pendentes (maior para menor)
+      }
+    
+
+    
+   
+  }}
+
+
+
 }
 
 class Aluno{
@@ -84,3 +127,7 @@ class Aluno{
     this.certificadosPendentes = 0;
   }
 }
+
+
+  
+

@@ -18,12 +18,24 @@
   width: fit-content;
   height: fit-content;
   margin-left: 20px;
+  
 }
 
 .btn-white:hover {
   background-color: #8a8989;
   color: white;
 }
+
+.btn-white:disabled{
+  cursor: not-allowed;
+}
+
+.btn-white[disabled]:hover{
+  color: #8a8989;
+  background-color: white;
+}
+
+
 
 h5 {
   color:#333333;

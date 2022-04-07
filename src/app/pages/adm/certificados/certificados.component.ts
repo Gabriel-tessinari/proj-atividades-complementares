@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CursoJson } from 'src/app/shared/json/curso.json';
 import { HorasComplementaresJson } from 'src/app/shared/json/horas-complementares.json';
-import { PontuacaoJson } from 'src/app/shared/json/pontuacao.json';
 import { TesteArqService } from 'src/app/shared/services/testeArq.service';
 
 @Component({

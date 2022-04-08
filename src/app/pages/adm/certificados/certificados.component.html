@@ -5,9 +5,10 @@
     </div>
     <div class="card-body">
       <h5>Cursos</h5>
-      <input class="form-control" list="lista-cursos" placeholder="Escolha um curso">         
+      <input #inputCurso class="form-control" list="lista-cursos" placeholder="Escolha um curso"
+      (input)="selectCurso(inputCurso.value)">         
         <datalist id="lista-cursos">
-          <option *ngFor="let curso of cursos" [value]= curso.name> {{curso.name}} </option>
+          <option *ngFor="let curso of cursos">{{curso.name}}</option>
         </datalist>
       <a class="btn btn-white" (click)="loadHorasComplementares()">Buscar</a>
     </div>

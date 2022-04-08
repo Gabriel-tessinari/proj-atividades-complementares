@@ -1,19 +1,21 @@
+@import '../../../../assets/scss/variables';
+
 .container-fluid{
   padding: 25px;
 }
 
 .card-header-cursos {
-  background: #c4c4c4;
+  background: map-get($colors, mdgrey) !important;
   color: white;
   font-size: 19px;
   font-weight: bold;
 }
 
 .btn-white {
-  color: #8a8989;
+  color: map-get($colors, dkgrey);
   background-color: white;
   font-weight: bold;
-  border-color: #8a8989;
+  border-color: map-get($colors, dkgrey);
   border-radius: 8px;
   width: fit-content;
   height: fit-content;
@@ -21,12 +23,11 @@
 }
 
 .btn-white:hover {
-  background-color: #8a8989;
+  background-color: map-get($colors, dkgrey);
   color: white;
 }
 
 h5 {
-  color:#333333;
   padding-top: 5px;
   padding-right: 20px;
 }
@@ -36,7 +37,7 @@ h5 {
   text-align: center;
   justify-content: center;
   align-items: center;
-  background-color: #E0E0E0;
+  background-color: map-get($colors, lggrey) !important;
   padding: 40px;
 }
 
@@ -48,11 +49,11 @@ h5 {
 
 th {
   cursor: pointer;
-  background-color: #CBCBCB;
+  background-color: map-get($colors, mdgrey);
   padding: 16px;
 }
 
 th, td {
   text-align: left;
-  border-color: #c4c4c4;
+  border-color: map-get($colors, mdgrey);
 }

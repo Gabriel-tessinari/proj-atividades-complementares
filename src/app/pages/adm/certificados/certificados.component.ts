@@ -13,6 +13,7 @@ export class CertificadosComponent implements OnInit {
   idCursoSelecionado: number;
   horasComplementares: Array<HorasComplementaresJson>;
   alunos: Array<Aluno>;
+  desabilitaButton: boolean;
   
   constructor( 
     private testeArqService: TesteArqService
@@ -23,6 +24,7 @@ export class CertificadosComponent implements OnInit {
     this.idCursoSelecionado = 0;
     this.alunos = [];
     this.loadCursos();
+    this.desabilitaButton = true;
   }
 
   loadCursos() {   
@@ -46,6 +48,8 @@ export class CertificadosComponent implements OnInit {
         this.idCursoSelecionado = 0;
       }
     }
+
+    this.desabilitaButton = (this.idCursoSelecionado == 0);
   }
 
   loadHorasComplementares() {
@@ -58,7 +62,7 @@ export class CertificadosComponent implements OnInit {
       error => {  
         console.log(error);
       }
-    );
+    );  
   }
 
   loadAlunos() {

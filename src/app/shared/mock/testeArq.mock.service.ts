@@ -13,6 +13,10 @@ export class TesteArqMockService {
     }
     return response;
   }
+
+  getAlunoById(): AlunoJson {
+    return AlunoJson.prototype.mockObject();
+  }
   
   getCursos(): Array<CursoJson> {
     let response = [];

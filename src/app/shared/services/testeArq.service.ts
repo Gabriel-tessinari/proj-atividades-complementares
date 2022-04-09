@@ -14,18 +14,27 @@ export class TesteArqService extends ServiceBase {
     super(http);
   }
 
+  //ALUNOS:
   getAlunos(): Observable<Array<AlunoJson>> {
     if(environment.mock) return of(TesteArqMockService.prototype.getAlunos());
     this.path = 'Aluno';
     return this.get();
-  } 
+  }
+  
+  getAlunoById(alunoId: number): Observable<AlunoJson> {
+    if(environment.mock) return of(TesteArqMockService.prototype.getAlunoById());
+    this.path = 'Aluno/' + alunoId;
+    return this.get();
+  }
 
+  //CURSOS:
   getCursos(): Observable<Array<CursoJson>> {
     if(environment.mock) return of(TesteArqMockService.prototype.getCursos());
     this.path = 'Curso';
     return this.get();
   }
 
+  //HORAS COMPLEMENTARES:
   getHorasComplementares(): Observable<Array<HorasComplementaresJson>> {
     if(environment.mock) return of(TesteArqMockService.prototype.getHorasComplementares());
     this.path = 'HorasComplementares';

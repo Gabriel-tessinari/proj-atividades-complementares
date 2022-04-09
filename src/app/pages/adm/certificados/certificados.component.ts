@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { TesteArqService } from 'src/app/shared/services/testeArq.service';
 import { CursoJson } from 'src/app/shared/json/curso.json';
 import { HorasComplementaresJson } from 'src/app/shared/json/horas-complementares.json';
-import { TesteArqService } from 'src/app/shared/services/testeArq.service';
 
 @Component({
   selector: 'app-certificados',
@@ -24,9 +24,9 @@ export class CertificadosComponent implements OnInit {
     this.cursos = [];
     this.idCursoSelecionado = 0;
     this.alunos = [];
-    this.loadCursos();
     this.desabilitaButton = true;
     this.ordenacaoTabela = ['', '', ''];
+    this.loadCursos();
   }
 
   loadCursos() {   
@@ -82,6 +82,7 @@ export class CertificadosComponent implements OnInit {
       });
       if(!alunoNaLista){
         let aluno: Aluno = new Aluno();
+        aluno.id = hc.alunoId;
         aluno.nome = hc.aluno.nome;
         aluno.matricula = hc.aluno.matricula;
         if(hc.status.descricao == 'Pendente') {
@@ -132,11 +133,13 @@ export class CertificadosComponent implements OnInit {
 }
 
 class Aluno {
+  id: number;
   nome: string;
   matricula: number;
   certificadosPendentes: number;
 
   constructor() {
+    this.id = 0;
     this.nome = '';
     this.matricula = 0;
     this.certificadosPendentes = 0;

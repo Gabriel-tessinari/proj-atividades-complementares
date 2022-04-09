@@ -14,6 +14,7 @@ export class CertificadosComponent implements OnInit {
   horasComplementares: Array<HorasComplementaresJson>;
   alunos: Array<Aluno>;
   desabilitaButton: boolean;
+  ordenacaoTabela: string[];
   
   constructor( 
     private testeArqService: TesteArqService
@@ -25,6 +26,7 @@ export class CertificadosComponent implements OnInit {
     this.alunos = [];
     this.loadCursos();
     this.desabilitaButton = true;
+    this.ordenacaoTabela = ['', '', ''];
   }
 
   loadCursos() {   
@@ -90,59 +92,43 @@ export class CertificadosComponent implements OnInit {
     });
   }
 
-  sortTable(column: number) {
-    let alunosAux: Array<Aluno> = [];
-
-    
+  sortTable(coluna: number) {
+    switch(coluna) {
+      case 0:
+        if(this.ordenacaoTabela[0] == '' || this.ordenacaoTabela[0] == 'decresc') {
+          this.alunos.sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR', {ignorePunctuation: true}));
+          this.ordenacaoTabela = ['cresc', '', ''];
+        } else {
+          this.alunos.sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR', {ignorePunctuation: true})*-1);
+          this.ordenacaoTabela = ['decresc', '', ''];
+        }
+        break;
+      case 1:
+        if(this.ordenacaoTabela[1] == '' || this.ordenacaoTabela[1] == 'decresc') {
+          this.alunos.sort((a, b) => this.sortTableNumberCompare(a.matricula, b.matricula));
+          this.ordenacaoTabela = ['', 'cresc', ''];
+        } else {
+          this.alunos.sort((a, b) => this.sortTableNumberCompare(a.matricula, b.matricula)*-1);
+          this.ordenacaoTabela = ['', 'decresc', ''];
+        }
+        break;
+      default:
+        if(this.ordenacaoTabela[2] == '' || this.ordenacaoTabela[2] == 'decresc') {
+          this.alunos.sort((a, b) => this.sortTableNumberCompare(a.certificadosPendentes, b.certificadosPendentes));
+          this.ordenacaoTabela = ['', '', 'cresc'];
+        } else {
+          this.alunos.sort((a, b) => this.sortTableNumberCompare(a.certificadosPendentes, b.certificadosPendentes)*-1);
+          this.ordenacaoTabela = ['', '', 'decresc'];
+        }
+        break;
+    }
   }
 
-  /*customSort(event: SortEvent) {
-    event.data.sort((data1, data2) => {
-      let value1;
-      let value2;
-      switch (event.field) {
-        case "origin.productionOrder.product.code":
-          value1 = data1.origin.productionOrder.product.code;
-          value2 = data2.origin.productionOrder.product.code;
-          break;
-        case "origin.productionOrder.product.derivation.code":
-          value1 = data1.origin.productionOrder.product.derivation.code;
-          value2 = data2.origin.productionOrder.product.derivation.code;
-          break;
-        case "origin.productionOrder.opNumber":
-          value1 = data1.origin.productionOrder.opNumber;
-          value2 = data2.origin.productionOrder.opNumber;
-          break;
-        case "quality.code":
-          value1 = data1.quality.code;
-          value2 = data2.quality.code;
-          break;
-        default:
-          value1 = data1[event.field];
-          value2 = data2[event.field];
-          break;
-      }
-      let result = null;
-
-      if (value1 == null && value2 != null) {
-        result = -1;
-      }
-      else if (value1 != null && value2 == null) {
-        result = 1;
-      }
-      else if (value1 == null && value2 == null) {
-        result = 0;
-      }
-      else if (typeof value1 === 'string' && typeof value2 === 'string') {
-        result = value1.localeCompare(value2);
-      }
-      else {
-        result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
-      }
-      return (event.order * result);
-    });
-    this.checkOrderMovement(this.movementChanged, true);
-  }*/
+  sortTableNumberCompare(numA: number, numB: number): number {
+    if(numA > numB) return 1;
+    if(numA < numB) return -1;
+    return 0;
+  }
 }
 
 class Aluno {

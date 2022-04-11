@@ -38,7 +38,7 @@
             <td>{{aluno.nome}}</td>
             <td>{{aluno.matricula}}</td>
             <td>{{aluno.certificadosPendentes}}</td>
-            <td style="text-align: center;">
+            <td class="center">
               <a class="btn btn-success" [routerLink]="['/certificados/aluno']" [queryParams]="{aluno: aluno.id}">
                 Validar Certificados
               </a>

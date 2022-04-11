@@ -1,1 +1,84 @@
-<p>certificados-aluno works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <span class="fa-stack fa-2x">
+        <i class="fas fa-circle fa-stack-2x circle-icon"></i>
+        <i class="fas fa-user fa-stack-1x"></i>
+      </span>
+      <span class="nome-aluno">{{aluno.nome}}</span>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-body" style="padding: 0;">
+      <table id="myTable" class="table table-light table-bordered">
+        <col style="width: 44%">
+        <col style="width: 14%">
+        <col style="width: 14%">
+        <col style="width: 14%">
+        <col style="width: 14%">
+        <thead>
+          <tr>
+            <th>Atividade</th>
+            <th>Data de Envio</th>
+            <th>Certificado</th>
+            <th>Status</th>
+            <th>Validar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let horaComplementar of horasComplementares">
+            <td>{{horaComplementar.pontuacao.atividadeId}}</td>
+            <td>-</td>
+            <td class="center">
+              <a class="btn btn-primary">Visualizar</a>
+            </td>
+            <td class="center"
+            [ngStyle]="{'color': horaComplementar.status.descricao == 'Aprovado'? 'lightgreen' : (horaComplementar.status.descricao == 'Recusado'? 'red' : null)}">
+              {{horaComplementar.status.descricao}}
+            </td>
+            <td class="center-double" *ngIf="horaComplementar.status.descricao == 'Pendente'">
+              <a class="btn btn-success" (click)="setStatusPendenteOuAprovado(horaComplementar, 3)">Validar</a>
+              <a class="btn btn-danger" (click)="openModal(horaComplementar)">Recusar</a>
+            </td>
+            <td class="center" *ngIf="horaComplementar.status.descricao == 'Aprovado'">
+              <a class="btn btn-primary" (click)="setStatusPendenteOuAprovado(horaComplementar, 1)">Desfazer</a>
+            </td>
+            <td class="center-double" *ngIf="horaComplementar.status.descricao == 'Recusado'">
+              <a class="btn btn-primary" (click)="setStatusPendenteOuAprovado(horaComplementar, 1)">Desfazer</a>
+              <a class="btn btn-info" (click)="openModal(horaComplementar)">Editar</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <a class="voltar" href="certificados">
+        <i class="fas fa-caret-left" style="margin-right: 5px"></i>Voltar
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<div id="modal-recusar" class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Adicionar comentário:</label>
+          <textarea class="form-control" rows="5" [(ngModel)]="atualizaStatus.observacao"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="postNewStatus()" data-dismiss="modal">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>

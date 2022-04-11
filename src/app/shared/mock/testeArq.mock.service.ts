@@ -6,6 +6,7 @@ import { HorasComplementaresJson } from "../json/horas-complementares.json";
 
 @Injectable()
 export class TesteArqMockService {
+  //ALUNOS:
   getAlunos(): Array<AlunoJson> {
     let response = [];
     for(let i = 0; i < MockUtil.injectNumber(10); i++) {
@@ -18,6 +19,7 @@ export class TesteArqMockService {
     return AlunoJson.prototype.mockObject();
   }
   
+  //CURSOS:
   getCursos(): Array<CursoJson> {
     let response = [];
     for(let i = 0; i < MockUtil.injectNumber(10); i++) {
@@ -26,6 +28,7 @@ export class TesteArqMockService {
     return response;
   }
 
+  //HORAS COMPLEMENTARES:
   getHorasComplementares(): Array<HorasComplementaresJson> {
     let response = [];
     for(let i = 0; i < MockUtil.injectNumber(10); i++) {
@@ -40,5 +43,9 @@ export class TesteArqMockService {
       response.push(HorasComplementaresJson.prototype.mockObject());
     }
     return response;
+  }
+
+  updateHoraComplementarStatus(): HorasComplementaresJson { 
+    return HorasComplementaresJson.prototype.mockObject();
   }
 }

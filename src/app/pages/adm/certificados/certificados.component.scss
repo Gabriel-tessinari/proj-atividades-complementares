@@ -1,8 +1,5 @@
 @import '../../../../assets/scss/variables';
-
-.container-fluid{
-  padding: 25px;
-}
+@import '../../../../assets/scss/adm.scss';
 
 .card-header-cursos {
   background: map-get($colors, mdgrey) !important;
@@ -41,28 +38,8 @@ h5 {
   padding-right: 20px;
 }
 
-.card-body{
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  background-color: map-get($colors, lggrey) !important;
-  padding: 40px;
-}
-
 .form-control{
   display:inline;
   width: 300px;
   border-radius: 8px;
-}
-
-th {
-  cursor: pointer;
-  background-color: map-get($colors, mdgrey);
-  padding: 16px;
-}
-
-th, td {
-  text-align: left;
-  border-color: map-get($colors, mdgrey);
 }

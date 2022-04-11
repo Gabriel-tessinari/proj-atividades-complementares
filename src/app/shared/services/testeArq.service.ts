@@ -7,6 +7,7 @@ import { TesteArqMockService } from '../mock/testeArq.mock.service';
 import { AlunoJson } from '../json/aluno.json';
 import { CursoJson } from '../json/curso.json';
 import { HorasComplementaresJson } from '../json/horas-complementares.json';
+import { HorasComplementaresAtualizaStatusJson } from '../json/horas-complementares-atualiza-status.json';
 
 @Injectable()
 export class TesteArqService extends ServiceBase {
@@ -45,5 +46,11 @@ export class TesteArqService extends ServiceBase {
     if(environment.mock) return of(TesteArqMockService.prototype.getHorasComplementaresByCurso());
     this.path = 'HorasComplementares/Curso/' + cursoId;
     return this.get();
+  }
+
+  updateHoraComplementarStatus(updateStatus: HorasComplementaresAtualizaStatusJson): Observable<HorasComplementaresJson> {
+    if(environment.mock) return of(TesteArqMockService.prototype.updateHoraComplementarStatus());
+    this.path = 'HorasComplementares/AtualizaStatus';
+    return this.post(updateStatus);
   }
 }

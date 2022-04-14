@@ -1,0 +1,32 @@
+@import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/adm.scss';
+
+.circle-icon {
+  color: map-get($colors, mdgrey);
+}
+
+.nome-aluno {
+  display: inline-block;
+  font-size: 2em;
+  font-weight: bolder;
+  vertical-align: sub;
+}
+
+.voltar {
+  color: black;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.modal-body {
+  font-weight: bolder;
+  padding-bottom: 0;
+}
+
+.modal-footer {
+  padding-top: 0;
+}
+
+.modal-body, .modal-footer {
+  background-color: map-get($colors, lggrey);
+}

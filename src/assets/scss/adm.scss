@@ -1,0 +1,35 @@
+.container-fluid{
+  padding: 25px 25px 0 25px;
+}
+
+.card-body{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background-color: map-get($colors, lggrey) !important;
+  padding: 40px;
+}
+
+th {
+  cursor: pointer;
+  background-color: map-get($colors, mdgrey);
+  padding: 16px;
+}
+
+th, td {
+  text-align: left;
+  border-color: map-get($colors, mdgrey);
+  vertical-align: middle;
+}
+
+td.center {
+  text-align: center;
+}
+
+td.center-double {
+  text-align: center;
+  a {
+    margin: 5px;
+  }
+}

@@ -16,3 +16,10 @@ Projeto da disciplina de Laboratório de Engenharia de Software 2022/1.
 3. Feitas as alterações necessárias, utilize os comandos `git add .` e depois `git commit -m "<DESCRIÇÃO BREVE DA ALTERAÇÃO>"`;
 	3.1. **Exemplo:** git commit -m "Adicionando página de atividades";
 4. Enviar para o repositório no github com `git push`.
+
+### Rodando o programa:
+1. Com o BACKEND e o banco de pé, usar o comando `npm start`. As chamadas serão feitas ao endpoint em src/environments/environment.ts;
+2. Quanto apenas desenvolvendo, usar comando `npm start mock`. As chamadas serão direcionadas para os services com resultados aleatórios em src/app/shared/mock.
+
+### Links úteis para os colaboradores:
+1. Para funções novas no mock.util.ts: https://fakerjs.dev/guide/

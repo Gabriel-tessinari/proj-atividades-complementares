@@ -1,0 +1,39 @@
+@import '../../../../assets/scss/variables';
+
+.navheader-major {
+  background: white;
+  position: relative;
+
+  .row:first-child {
+    > div {
+      height: 90px;
+    }
+  }
+}
+
+.navheader-logo {
+  width: 200px;
+  padding: 15px 10px 15px 0 !important;
+}
+
+.navheader-minor {
+  background: map-get($colors, uvvblue) !important;
+  color: white;
+  height: 50px;
+  width: 100%;
+
+  .row {
+    height: 50px;
+
+    .col-12 {
+      height: 50px;
+      padding-top: 10px;
+    }
+  }
+}
+
+a {
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+}

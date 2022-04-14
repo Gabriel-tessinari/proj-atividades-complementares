@@ -5,11 +5,12 @@
     </div>
     <div class="card-body">
       <h5>Cursos</h5>
-      <input class="form-control" list="lista-cursos" placeholder="Escolha um curso">         
+      <input #inputCurso class="form-control" list="lista-cursos" placeholder="Escolha um curso"
+      (input)="selectCurso(inputCurso.value)">         
         <datalist id="lista-cursos">
-          <option *ngFor="let curso of cursos" [value]= curso.name> {{curso.name}} </option>
+          <option *ngFor="let curso of cursos">{{curso.name}}</option>
         </datalist>
-      <a class="btn btn-white" (click)="loadHorasComplementares()">Buscar</a>
+      <button class="btn btn-white" [disabled]="desabilitaButton" (click)="loadHorasComplementares()">Buscar</button>
     </div>
   </div>
 </div>
@@ -19,16 +20,16 @@
       <i class="fas fa-user" style="margin-right: 10px;"></i>Alunos
     </div>
     <div class="card-body" style="padding: 0;">
-      <table class="table table-light table-bordered">
+      <table id="myTable" class="table table-light table-bordered">
         <col style="width: 36%">
         <col style="width: 25%">
         <col style="width: 25%">
         <col style="width: 14%">
         <thead>
           <tr>
-            <th onclick="sortTable(0)">Nome</th>
-            <th onclick="sortTable(1)">Matrícula</th>
-            <th onclick="sortTable(2)">Certificados Pendentes</th>
+            <th (click)="sortTable(0)">Nome</th>
+            <th (click)="sortTable(1)">Matrícula</th>
+            <th (click)="sortTable(2)">Certificados Pendentes</th>
             <th></th>
           </tr>
         </thead>
@@ -37,7 +38,11 @@
             <td>{{aluno.nome}}</td>
             <td>{{aluno.matricula}}</td>
             <td>{{aluno.certificadosPendentes}}</td>
-            <td style="text-align: center;"><a class="btn btn-success">Validar Certificados</a></td>
+            <td class="center">
+              <a class="btn btn-success" [routerLink]="['/certificados/aluno']" [queryParams]="{aluno: aluno.id}">
+                Validar Certificados
+              </a>
+            </td>
           </tr>
         </tbody>
       </table>

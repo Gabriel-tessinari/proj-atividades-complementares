@@ -24,6 +24,7 @@ export class CursosComponent implements OnInit {
     .subscribe(
       response => {
         this.cursos = response;
+        console.log(this.cursos);
       },
       error => {
         console.log(error);

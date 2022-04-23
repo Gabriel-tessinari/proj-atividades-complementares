@@ -3,6 +3,7 @@ import { MockUtil } from "./mock.util";
 import { AlunoJson } from "../json/aluno.json";
 import { CursoJson } from "../json/curso.json";
 import { HorasComplementaresJson } from "../json/horas-complementares.json";
+import { AtividadeJson } from "../json/atividade.json";
 
 @Injectable()
 export class TesteArqMockService {
@@ -17,6 +18,15 @@ export class TesteArqMockService {
 
   getAlunoById(): AlunoJson {
     return AlunoJson.prototype.mockObject();
+  }
+
+  //ATIVIDADES:
+  getAtividades(): Array<AtividadeJson> {
+    let response = [];
+    for(let i = 0; i < MockUtil.injectNumber(10); i++) {
+      response.push(AtividadeJson.prototype.mockObject());
+    }
+    return response;
   }
   
   //CURSOS:

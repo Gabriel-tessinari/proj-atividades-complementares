@@ -6,7 +6,6 @@ export class PontuacaoJson {
   pontos: number;
   numeroMaximo: number;
   atividadeId: number;
-  atividade: AtividadeJson;
   cursoId: number;
 
   mockObject(): PontuacaoJson {
@@ -15,7 +14,6 @@ export class PontuacaoJson {
       pontos: MockUtil.injectNumber(),
       numeroMaximo: MockUtil.injectNumber(),
       atividadeId: MockUtil.injectNumber(),
-      atividade: AtividadeJson.prototype.mockObject(),
       cursoId: MockUtil.injectNumber()
     } as PontuacaoJson;
   }

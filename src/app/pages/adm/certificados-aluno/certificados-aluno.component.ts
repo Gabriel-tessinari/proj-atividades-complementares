@@ -4,6 +4,7 @@ import { TesteArqService } from 'src/app/shared/services/testeArq.service';
 import { AlunoJson } from 'src/app/shared/json/aluno.json';
 import { HorasComplementaresJson } from 'src/app/shared/json/horas-complementares.json';
 import { HorasComplementaresAtualizaStatusJson } from 'src/app/shared/json/horas-complementares-atualiza-status.json';
+import { AtividadeJson } from 'src/app/shared/json/atividade.json';
 
 declare var $: any;
 
@@ -15,6 +16,8 @@ declare var $: any;
 export class CertificadosAlunoComponent implements OnInit {
   aluno: AlunoJson;
   horasComplementares: Array<HorasComplementaresJson>;
+  atividades: Array<AtividadeJson>;
+  horasEnviadas: Array<HoraEnviada>;
   atualizaStatus: HorasComplementaresAtualizaStatusJson;
 
   constructor(
@@ -30,8 +33,11 @@ export class CertificadosAlunoComponent implements OnInit {
 
   ngOnInit(): void {
     this.horasComplementares = [];
+    this.atividades = [];
+    this.horasEnviadas = [];
     this.atualizaStatus = {} as HorasComplementaresAtualizaStatusJson;
     this.loadAluno();
+    this.loadAtividades();
   }
 
   loadAluno() {   
@@ -59,11 +65,41 @@ export class CertificadosAlunoComponent implements OnInit {
     );
   }
 
+  loadAtividades() {
+    this.testeArqService.getAtividades()
+    .subscribe(
+      response => {
+        this.atividades = response;
+      },
+      error => {  
+        console.log(error);
+      }
+    );
+  }
+
   filterHorasComplementaresFromAluno(horas: Array<HorasComplementaresJson>) {
     horas.forEach(hc => {
       if(hc.alunoId == this.aluno.id) {
         this.horasComplementares.push(hc);
       }
+    });
+
+    this.setHorasEnviadas();
+  }
+
+  setHorasEnviadas() {
+    this.horasComplementares.forEach(hora => {
+      let horaEnviada: HoraEnviada = new HoraEnviada();
+      horaEnviada.horaComplementar = hora;
+
+      for(let i = 0; i < this.atividades.length; i++) {
+        if(hora.pontuacao.atividadeId == this.atividades[i].id) {
+          horaEnviada.atividade = this.atividades[i];
+          i = this.atividades.length;
+        }
+      }
+
+      this.horasEnviadas.push(horaEnviada);
     });
   }
 
@@ -79,10 +115,10 @@ export class CertificadosAlunoComponent implements OnInit {
     this.testeArqService.updateHoraComplementarStatus(this.atualizaStatus)
     .subscribe(
       response => {
-        for(let i = 0; i < this.horasComplementares.length; i++) {
-          if(response.id == this.horasComplementares[i].id) {
-            this.horasComplementares[i] = response;
-            i = this.horasComplementares.length;
+        for(let i = 0; i < this.horasEnviadas.length; i++) {
+          if(response.id == this.horasEnviadas[i].horaComplementar.id) {
+            this.horasEnviadas[i].horaComplementar = response;
+            i = this.horasEnviadas.length;
           }
         }
       },
@@ -102,5 +138,15 @@ export class CertificadosAlunoComponent implements OnInit {
       keyboard: false,
       backdrop: 'static'
     });
+  }
+}
+
+class HoraEnviada {
+  horaComplementar: HorasComplementaresJson;
+  atividade: AtividadeJson;
+
+  constructor() {
+    this.horaComplementar = {} as HorasComplementaresJson;
+    this.atividade = {} as AtividadeJson;
   }
 }

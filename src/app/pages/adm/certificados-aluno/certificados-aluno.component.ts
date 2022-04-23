@@ -5,6 +5,7 @@ import { AlunoJson } from 'src/app/shared/json/aluno.json';
 import { HorasComplementaresJson } from 'src/app/shared/json/horas-complementares.json';
 import { HorasComplementaresAtualizaStatusJson } from 'src/app/shared/json/horas-complementares-atualiza-status.json';
 import { AtividadeJson } from 'src/app/shared/json/atividade.json';
+import { DateUtil } from 'src/app/shared/util/date.util';
 
 declare var $: any;
 
@@ -91,6 +92,7 @@ export class CertificadosAlunoComponent implements OnInit {
     this.horasComplementares.forEach(hora => {
       let horaEnviada: HoraEnviada = new HoraEnviada();
       horaEnviada.horaComplementar = hora;
+      horaEnviada.setDataEnvio();
 
       for(let i = 0; i < this.atividades.length; i++) {
         if(hora.pontuacao.atividadeId == this.atividades[i].id) {
@@ -143,10 +145,16 @@ export class CertificadosAlunoComponent implements OnInit {
 
 class HoraEnviada {
   horaComplementar: HorasComplementaresJson;
+  dataEnvio: string;
   atividade: AtividadeJson;
 
   constructor() {
     this.horaComplementar = {} as HorasComplementaresJson;
+    this.dataEnvio = '00/00/0000 00:00'
     this.atividade = {} as AtividadeJson;
+  }
+
+  setDataEnvio() {
+    this.dataEnvio = DateUtil.formatDateToString(new Date(this.horaComplementar.data));
   }
 }

@@ -20,10 +20,19 @@
         <col style="width: 14%">
         <thead>
           <tr>
-            <th (click)="sortTable(0)">Atividade</th>
-            <th (click)="sortTable(1)">Data de Envio</th>
+            <th (click)="sortTable(0)">
+              <i [ngClass]="ordenacaoTabela[0] == '' ? 'fas fa-sort' : ordenacaoTabela[0] == 'cresc' ? 'fas fa-sort-down' : 'fas fa-sort-up'"></i>
+              Atividade
+            </th>
+            <th (click)="sortTable(1)">
+              <i [ngClass]="ordenacaoTabela[1] == '' ? 'fas fa-sort' : ordenacaoTabela[1] == 'cresc' ? 'fas fa-sort-down' : 'fas fa-sort-up'"></i>
+              Data de Envio
+            </th>
             <th style="cursor: default">Certificado</th>
-            <th (click)="sortTable(2)">Status</th>
+            <th (click)="sortTable(2)">
+              <i [ngClass]="ordenacaoTabela[2] == '' ? 'fas fa-sort' : ordenacaoTabela[2] == 'cresc' ? 'fas fa-sort-down' : 'fas fa-sort-up'"></i>
+              Status
+            </th>
             <th style="cursor: default">Validar</th>
           </tr>
         </thead>

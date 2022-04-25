@@ -94,34 +94,36 @@ export class CertificadosComponent implements OnInit {
   }
 
   sortTable(coluna: number) {
-    switch(coluna) {
-      case 0:
-        if(this.ordenacaoTabela[0] == '' || this.ordenacaoTabela[0] == 'decresc') {
-          this.alunos.sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR', {ignorePunctuation: true}));
-          this.ordenacaoTabela = ['cresc', '', ''];
-        } else {
-          this.alunos.sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR', {ignorePunctuation: true})*-1);
-          this.ordenacaoTabela = ['decresc', '', ''];
-        }
-        break;
-      case 1:
-        if(this.ordenacaoTabela[1] == '' || this.ordenacaoTabela[1] == 'decresc') {
-          this.alunos.sort((a, b) => this.sortTableNumberCompare(a.matricula, b.matricula));
-          this.ordenacaoTabela = ['', 'cresc', ''];
-        } else {
-          this.alunos.sort((a, b) => this.sortTableNumberCompare(a.matricula, b.matricula)*-1);
-          this.ordenacaoTabela = ['', 'decresc', ''];
-        }
-        break;
-      default:
-        if(this.ordenacaoTabela[2] == '' || this.ordenacaoTabela[2] == 'decresc') {
-          this.alunos.sort((a, b) => this.sortTableNumberCompare(a.certificadosPendentes, b.certificadosPendentes));
-          this.ordenacaoTabela = ['', '', 'cresc'];
-        } else {
-          this.alunos.sort((a, b) => this.sortTableNumberCompare(a.certificadosPendentes, b.certificadosPendentes)*-1);
-          this.ordenacaoTabela = ['', '', 'decresc'];
-        }
-        break;
+    if(this.alunos.length > 0) {
+      switch(coluna) {
+        case 0:
+          if(this.ordenacaoTabela[0] == '' || this.ordenacaoTabela[0] == 'decresc') {
+            this.alunos.sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR', {ignorePunctuation: true}));
+            this.ordenacaoTabela = ['cresc', '', ''];
+          } else {
+            this.alunos.sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR', {ignorePunctuation: true})*-1);
+            this.ordenacaoTabela = ['decresc', '', ''];
+          }
+          break;
+        case 1:
+          if(this.ordenacaoTabela[1] == '' || this.ordenacaoTabela[1] == 'decresc') {
+            this.alunos.sort((a, b) => this.sortTableNumberCompare(a.matricula, b.matricula));
+            this.ordenacaoTabela = ['', 'cresc', ''];
+          } else {
+            this.alunos.sort((a, b) => this.sortTableNumberCompare(a.matricula, b.matricula)*-1);
+            this.ordenacaoTabela = ['', 'decresc', ''];
+          }
+          break;
+        default:
+          if(this.ordenacaoTabela[2] == '' || this.ordenacaoTabela[2] == 'decresc') {
+            this.alunos.sort((a, b) => this.sortTableNumberCompare(a.certificadosPendentes, b.certificadosPendentes));
+            this.ordenacaoTabela = ['', '', 'cresc'];
+          } else {
+            this.alunos.sort((a, b) => this.sortTableNumberCompare(a.certificadosPendentes, b.certificadosPendentes)*-1);
+            this.ordenacaoTabela = ['', '', 'decresc'];
+          }
+          break;
+      }
     }
   }
 

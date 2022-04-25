@@ -20,11 +20,11 @@
         <col style="width: 14%">
         <thead>
           <tr>
-            <th>Atividade</th>
-            <th>Data de Envio</th>
-            <th>Certificado</th>
-            <th>Status</th>
-            <th>Validar</th>
+            <th (click)="sortTable(0)">Atividade</th>
+            <th (click)="sortTable(1)">Data de Envio</th>
+            <th style="cursor: default">Certificado</th>
+            <th (click)="sortTable(2)">Status</th>
+            <th style="cursor: default">Validar</th>
           </tr>
         </thead>
         <tbody>

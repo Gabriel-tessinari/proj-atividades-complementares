@@ -1,5 +1,4 @@
 import { MockUtil } from "../mock/mock.util";
-import { AtividadeJson } from "./atividade.json";
 
 export class PontuacaoJson {
   id: number;

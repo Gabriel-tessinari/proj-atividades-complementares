@@ -20,6 +20,7 @@ export class CertificadosAlunoComponent implements OnInit {
   atividades: Array<AtividadeJson>;
   horasEnviadas: Array<HoraEnviada>;
   atualizaStatus: HorasComplementaresAtualizaStatusJson;
+  ordenacaoTabela: string[];
 
   constructor(
     private testeArqService: TesteArqService,
@@ -27,7 +28,7 @@ export class CertificadosAlunoComponent implements OnInit {
   ) {
     this.route.queryParams
     .subscribe(params => {
-      this.aluno = new AlunoJson;
+      this.aluno = new AlunoJson();
       this.aluno.id = params.aluno;
     });
   }
@@ -37,6 +38,7 @@ export class CertificadosAlunoComponent implements OnInit {
     this.atividades = [];
     this.horasEnviadas = [];
     this.atualizaStatus = {} as HorasComplementaresAtualizaStatusJson;
+    this.ordenacaoTabela = ['', '', ''];
     this.loadAluno();
     this.loadAtividades();
   }
@@ -140,6 +142,48 @@ export class CertificadosAlunoComponent implements OnInit {
       keyboard: false,
       backdrop: 'static'
     });
+  }
+
+  sortTable(coluna: number) {
+    if(this.horasEnviadas.length > 0) {
+      switch(coluna) {
+        case 0:
+          if(this.ordenacaoTabela[0] == '' || this.ordenacaoTabela[0] == 'decresc') {
+            this.horasEnviadas.sort((a, b) => a.atividade.nome.localeCompare(b.atividade.nome, 'pt-BR', {ignorePunctuation: true}));
+            this.ordenacaoTabela = ['cresc', '', ''];
+          } else {
+            this.horasEnviadas.sort((a, b) => a.atividade.nome.localeCompare(b.atividade.nome, 'pt-BR', {ignorePunctuation: true})*-1);
+            this.ordenacaoTabela = ['decresc', '', ''];
+          }
+          break;
+        case 1:
+          if(this.ordenacaoTabela[1] == '' || this.ordenacaoTabela[1] == 'decresc') {
+            this.horasEnviadas.sort((a, b) => this.sortTableDateCompare(a.horaComplementar.data, b.horaComplementar.data));
+            this.ordenacaoTabela = ['', 'cresc', ''];
+          } else {
+            this.horasEnviadas.sort((a, b) => this.sortTableDateCompare(a.horaComplementar.data, b.horaComplementar.data)*-1);
+            this.ordenacaoTabela = ['', 'decresc', ''];
+          }
+          break;
+        default:
+          if(this.ordenacaoTabela[2] == '' || this.ordenacaoTabela[2] == 'decresc') {
+            this.horasEnviadas.sort((a, b) => a.horaComplementar.status.descricao.localeCompare(b.horaComplementar.status.descricao, 'pt-BR', {ignorePunctuation: true}));
+            this.ordenacaoTabela = ['', '', 'cresc'];
+          } else {
+            this.horasEnviadas.sort((a, b) => a.horaComplementar.status.descricao.localeCompare(b.horaComplementar.status.descricao, 'pt-BR', {ignorePunctuation: true})*-1);
+            this.ordenacaoTabela = ['', '', 'decresc'];
+          }
+          break;
+      }
+    }
+  }
+
+  sortTableDateCompare(dateA: Date, dateB: Date): number {
+    dateA = new Date(dateA);
+    dateB = new Date(dateB);
+    if(DateUtil.isNewer(dateA, dateB)) return 1;
+    if(DateUtil.isNewer(dateB, dateA)) return -1;
+    return 0;
   }
 }
 

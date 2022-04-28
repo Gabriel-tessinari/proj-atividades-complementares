@@ -8,6 +8,7 @@ import { AlunoJson } from '../json/aluno.json';
 import { CursoJson } from '../json/curso.json';
 import { HorasComplementaresJson } from '../json/horas-complementares.json';
 import { HorasComplementaresAtualizaStatusJson } from '../json/horas-complementares-atualiza-status.json';
+import { AtividadeJson } from '../json/atividade.json';
 
 @Injectable()
 export class TesteArqService extends ServiceBase {
@@ -25,6 +26,13 @@ export class TesteArqService extends ServiceBase {
   getAlunoById(alunoId: number): Observable<AlunoJson> {
     if(environment.mock) return of(TesteArqMockService.prototype.getAlunoById());
     this.path = 'Aluno/' + alunoId;
+    return this.get();
+  }
+
+  //ATIVIDADES:
+  getAtividades(): Observable<Array<AtividadeJson>> {
+    if(environment.mock) return of(TesteArqMockService.prototype.getAtividades());
+    this.path = 'Atividades';
     return this.get();
   }
 

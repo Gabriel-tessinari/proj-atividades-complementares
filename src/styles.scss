@@ -3,3 +3,7 @@
 body {
   background: map-get($colors, bgcolor) !important;
 }
+
+button:disabled {
+  cursor: not-allowed;
+}

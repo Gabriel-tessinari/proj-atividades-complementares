@@ -24,6 +24,11 @@ export class MockUtil {
     return faker.datatype.number(max);
   }
 
+  //date:
+  static injectDateTime(): Date {
+    return new Date();
+  }
+
   //array element:
   static injectOneOf(array: any[]): any {
     return faker.random.arrayElement(array);

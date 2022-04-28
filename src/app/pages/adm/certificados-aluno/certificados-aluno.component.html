@@ -48,15 +48,12 @@
               {{horaEnviada.horaComplementar.status.descricao}}
             </td>
             <td class="center-double" *ngIf="horaEnviada.horaComplementar.status.descricao == 'Pendente'">
-              <a class="btn btn-success" (click)="setStatusPendenteOuAprovado(horaEnviada.horaComplementar, 3)">Validar</a>
-              <a class="btn btn-danger" (click)="openModal(horaEnviada.horaComplementar)">Recusar</a>
-            </td>
-            <td class="center" *ngIf="horaEnviada.horaComplementar.status.descricao == 'Aprovado'">
-              <a class="btn btn-primary" (click)="setStatusPendenteOuAprovado(horaEnviada.horaComplementar, 1)">Desfazer</a>
+              <a class="btn btn-success" (click)="openModalValidar(horaEnviada.horaComplementar)">Validar</a>
+              <a class="btn btn-danger" (click)="openModalRecusar(horaEnviada.horaComplementar)">Recusar</a>
             </td>
             <td class="center-double" *ngIf="horaEnviada.horaComplementar.status.descricao == 'Recusado'">
-              <a class="btn btn-primary" (click)="setStatusPendenteOuAprovado(horaEnviada.horaComplementar, 1)">Desfazer</a>
-              <a class="btn btn-info" (click)="openModal(horaEnviada.horaComplementar)">Editar</a>
+              <a class="btn btn-primary" (click)="setStatusPendente(horaEnviada.horaComplementar)">Desfazer</a>
+              <a class="btn btn-info" (click)="openModalRecusar(horaEnviada.horaComplementar)">Editar</a>
             </td>
           </tr>
         </tbody>
@@ -78,15 +75,37 @@
 <div id="modal-recusar" class="modal fade" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-body">
+      <div class="modal-body modal-body-recusar">
         <div class="form-group">
           <label>Adicionar comentário:</label>
           <textarea class="form-control" rows="5" [(ngModel)]="atualizaStatus.observacao"></textarea>
         </div>
       </div>
+      <div class="modal-footer modal-footer-recusar">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="postNewStatus()" data-dismiss="modal"
+        [disabled]="atualizaStatus.observacao == ''">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-validar" class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Validar Atividade Complementar</h5>
+      </div>
+      <div class="modal-body">
+        <p>
+          Tem certeza que deseja validar a atividade complementar de {{aluno.nome}}?
+          Está ação não poderá ser desfeita.
+        </p>
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" (click)="postNewStatus()" data-dismiss="modal">Enviar</button>
+        <button type="button" class="btn btn-primary" (click)="postNewStatus()"
+        data-dismiss="modal">Confirmar</button>
       </div>
     </div>
   </div>

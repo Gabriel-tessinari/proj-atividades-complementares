@@ -107,9 +107,9 @@ export class CertificadosAlunoComponent implements OnInit {
     });
   }
 
-  setStatusPendenteOuAprovado(hc: HorasComplementaresJson, newStatusId: number) {
+  setStatusPendente(hc: HorasComplementaresJson) {
     this.atualizaStatus.id = hc.id;
-    this.atualizaStatus.statusId = newStatusId;
+    this.atualizaStatus.statusId = 1;
     this.atualizaStatus.observacao = '';
 
     this.postNewStatus();
@@ -132,12 +132,24 @@ export class CertificadosAlunoComponent implements OnInit {
     );
   }
 
-  openModal(hc: HorasComplementaresJson) {
+  openModalRecusar(hc: HorasComplementaresJson) {
     this.atualizaStatus.id = hc.id;
     this.atualizaStatus.statusId = 2;
     this.atualizaStatus.observacao = hc.observacao;
     
     $("#modal-recusar").modal({
+      show: true,
+      keyboard: false,
+      backdrop: 'static'
+    });
+  }
+
+  openModalValidar(hc: HorasComplementaresJson) {
+    this.atualizaStatus.id = hc.id;
+    this.atualizaStatus.statusId = 3;
+    this.atualizaStatus.observacao = '';
+    
+    $("#modal-validar").modal({
       show: true,
       keyboard: false,
       backdrop: 'static'

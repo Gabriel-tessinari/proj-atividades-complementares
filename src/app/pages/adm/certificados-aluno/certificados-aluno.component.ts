@@ -86,8 +86,21 @@ export class CertificadosAlunoComponent implements OnInit {
         this.horasComplementares.push(hc);
       }
     });
-
+    this.orderPendentesFirst();
     this.setHorasEnviadas();
+  }
+
+  orderPendentesFirst() {
+    this.horasComplementares.sort((a, b) => this.pendentesFirstCompare(a, b));
+  }
+
+  pendentesFirstCompare(horaA: HorasComplementaresJson, horaB: HorasComplementaresJson): number {
+    let aPendente: boolean = horaA.status.descricao == 'Pendente';
+    let bPendente: boolean = horaB.status.descricao == 'Pendente';
+
+    if(aPendente && !bPendente) return -1;
+    if(!aPendente && bPendente) return 1;
+    return 0;
   }
 
   setHorasEnviadas() {

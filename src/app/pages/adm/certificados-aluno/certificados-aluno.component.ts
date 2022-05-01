@@ -21,6 +21,7 @@ export class CertificadosAlunoComponent implements OnInit {
   horasEnviadas: Array<HoraEnviada>;
   atualizaStatus: HorasComplementaresAtualizaStatusJson;
   ordenacaoTabela: string[];
+  alertas: Alertas;
 
   constructor(
     private testeArqService: TesteArqService,
@@ -39,8 +40,8 @@ export class CertificadosAlunoComponent implements OnInit {
     this.horasEnviadas = [];
     this.atualizaStatus = {} as HorasComplementaresAtualizaStatusJson;
     this.ordenacaoTabela = ['', '', ''];
+    this.alertas = new Alertas();
     this.loadAluno();
-    this.loadAtividades();
   }
 
   loadAluno() {   
@@ -48,10 +49,25 @@ export class CertificadosAlunoComponent implements OnInit {
     .subscribe(
       response => {
         this.aluno = response;
-        this.loadHorasComplementares();
+        this.loadAtividades();
       },
       error => {
         console.log(error);
+        this.alertas.aluno = true;
+      }
+    );
+  }
+
+  loadAtividades() {
+    this.testeArqService.getAtividades()
+    .subscribe(
+      response => {
+        this.atividades = response;
+        this.loadHorasComplementares();
+      },
+      error => {  
+        console.log(error);
+        this.alertas.horaEnviada = true;
       }
     );
   }
@@ -64,18 +80,7 @@ export class CertificadosAlunoComponent implements OnInit {
       },
       error => {  
         console.log(error);
-      }
-    );
-  }
-
-  loadAtividades() {
-    this.testeArqService.getAtividades()
-    .subscribe(
-      response => {
-        this.atividades = response;
-      },
-      error => {  
-        console.log(error);
+        this.alertas.horaEnviada = true;
       }
     );
   }
@@ -212,6 +217,7 @@ export class CertificadosAlunoComponent implements OnInit {
   }
 }
 
+
 class HoraEnviada {
   horaComplementar: HorasComplementaresJson;
   dataEnvio: string;
@@ -225,5 +231,21 @@ class HoraEnviada {
 
   setDataEnvio() {
     this.dataEnvio = DateUtil.formatDateToString(new Date(this.horaComplementar.data));
+  }
+}
+
+
+class Alertas {
+  aluno: boolean;
+  horaEnviada: boolean;
+
+  alunoMensagem: string;
+  horaEnviadaMensagem: string;
+
+  constructor() {
+    this.aluno = false;
+    this.horaEnviada = false;
+    this.alunoMensagem = 'Erro ao carregar informações do aluno.';
+    this.horaEnviadaMensagem = 'Erro ao carregar as horas complementares do aluno.';
   }
 }

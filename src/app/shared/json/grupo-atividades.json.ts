@@ -6,7 +6,7 @@ export class GrupoAtividadesJson {
 
   mockObject(): GrupoAtividadesJson {
     return {
-      id: MockUtil.injectNumber(),
+      id: 1,
       nome: MockUtil.injectString()
     } as GrupoAtividadesJson;
   }

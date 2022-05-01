@@ -11,7 +11,7 @@
           <datalist id="lista-grupos">
             <option *ngFor="let grupo of grupos">{{grupo.nome}}</option>
           </datalist>
-        <button class="btn btn-white" [disabled]="desabilitaButton || grupos.length == 0">Buscar</button>
+        <button class="btn btn-white" [disabled]="desabilitaButton || grupos.length == 0" (click)="loadAtividades()">Buscar</button>
       </div>
       <div class="row centered">
         <button class="btn btn-white" style="margin-top: 20px;"
@@ -19,6 +19,45 @@
       </div>     
     </div>
   </div>
+</div>
+
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      <i class="fas fa-user" style="margin-right: 10px;"></i>Criar nova atividade:
+      <input type="text" [(ngModel)]="novaAtividade.nome"> 
+      <button class="btn btn-white" (click)="createAtividade()">Adicionar</button>
+    </div>
+    <div class="card-body" style="padding: 0;">
+      <table id="myTable" class="table table-light table-bordered">
+        <col style="width: 95%">
+        <col style="width: 5%">
+        <thead>
+        </thead>
+        <tbody>
+          <tr *ngFor="let atividade of atividades">
+            <td>{{atividade.nome}}</td>
+            <td class="center">
+              <a class="btn btn-white" (click)="deleteAtividade(atividade.id)">
+                X
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row centered">
+  <a class="btn btn-white" (click)="deleteGrupo(idGrupoSelecionado)">
+    Excluir Grupo
+  </a>
+  <a class="btn btn-white">
+    Editar Pontuação
+  </a>
+</div>
 </div>
 
 <div class="container container-alert">
@@ -40,13 +79,13 @@
             <label class="font-size mr-2">Nome</label>
           </div>
           <div class="col-sm-10">
-            <input class="form-control" type="text">
+            <input class="form-control" type="text" [(ngModel)]="novoGrupo.nome">
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Confirmar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveGrupos()">Confirmar</button>
       </div>
     </div>
   </div>

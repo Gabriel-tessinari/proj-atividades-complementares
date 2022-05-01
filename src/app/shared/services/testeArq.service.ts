@@ -37,6 +37,19 @@ export class TesteArqService extends ServiceBase {
     return this.get();
   }
 
+  createAtividade(newAtividade: GrupoAtividadesJson): Observable<AtividadeJson> {
+    console.log(newAtividade)
+    if(environment.mock) return of(TesteArqMockService.prototype.createAtividade());
+    this.path = 'Atividades';
+    return this.post(newAtividade);
+  }
+
+  deleteAtividade(id: number): Observable<void> {
+    if(environment.mock) return of(TesteArqMockService.prototype.deleteAtividade());
+    this.path = 'GrupoAtividades';
+    return this.delete(id);
+  }
+
   //CURSOS:
   getCursos(): Observable<Array<CursoJson>> {
     if(environment.mock) return of(TesteArqMockService.prototype.getCursos());
@@ -49,6 +62,18 @@ export class TesteArqService extends ServiceBase {
     if(environment.mock) return of(TesteArqMockService.prototype.getGruposAtividades());
     this.path = 'GrupoAtividades';
     return this.get();
+  }
+
+  createGrupoAtividades(newGrupo: GrupoAtividadesJson): Observable<GrupoAtividadesJson> {
+    if(environment.mock) return of(TesteArqMockService.prototype.createGrupoAtividades());
+    this.path = 'GrupoAtividades';
+    return this.post(newGrupo);
+  }
+
+  deleteGrupoAtividades(id: number): Observable<void> {
+    if(environment.mock) return of(TesteArqMockService.prototype.deleteGrupoAtividades());
+    this.path = 'GrupoAtividades';
+    return this.delete(id);
   }
 
   //HORAS COMPLEMENTARES:

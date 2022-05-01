@@ -29,6 +29,15 @@ export class TesteArqMockService {
     }
     return response;
   }
+
+  createAtividade(): AtividadeJson {
+    return AtividadeJson.prototype.mockObject();
+  }
+
+  deleteAtividade(): void{
+    console.log("TENTOU DELETAR UMA ATIVIDADE")
+
+  }
   
   //CURSOS:
   getCursos(): Array<CursoJson> {
@@ -46,6 +55,14 @@ export class TesteArqMockService {
       response.push(GrupoAtividadesJson.prototype.mockObject());
     }
     return response;
+  }
+
+  createGrupoAtividades(): GrupoAtividadesJson {
+    return GrupoAtividadesJson.prototype.mockObject();
+  }
+
+  deleteGrupoAtividades(): void {
+    console.log("TENTOU DELETAR UM GRUPO DE ATIVIDADES")
   }
 
   //HORAS COMPLEMENTARES:

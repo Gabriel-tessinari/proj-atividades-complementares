@@ -4,6 +4,7 @@ import { AlunoJson } from "../json/aluno.json";
 import { CursoJson } from "../json/curso.json";
 import { HorasComplementaresJson } from "../json/horas-complementares.json";
 import { AtividadeJson } from "../json/atividade.json";
+import { GrupoAtividadesJson } from "../json/grupo-atividades.json";
 
 @Injectable()
 export class TesteArqMockService {
@@ -34,6 +35,15 @@ export class TesteArqMockService {
     let response = [];
     for(let i = 0; i < MockUtil.injectNumber(10); i++) {
       response.push(CursoJson.prototype.mockObject());
+    }
+    return response;
+  }
+
+  //GRUPOS DE ATIVIDADES:
+  getGruposAtividades(): Array<GrupoAtividadesJson> {
+    let response = [];
+    for(let i = 0; i < MockUtil.injectNumber(10); i++) {
+      response.push(GrupoAtividadesJson.prototype.mockObject());
     }
     return response;
   }

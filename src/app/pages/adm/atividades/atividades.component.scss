@@ -1,6 +1,10 @@
 @import '../../../../assets/scss/variables';
 @import '../../../../assets/scss/adm.scss';
 
+.card-body {
+  display: grid;
+}
+
 .centered {
   justify-content: center;
 }

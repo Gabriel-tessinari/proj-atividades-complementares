@@ -2,8 +2,8 @@
   padding: 25px 25px 0 25px;
 }
 
-.card-body{
-  display: grid;
+.card-body {
+  display: flex;
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -23,12 +23,14 @@
   font-weight: bold;
 }
 
-.form-control{
+.form-control-card {
   display:inline;
   width: 300px;
   border-radius: 8px;
 }
 
+
+/*Botões*/
 .btn-white {
   color: map-get($colors, dkgrey);
   background-color: white;
@@ -45,7 +47,7 @@
   color: white;
 }
 
-.btn-white[disabled]:hover{
+.btn-white[disabled]:hover {
   color: map-get($colors, dkgrey);
   background-color: white;
 }
@@ -102,4 +104,18 @@ td.center-double {
 .alerta-aviso {
   background-color: yellow;
   border-color: yellow;
+}
+
+
+/*Modal*/
+.modal-header, .modal-footer {
+  border: none;
+}
+
+.modal-header {
+  padding-bottom: 0;
+}
+
+.modal-footer {
+  padding-top: 0;
 }

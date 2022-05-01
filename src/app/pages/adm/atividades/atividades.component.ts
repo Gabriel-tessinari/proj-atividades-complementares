@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TesteArqService } from 'src/app/shared/services/testeArq.service';
 import { GrupoAtividadesJson } from 'src/app/shared/json/grupo-atividades.json';
 
+declare var $: any;
+
 @Component({
   selector: 'app-atividades',
   templateUrl: './atividades.component.html',
@@ -49,6 +51,14 @@ export class AtividadesComponent implements OnInit {
     }
 
     this.desabilitaButton = (this.idGrupoSelecionado == 0);
+  }
+
+  openModalAddGrupo() {
+    $("#modal-add-grupo").modal({
+      show: true,
+      keyboard: false,
+      backdrop: 'static'
+    });
   }
 }
 

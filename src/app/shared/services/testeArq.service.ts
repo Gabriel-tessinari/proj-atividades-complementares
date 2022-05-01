@@ -47,7 +47,7 @@ export class TesteArqService extends ServiceBase {
   //GRUPOS DE ATIVIDADES:
   getGruposAtividades(): Observable<Array<GrupoAtividadesJson>> {
     if(environment.mock) return of(TesteArqMockService.prototype.getGruposAtividades());
-    this.path = 'GruposAtividades';
+    this.path = 'GrupoAtividades';
     return this.get();
   }
 

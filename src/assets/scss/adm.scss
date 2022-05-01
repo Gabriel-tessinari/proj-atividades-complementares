@@ -3,14 +3,55 @@
 }
 
 .card-body{
-  display: flex;
+  display: grid;
   text-align: center;
   justify-content: center;
   align-items: center;
   background-color: map-get($colors, lggrey) !important;
   padding: 40px;
+
+  h5 {
+    padding-top: 5px;
+    padding-right: 20px;
+  }
 }
 
+.card-header-grey {
+  background: map-get($colors, mdgrey) !important;
+  color: white;
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.form-control{
+  display:inline;
+  width: 300px;
+  border-radius: 8px;
+}
+
+.btn-white {
+  color: map-get($colors, dkgrey);
+  background-color: white;
+  font-weight: bold;
+  border-color: map-get($colors, dkgrey);
+  border-radius: 8px;
+  width: fit-content;
+  height: fit-content;
+  margin-left: 20px;
+}
+
+.btn-white:hover {
+  background-color: map-get($colors, dkgrey);
+  color: white;
+}
+
+.btn-white[disabled]:hover{
+  color: map-get($colors, dkgrey);
+  background-color: white;
+}
+
+
+/*Tabelas*/
 th {
   cursor: pointer;
   background-color: map-get($colors, mdgrey);
@@ -34,6 +75,8 @@ td.center-double {
   }
 }
 
+
+/*Mensagens de erro*/
 .container-alert {
   max-width: fit-content;
   padding: 1rem;

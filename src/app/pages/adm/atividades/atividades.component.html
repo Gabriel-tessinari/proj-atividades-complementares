@@ -1,1 +1,27 @@
-<p>atividades works!</p>
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header card-header-grey">
+      EDITAR GRUPOS
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <h5>Grupos</h5>
+        <input #inputGrupo class="form-control" list="lista-grupos" placeholder="Escolha um grupo"
+        (input)="selectGrupo(inputGrupo.value)">         
+          <datalist id="lista-grupos">
+            <option *ngFor="let grupo of grupos">{{grupo.nome}}</option>
+          </datalist>
+        <button class="btn btn-white" [disabled]="desabilitaButton || grupos.length == 0">Buscar</button>
+      </div>
+      <div class="row centered">
+        <button class="btn btn-white" style="margin-top: 20px;">Novo Grupo</button>
+      </div>     
+    </div>
+  </div>
+</div>
+
+<div class="container container-alert">
+  <div class="alert alerta-erro" role="alert" *ngIf="alertas.grupo">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.grupoMensagem}}
+  </div>
+</div>

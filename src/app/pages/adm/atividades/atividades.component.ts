@@ -111,23 +111,50 @@ export class AtividadesComponent implements OnInit {
     );
   }
 
-  deleteGrupo(id: number) {
-    for(let i = 0; i < this.atividades.length; i++) {
-      this.deleteAtividade(this.atividades[i].id)
-    }
-    this.testeArqService.deleteGrupoAtividades(id)
+  deleteGrupo() {
+    this.deleteAtividadesFromGrupo();
+
+    this.testeArqService.deleteGrupoAtividades(this.grupoSelecionado.id)
     .subscribe(
-      response => {
-        this.grupos = []
-        this.loadGrupos()
+      () => {
+        this.ngOnInit();
       },
       error => {
         console.log(error);
+        this.alertas.deleteGrupo = true;
       }
     );
-  } 
+  }
 
-  
+  deleteAtividadesFromGrupo() {
+    if(this.atividades.length > 0){
+      this.atividades.forEach(atividade => {
+        console.log(atividade);
+        this.testeArqService.deleteAtividade(atividade.id)
+        .subscribe(
+          () => {
+            console.log('Deletada com sucesso.')
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      });
+    }
+  }
+
+  deleteAtividade(id: number){
+    this.testeArqService.deleteAtividade(id)
+    .subscribe(
+      () => {
+        this.loadAtividades()
+      },
+      error => {
+        console.log(error);
+        this.alertas.grupo = true;
+      }
+    );
+  }
 
   createAtividade(){
     this.testeArqService.createAtividade(this.novaAtividade)
@@ -142,22 +169,16 @@ export class AtividadesComponent implements OnInit {
 
   }
 
-  deleteAtividade(id: number){
-    this.testeArqService.deleteAtividade(id)
-    .subscribe(
-      response => {
-        this.loadAtividades()
-      },
-      error => {
-        console.log(error);
-        this.alertas.grupo = true;
-      }
-    );
-
-    }
-
   openModalAddGrupo() {
     $("#modal-add-grupo").modal({
+      show: true,
+      keyboard: false,
+      backdrop: 'static'
+    });
+  }
+
+  openModalDeleteGrupo() {
+    $("#modal-delete-grupo").modal({
       show: true,
       keyboard: false,
       backdrop: 'static'
@@ -169,14 +190,18 @@ export class AtividadesComponent implements OnInit {
 class Alertas {
   grupo: boolean;
   saveGrupo: boolean;
+  deleteGrupo: boolean;
  
   grupoMensagem: string;
   saveGrupoMensagem: string;
+  deleteGrupoMensagem: string;
 
   constructor() {
     this.grupo = false;
     this.saveGrupo = false;
+    this.deleteGrupo = false;
     this.grupoMensagem = 'Erro ao carregar a lista de grupos de atividades.';
-    this.saveGrupoMensagem = 'Erro ao criar novo grupo de atividades. Tente novamente.'
+    this.saveGrupoMensagem = 'Erro ao criar novo grupo de atividades. Tente novamente.';
+    this.deleteGrupoMensagem = 'Erro ao deletar grupo de atividades. Tente novamente.'
   }
 }

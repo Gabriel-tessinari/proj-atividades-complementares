@@ -46,7 +46,7 @@ export class TesteArqService extends ServiceBase {
 
   deleteAtividade(id: number): Observable<void> {
     if(environment.mock) return of(TesteArqMockService.prototype.deleteAtividade());
-    this.path = 'GrupoAtividades';
+    this.path = 'Atividades';
     return this.delete(id);
   }
 

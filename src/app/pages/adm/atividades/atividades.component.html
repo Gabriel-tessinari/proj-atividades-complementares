@@ -3,7 +3,7 @@
     <div class="card-header card-header-grey">
       EDITAR GRUPOS
     </div>
-    <div class="card-body">
+    <div class="card-body card-body-centered-lines">
       <div class="row">
         <h5>Grupos</h5>
         <input #inputGrupo class="form-control form-control-card" list="lista-grupos" placeholder="Escolha um grupo"
@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<div class="container-fluid" *ngIf="false">
+<div class="container-fluid" *ngIf="grupoSelecionado.id != undefined && grupoSelecionado.id != null">
   <div class="card">
     <div class="card-header">
       <i class="fas fa-user" style="margin-right: 10px;"></i>Criar nova atividade:
@@ -36,14 +36,15 @@
         <col style="width: 95%">
         <col style="width: 5%">
         <thead>
+          <tr></tr>
         </thead>
         <tbody>
           <tr *ngFor="let atividade of atividades">
             <td>{{atividade.nome}}</td>
             <td class="center">
-              <a class="btn btn-white" (click)="deleteAtividade(atividade.id)">
-                X
-              </a>
+              <i class="far fa-times-circle fa-2x" style="cursor: pointer;"
+              (click)="openModalDeleteAtividade(atividade.id)" data-toggle="tooltip"
+              title="Deletar esta atividade."></i>
             </td>
           </tr>
         </tbody>
@@ -99,7 +100,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveGrupo()">Confirmar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveGrupo()">
+          Confirmar
+        </button>
       </div>
     </div>
   </div>
@@ -112,14 +115,38 @@
         <p style="text-align: center;">
           <i class="far fa-trash-alt fa-3x mb-2"></i>
           <br>
-          Excluir o grupo {{grupoSelecionado.nome}} também excluirá as suas atividades.
-          <br>
-          Deseja prosseguir?
+          Excluir o grupo {{grupoSelecionado.nome}} também excluirá as suas atividades. Deseja prosseguir?
         </p>
       </div>
       <div class="modal-footer centered">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteGrupo()">Confirmar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteGrupo()">
+          Confirmar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-delete-atividade" class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body centered">
+        <p style="text-align: center;">
+          <i class="far fa-trash-alt fa-3x mb-2"></i>
+          <br>
+          Deseja mesmo excluir a atividade?
+        </p>
+      </div>
+      <div class="modal-footer centered">
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+        (click)="atividadeToDeleteId = 0">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal"
+        (click)="deleteAtividade(atividadeToDeleteId)">
+          Confirmar
+        </button>
       </div>
     </div>
   </div>

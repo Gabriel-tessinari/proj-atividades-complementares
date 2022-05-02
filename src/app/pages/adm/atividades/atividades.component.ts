@@ -20,6 +20,7 @@ export class AtividadesComponent implements OnInit {
   novoGrupo: GrupoAtividadesJson;
   novaAtividade: AtividadeJson;
   atividades: Array<AtividadeJson>;
+  atividadeToDeleteId: number;
 
   constructor(
     private testeArqService: TesteArqService
@@ -35,6 +36,7 @@ export class AtividadesComponent implements OnInit {
     this.alertas = new Alertas();
     this.novoGrupo = new GrupoAtividadesJson();
     this.novaAtividade = new AtividadeJson();
+    this.atividadeToDeleteId = 0;
     this.loadGrupos();
   }
 
@@ -147,13 +149,21 @@ export class AtividadesComponent implements OnInit {
     this.testeArqService.deleteAtividade(id)
     .subscribe(
       () => {
-        this.loadAtividades()
+        this.deleteAtividadeFromTable(id);
       },
       error => {
         console.log(error);
         this.alertas.grupo = true;
       }
     );
+  }
+
+  deleteAtividadeFromTable(atividadeId: number) {
+    this.atividades.forEach((atividade, index) => {
+      if(atividade.id == atividadeId) {
+        this.atividades.splice(index, 1);
+      }
+    });
   }
 
   createAtividade(){
@@ -184,6 +194,16 @@ export class AtividadesComponent implements OnInit {
       backdrop: 'static'
     });
   }
+
+  openModalDeleteAtividade(atividadeId: number) {
+    this.atividadeToDeleteId = atividadeId;
+
+    $("#modal-delete-atividade").modal({
+      show: true,
+      keyboard: false,
+      backdrop: 'static'
+    });
+  }
 }
 
 
@@ -191,17 +211,27 @@ class Alertas {
   grupo: boolean;
   saveGrupo: boolean;
   deleteGrupo: boolean;
+  atividade: boolean;
+  zeroAtividade: boolean;
+  deleteAtividade: boolean;
  
   grupoMensagem: string;
   saveGrupoMensagem: string;
   deleteGrupoMensagem: string;
+  atividadeMensagem: string;
+  zeroAtividadeMensagem: string;
+  deleteAtividadeMensagem: string;
 
   constructor() {
     this.grupo = false;
     this.saveGrupo = false;
     this.deleteGrupo = false;
+    this.atividade = false;
+    this.zeroAtividade = false;
+    this.deleteAtividade = false;
     this.grupoMensagem = 'Erro ao carregar a lista de grupos de atividades.';
     this.saveGrupoMensagem = 'Erro ao criar novo grupo de atividades. Tente novamente.';
-    this.deleteGrupoMensagem = 'Erro ao deletar grupo de atividades. Tente novamente.'
+    this.deleteGrupoMensagem = 'Erro ao deletar grupo de atividades. Tente novamente.';
+    this.atividadeMensagem = 'Erro ao carregar as atividades do grupo selecionado.';
   }
 }

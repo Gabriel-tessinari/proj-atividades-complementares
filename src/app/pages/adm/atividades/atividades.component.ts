@@ -102,16 +102,27 @@ export class AtividadesComponent implements OnInit {
   }
 
   saveGrupo() {
-    this.testeArqService.createGrupoAtividades(this.novoGrupo)
-    .subscribe(
-      () => {
-        this.ngOnInit();
-      },
-      error => {
-        console.log(error);
-        this.alertas.saveGrupo = true;
-      }
-    );
+    if(this.validaGrupo()) {
+      this.testeArqService.createGrupoAtividades(this.novoGrupo)
+      .subscribe(
+        () => {
+          this.ngOnInit();
+        },
+        error => {
+          console.log(error);
+          this.alertas.saveGrupo = true;
+        }
+      );
+    } else this.alertas.saveGrupo = true;
+  }
+
+  validaGrupo(): boolean {
+    let valida: boolean = true;
+    this.grupos.forEach(grupo => {
+      if(grupo.nome == this.novoGrupo.nome) valida = false;
+    });
+
+    return valida;
   }
 
   deleteGrupo() {
@@ -168,20 +179,31 @@ export class AtividadesComponent implements OnInit {
   }
 
   createAtividade() {
-    this.novaAtividade.grupoAtividadesId = this.grupoSelecionado.id;
-    this.novaAtividade.converterHoras = false;
-    
-    this.testeArqService.createAtividade(this.novaAtividade)
-    .subscribe(
-      () => {
-        this.novaAtividade.nome = '';
-        this.loadAtividades();
-      },
-      error => {
-        console.log(error);
-        this.alertas.saveAtividade = true;
-      }
-    );
+    if(this.validaAtividade()) {
+      this.novaAtividade.grupoAtividadesId = this.grupoSelecionado.id;
+      this.novaAtividade.converterHoras = false;
+      
+      this.testeArqService.createAtividade(this.novaAtividade)
+      .subscribe(
+        () => {
+          this.novaAtividade.nome = '';
+          this.loadAtividades();
+        },
+        error => {
+          console.log(error);
+          this.alertas.saveAtividade = true;
+        }
+      );
+    }
+  }
+
+  validaAtividade(): boolean {
+    let valida: boolean = true;
+    this.atividades.forEach(atividade => {
+      if(atividade.nome == this.novaAtividade.nome) valida = false;
+    });
+
+    return valida;
   }
 
   openModalAddGrupo() {

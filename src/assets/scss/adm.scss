@@ -2,15 +2,58 @@
   padding: 25px 25px 0 25px;
 }
 
-.card-body{
+.card-body {
   display: flex;
   text-align: center;
   justify-content: center;
   align-items: center;
   background-color: map-get($colors, lggrey) !important;
   padding: 40px;
+
+  h5 {
+    padding-top: 5px;
+    padding-right: 20px;
+  }
 }
 
+.card-header-grey {
+  background: map-get($colors, mdgrey) !important;
+  color: white;
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.form-control-card {
+  display:inline;
+  width: 300px;
+  border-radius: 8px;
+}
+
+
+/*Botões*/
+.btn-white {
+  color: map-get($colors, dkgrey);
+  background-color: white;
+  font-weight: bold;
+  border-color: map-get($colors, dkgrey);
+  border-radius: 8px;
+  width: fit-content;
+  height: fit-content;
+  margin-left: 20px;
+}
+
+.btn-white:hover {
+  background-color: map-get($colors, dkgrey);
+  color: white;
+}
+
+.btn-white[disabled]:hover {
+  color: map-get($colors, dkgrey);
+  background-color: white;
+}
+
+
+/*Tabelas*/
 th {
   cursor: pointer;
   background-color: map-get($colors, mdgrey);
@@ -34,6 +77,8 @@ td.center-double {
   }
 }
 
+
+/*Mensagens de erro*/
 .container-alert {
   max-width: fit-content;
   padding: 1rem;
@@ -59,4 +104,18 @@ td.center-double {
 .alerta-aviso {
   background-color: yellow;
   border-color: yellow;
+}
+
+
+/*Modal*/
+.modal-header, .modal-footer {
+  border: none;
+}
+
+.modal-header {
+  padding-bottom: 0;
+}
+
+.modal-footer {
+  padding-top: 0;
 }

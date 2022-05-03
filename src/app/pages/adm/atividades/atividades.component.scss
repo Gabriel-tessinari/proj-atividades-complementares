@@ -1,0 +1,14 @@
+@import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/adm.scss';
+
+.card-body-centered-lines {
+  display: grid;
+}
+
+.centered {
+  justify-content: center;
+}
+
+input {
+  min-width: 50%;
+}

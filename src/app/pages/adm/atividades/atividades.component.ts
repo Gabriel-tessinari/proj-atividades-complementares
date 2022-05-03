@@ -194,7 +194,7 @@ export class AtividadesComponent implements OnInit {
           this.alertas.saveAtividade = true;
         }
       );
-    }
+    } else this.alertas.saveAtividade = true;
   }
 
   validaAtividade(): boolean {

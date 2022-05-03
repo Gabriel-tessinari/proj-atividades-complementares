@@ -73,6 +73,7 @@ export class AtividadesComponent implements OnInit {
       }
     });
 
+    this.alertas = new Alertas();
     this.loadAtividades();
   }
 
@@ -97,7 +98,7 @@ export class AtividadesComponent implements OnInit {
       }
     });
 
-    console.log(this.atividades)
+    this.alertas.zeroAtividade = (this.atividades.length == 0);
   }
 
   saveGrupo() {
@@ -153,7 +154,7 @@ export class AtividadesComponent implements OnInit {
       },
       error => {
         console.log(error);
-        this.alertas.grupo = true;
+        this.alertas.deleteAtividade = true;
       }
     );
   }
@@ -166,17 +167,21 @@ export class AtividadesComponent implements OnInit {
     });
   }
 
-  createAtividade(){
+  createAtividade() {
+    this.novaAtividade.grupoAtividadesId = this.grupoSelecionado.id;
+    this.novaAtividade.converterHoras = false;
+    
     this.testeArqService.createAtividade(this.novaAtividade)
     .subscribe(
-      response => {
-        this.loadAtividades()
+      () => {
+        this.novaAtividade.nome = '';
+        this.loadAtividades();
       },
       error => {
         console.log(error);
+        this.alertas.saveAtividade = true;
       }
     );
-
   }
 
   openModalAddGrupo() {
@@ -214,6 +219,7 @@ class Alertas {
   atividade: boolean;
   zeroAtividade: boolean;
   deleteAtividade: boolean;
+  saveAtividade: boolean;
  
   grupoMensagem: string;
   saveGrupoMensagem: string;
@@ -221,6 +227,7 @@ class Alertas {
   atividadeMensagem: string;
   zeroAtividadeMensagem: string;
   deleteAtividadeMensagem: string;
+  saveAtividadeMensagem: string;
 
   constructor() {
     this.grupo = false;
@@ -229,9 +236,13 @@ class Alertas {
     this.atividade = false;
     this.zeroAtividade = false;
     this.deleteAtividade = false;
+    this.saveAtividade = false;
     this.grupoMensagem = 'Erro ao carregar a lista de grupos de atividades.';
     this.saveGrupoMensagem = 'Erro ao criar novo grupo de atividades. Tente novamente.';
     this.deleteGrupoMensagem = 'Erro ao deletar grupo de atividades. Tente novamente.';
     this.atividadeMensagem = 'Erro ao carregar as atividades do grupo selecionado.';
+    this.zeroAtividadeMensagem = 'Não há atividade no grupo selecionado.';
+    this.deleteAtividadeMensagem = 'Erro ao deletar atividade. Tente novamente.';
+    this.saveAtividadeMensagem = 'Erro ao criar nova atividade no grupo selecionado. Tente novamente.';
   }
 }

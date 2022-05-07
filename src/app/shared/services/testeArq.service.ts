@@ -8,6 +8,8 @@ import { AlunoJson } from '../json/aluno.json';
 import { CursoJson } from '../json/curso.json';
 import { HorasComplementaresJson } from '../json/horas-complementares.json';
 import { HorasComplementaresAtualizaStatusJson } from '../json/horas-complementares-atualiza-status.json';
+import { AtividadeJson } from '../json/atividade.json';
+import { GrupoAtividadesJson } from '../json/grupo-atividades.json';
 
 @Injectable()
 export class TesteArqService extends ServiceBase {
@@ -28,11 +30,50 @@ export class TesteArqService extends ServiceBase {
     return this.get();
   }
 
+  //ATIVIDADES:
+  getAtividades(): Observable<Array<AtividadeJson>> {
+    if(environment.mock) return of(TesteArqMockService.prototype.getAtividades());
+    this.path = 'Atividades';
+    return this.get();
+  }
+
+  createAtividade(newAtividade: GrupoAtividadesJson): Observable<AtividadeJson> {
+    console.log(newAtividade)
+    if(environment.mock) return of(TesteArqMockService.prototype.createAtividade());
+    this.path = 'Atividades';
+    return this.post(newAtividade);
+  }
+
+  deleteAtividade(id: number): Observable<void> {
+    if(environment.mock) return of(TesteArqMockService.prototype.deleteAtividade());
+    this.path = 'Atividades';
+    return this.delete(id);
+  }
+
   //CURSOS:
   getCursos(): Observable<Array<CursoJson>> {
     if(environment.mock) return of(TesteArqMockService.prototype.getCursos());
     this.path = 'Curso';
     return this.get();
+  }
+
+  //GRUPOS DE ATIVIDADES:
+  getGruposAtividades(): Observable<Array<GrupoAtividadesJson>> {
+    if(environment.mock) return of(TesteArqMockService.prototype.getGruposAtividades());
+    this.path = 'GrupoAtividades';
+    return this.get();
+  }
+
+  createGrupoAtividades(newGrupo: GrupoAtividadesJson): Observable<GrupoAtividadesJson> {
+    if(environment.mock) return of(TesteArqMockService.prototype.createGrupoAtividades());
+    this.path = 'GrupoAtividades';
+    return this.post(newGrupo);
+  }
+
+  deleteGrupoAtividades(id: number): Observable<void> {
+    if(environment.mock) return of(TesteArqMockService.prototype.deleteGrupoAtividades());
+    this.path = 'GrupoAtividades';
+    return this.delete(id);
   }
 
   //HORAS COMPLEMENTARES:

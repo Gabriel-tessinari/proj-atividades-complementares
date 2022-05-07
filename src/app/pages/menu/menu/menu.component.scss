@@ -1,0 +1,33 @@
+@import '../../../../assets/scss/variables';
+
+body {
+  background: #00002B;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.card {
+  min-height: 200px;
+  width: 500px;
+}
+
+.card-header {
+  color: white;
+  background: map-get($colors, uvvblue) !important;
+}
+
+.btn-uvv {
+  color: map-get($colors, uvvblue);
+  border-color: map-get($colors, uvvblue) !important;
+}
+
+.btn-uvv:hover {
+  color: white;
+  background-color: map-get($colors, uvvblue) !important;
+  border-color: map-get($colors, uvvblue) !important;
+}

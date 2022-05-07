@@ -1,20 +1,21 @@
 <div class="container-fluid">
   <div class="card">
-    <div class="card-header card-header-cursos">
+    <div class="card-header card-header-grey">
       FILTRAR ALUNOS POR CURSO
     </div>
     <div class="card-body">
       <h5>Cursos</h5>
-      <input #inputCurso class="form-control" list="lista-cursos" placeholder="Escolha um curso"
+      <input #inputCurso class="form-control form-control-card" list="lista-cursos" placeholder="Escolha um curso"
       (input)="selectCurso(inputCurso.value)">         
         <datalist id="lista-cursos">
           <option *ngFor="let curso of cursos">{{curso.name}}</option>
         </datalist>
-      <button class="btn btn-white" [disabled]="desabilitaButton" (click)="loadHorasComplementares()">Buscar</button>
+      <button class="btn btn-white" [disabled]="desabilitaButton || cursos.length == 0" (click)="loadHorasComplementares()">Buscar</button>
     </div>
   </div>
 </div>
-<div class="container-fluid">
+
+<div class="container-fluid" *ngIf="!alertas.curso && !alertas.aluno && mostrarTabela">
   <div class="card">
     <div class="card-header">
       <i class="fas fa-user" style="margin-right: 10px;"></i>Alunos
@@ -27,10 +28,19 @@
         <col style="width: 14%">
         <thead>
           <tr>
-            <th (click)="sortTable(0)">Nome</th>
-            <th (click)="sortTable(1)">Matrícula</th>
-            <th (click)="sortTable(2)">Certificados Pendentes</th>
-            <th></th>
+            <th (click)="sortTable(0)">
+              <i [ngClass]="ordenacaoTabela[0] == '' ? 'fas fa-sort' : ordenacaoTabela[0] == 'cresc' ? 'fas fa-sort-down' : 'fas fa-sort-up'"></i>
+              Nome
+            </th>
+            <th (click)="sortTable(1)">
+              <i [ngClass]="ordenacaoTabela[1] == '' ? 'fas fa-sort' : ordenacaoTabela[1] == 'cresc' ? 'fas fa-sort-down' : 'fas fa-sort-up'"></i>
+              Matrícula
+            </th>
+            <th (click)="sortTable(2)">
+              <i [ngClass]="ordenacaoTabela[2] == '' ? 'fas fa-sort' : ordenacaoTabela[2] == 'cresc' ? 'fas fa-sort-down' : 'fas fa-sort-up'"></i>
+              Certificados Pendentes
+            </th>
+            <th style="cursor: default"></th>
           </tr>
         </thead>
         <tbody>
@@ -47,5 +57,17 @@
         </tbody>
       </table>
     </div>
+  </div>
+</div>
+
+<div class="container container-alert">
+  <div class="alert alerta-erro" role="alert" *ngIf="alertas.curso">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.cursoMensagem}}
+  </div>
+  <div class="alert alerta-erro" role="alert" *ngIf="alertas.aluno">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.alunoMensagem}}
+  </div>
+  <div class="alert alerta-aviso" role="alert" *ngIf="alertas.zeroAlunos">
+    <i class="fas fa-exclamation-triangle fa-lg"></i>{{alertas.zeroAlunosMensagem}}
   </div>
 </div>

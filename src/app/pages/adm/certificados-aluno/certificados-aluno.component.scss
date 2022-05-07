@@ -18,15 +18,11 @@
   text-decoration: none;
 }
 
-.modal-body {
+.modal-body-recusar {
   font-weight: bolder;
   padding-bottom: 0;
 }
 
-.modal-footer {
-  padding-top: 0;
-}
-
-.modal-body, .modal-footer {
+.modal-body-recusar, .modal-footer-recusar {
   background-color: map-get($colors, lggrey);
 }

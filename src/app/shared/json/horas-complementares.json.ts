@@ -8,6 +8,7 @@ export class HorasComplementaresJson {
   certificado: string;
   observacao: string;
   horas: number;
+  data: Date;
   alunoId: number;
   aluno: AlunoJson;
   pontuacaoId: number;
@@ -21,6 +22,7 @@ export class HorasComplementaresJson {
       certificado: MockUtil.injectString(),
       observacao: MockUtil.injectText(),
       horas: MockUtil.injectNumber(),
+      data: MockUtil.injectDateTime(),
       alunoId: MockUtil.injectNumber(),
       aluno: AlunoJson.prototype.mockObject(),
       pontuacaoId: MockUtil.injectNumber(),

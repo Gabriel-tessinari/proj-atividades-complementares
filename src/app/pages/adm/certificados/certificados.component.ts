@@ -15,6 +15,8 @@ export class CertificadosComponent implements OnInit {
   alunos: Array<Aluno>;
   desabilitaButton: boolean;
   ordenacaoTabela: string[];
+  mostrarTabela: boolean;
+  alertas: Alertas;
   
   constructor( 
     private testeArqService: TesteArqService
@@ -26,6 +28,8 @@ export class CertificadosComponent implements OnInit {
     this.alunos = [];
     this.desabilitaButton = true;
     this.ordenacaoTabela = ['', '', ''];
+    this.mostrarTabela = false;
+    this.alertas = new Alertas();
     this.loadCursos();
   }
 
@@ -33,10 +37,11 @@ export class CertificadosComponent implements OnInit {
     this.testeArqService.getCursos()
     .subscribe(
       response => {
-        this.cursos = response;
+        this.cursos = response
       },
       error => {
         console.log(error);
+        this.alertas.curso = true;
       }
     );
   }
@@ -59,10 +64,12 @@ export class CertificadosComponent implements OnInit {
     .subscribe(
       response => {
         this.horasComplementares = response;
+        this.mostrarTabela = true;
         this.loadAlunos();
       },
       error => {  
         console.log(error);
+        this.alertas.aluno = true;
       }
     );  
   }
@@ -70,7 +77,7 @@ export class CertificadosComponent implements OnInit {
   loadAlunos() {
     this.alunos = [];
 
-    this.horasComplementares.forEach(hc=>{
+    this.horasComplementares.forEach(hc => {
       let alunoNaLista: boolean = false;
       this.alunos.forEach(aluno =>{
         if(hc.aluno.matricula == aluno.matricula){
@@ -91,37 +98,41 @@ export class CertificadosComponent implements OnInit {
         this.alunos.push(aluno);
       }     
     });
+
+    this.alertas.zeroAlunos = this.alunos.length == 0;
   }
 
   sortTable(coluna: number) {
-    switch(coluna) {
-      case 0:
-        if(this.ordenacaoTabela[0] == '' || this.ordenacaoTabela[0] == 'decresc') {
-          this.alunos.sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR', {ignorePunctuation: true}));
-          this.ordenacaoTabela = ['cresc', '', ''];
-        } else {
-          this.alunos.sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR', {ignorePunctuation: true})*-1);
-          this.ordenacaoTabela = ['decresc', '', ''];
-        }
-        break;
-      case 1:
-        if(this.ordenacaoTabela[1] == '' || this.ordenacaoTabela[1] == 'decresc') {
-          this.alunos.sort((a, b) => this.sortTableNumberCompare(a.matricula, b.matricula));
-          this.ordenacaoTabela = ['', 'cresc', ''];
-        } else {
-          this.alunos.sort((a, b) => this.sortTableNumberCompare(a.matricula, b.matricula)*-1);
-          this.ordenacaoTabela = ['', 'decresc', ''];
-        }
-        break;
-      default:
-        if(this.ordenacaoTabela[2] == '' || this.ordenacaoTabela[2] == 'decresc') {
-          this.alunos.sort((a, b) => this.sortTableNumberCompare(a.certificadosPendentes, b.certificadosPendentes));
-          this.ordenacaoTabela = ['', '', 'cresc'];
-        } else {
-          this.alunos.sort((a, b) => this.sortTableNumberCompare(a.certificadosPendentes, b.certificadosPendentes)*-1);
-          this.ordenacaoTabela = ['', '', 'decresc'];
-        }
-        break;
+    if(this.alunos.length > 0) {
+      switch(coluna) {
+        case 0:
+          if(this.ordenacaoTabela[0] == '' || this.ordenacaoTabela[0] == 'decresc') {
+            this.alunos.sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR', {ignorePunctuation: true}));
+            this.ordenacaoTabela = ['cresc', '', ''];
+          } else {
+            this.alunos.sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR', {ignorePunctuation: true})*-1);
+            this.ordenacaoTabela = ['decresc', '', ''];
+          }
+          break;
+        case 1:
+          if(this.ordenacaoTabela[1] == '' || this.ordenacaoTabela[1] == 'decresc') {
+            this.alunos.sort((a, b) => this.sortTableNumberCompare(a.matricula, b.matricula));
+            this.ordenacaoTabela = ['', 'cresc', ''];
+          } else {
+            this.alunos.sort((a, b) => this.sortTableNumberCompare(a.matricula, b.matricula)*-1);
+            this.ordenacaoTabela = ['', 'decresc', ''];
+          }
+          break;
+        default:
+          if(this.ordenacaoTabela[2] == '' || this.ordenacaoTabela[2] == 'decresc') {
+            this.alunos.sort((a, b) => this.sortTableNumberCompare(a.certificadosPendentes, b.certificadosPendentes));
+            this.ordenacaoTabela = ['', '', 'cresc'];
+          } else {
+            this.alunos.sort((a, b) => this.sortTableNumberCompare(a.certificadosPendentes, b.certificadosPendentes)*-1);
+            this.ordenacaoTabela = ['', '', 'decresc'];
+          }
+          break;
+      }
     }
   }
 
@@ -143,5 +154,25 @@ class Aluno {
     this.nome = '';
     this.matricula = 0;
     this.certificadosPendentes = 0;
+  }
+}
+
+
+class Alertas {
+  curso: boolean;
+  aluno: boolean;
+  zeroAlunos: boolean;
+
+  cursoMensagem: string;
+  alunoMensagem: string;
+  zeroAlunosMensagem: string;
+
+  constructor() {
+    this.curso = false;
+    this.aluno = false;
+    this.zeroAlunos = false;
+    this.cursoMensagem = 'Erro ao carregar a lista de cursos.';
+    this.alunoMensagem = 'Erro ao carregar lista de alunos do curso selecionado.';
+    this.zeroAlunosMensagem = 'Nenhum aluno do curso selecionado enviou atividades complementares.';
   }
 }

@@ -7,13 +7,15 @@ import { TesteArqService } from 'src/app/shared/services/testeArq.service';
 import { CertificadosComponent } from './certificados/certificados.component';
 import { CertificadosAlunoComponent } from './certificados-aluno/certificados-aluno.component';
 import { AtividadesComponent } from './atividades/atividades.component';
+import { PontuacoesCursoComponent } from './pontuacoes-curso/pontuacoes-curso.component';
 
 
 @NgModule({
   declarations: [
     CertificadosComponent,
     CertificadosAlunoComponent,
-    AtividadesComponent
+    AtividadesComponent,
+    PontuacoesCursoComponent
   ],
   imports: [
     CommonModule,

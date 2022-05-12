@@ -84,7 +84,8 @@ td.center-double {
   padding: 1rem;
 }
 
-.alerta-erro, .alerta-aviso {
+.alerta-erro, .alerta-aviso,
+.alerta-sucesso {
   border-radius: .5rem;
   font-size: 1.1rem;
   font-weight: bold;
@@ -104,6 +105,12 @@ td.center-double {
 .alerta-aviso {
   background-color: yellow;
   border-color: yellow;
+}
+
+.alerta-sucesso {
+  background-color: green;
+  border-color: green;
+  color: white;
 }
 
 

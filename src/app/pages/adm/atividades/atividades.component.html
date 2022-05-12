@@ -16,7 +16,7 @@
         </button>
       </div>
       <div class="row centered">
-        <button class="btn btn-white mt-4" (click)="openModalAddGrupo()" [disabled]="alertas.grupo">
+        <button class="btn btn-white mt-4" (click)="openModalAddGrupo()" [disabled]="alertas.grupoError">
           Novo Grupo
         </button>
       </div>     
@@ -57,33 +57,48 @@
 </div>
 
 <div class="container container-alert">
-  <div class="alert alerta-erro" role="alert" *ngIf="alertas.grupo">
-    <i class="fas fa-times-circle fa-lg"></i>{{alertas.grupoMensagem}}
-  </div>
-  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.saveGrupo">
-    <i class="fas fa-times-circle fa-lg"></i>{{alertas.saveGrupoMensagem}}
-    <button type="button" class="close" aria-label="Close" (click)="alertas.saveGrupo = false">
+  <div class="alert alerta-sucesso alert-dismissible fade show" role="alert" *ngIf="alertas.saveGrupoSuccess">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.saveGrupoSuccessMensagem}}
+    <button type="button" class="close" aria-label="Close" (click)="alertas.saveGrupoSuccess = false">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.deleteGrupo">
-    <i class="fas fa-times-circle fa-lg"></i>{{alertas.deleteGrupoMensagem}}
-    <button type="button" class="close" aria-label="Close" (click)="alertas.deleteGrupo = false">
+  <div class="alert alerta-sucesso alert-dismissible fade show" role="alert" *ngIf="alertas.saveAtividadeSuccess">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.saveAtividadeSuccessMensagem}}
+    <button type="button" class="close" aria-label="Close" (click)="alertas.saveAtividadeSuccess = false">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.deleteAtividade">
-    <i class="fas fa-times-circle fa-lg"></i>{{alertas.deleteAtividadeMensagem}}
-    <button type="button" class="close" aria-label="Close" (click)="alertas.deleteAtividade = false">
+</div>
+
+<div class="container container-alert">
+  <div class="alert alerta-erro" role="alert" *ngIf="alertas.grupoError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.grupoErrorMensagem}}
+  </div>
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.saveGrupoError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.saveGrupoErrorMensagem}}
+    <button type="button" class="close" aria-label="Close" (click)="alertas.saveGrupoError = false">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="alert alerta-aviso" role="alert" *ngIf="alertas.zeroAtividade">
-    <i class="fas fa-exclamation-triangle fa-lg"></i>{{alertas.zeroAtividadeMensagem}}
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.deleteGrupoError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.deleteGrupoErrorMensagem}}
+    <button type="button" class="close" aria-label="Close" (click)="alertas.deleteGrupoError = false">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
-  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.saveAtividade">
-    <i class="fas fa-times-circle fa-lg"></i>{{alertas.saveAtividadeMensagem}}
-    <button type="button" class="close" aria-label="Close" (click)="alertas.saveAtividade = false">
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.deleteAtividadeError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.deleteAtividadeErrorMensagem}}
+    <button type="button" class="close" aria-label="Close" (click)="alertas.deleteAtividadeError = false">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="alert alerta-aviso" role="alert" *ngIf="alertas.zeroAtividadeError">
+    <i class="fas fa-exclamation-triangle fa-lg"></i>{{alertas.zeroAtividadeErrorMensagem}}
+  </div>
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.saveAtividadeError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.saveAtividadeErrorMensagem}}
+    <button type="button" class="close" aria-label="Close" (click)="alertas.saveAtividadeError = false">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>

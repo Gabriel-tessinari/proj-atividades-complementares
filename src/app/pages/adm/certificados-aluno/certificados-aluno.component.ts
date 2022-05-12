@@ -125,14 +125,6 @@ export class CertificadosAlunoComponent implements OnInit {
     });
   }
 
-  setStatusPendente(hc: HorasComplementaresJson) {
-    this.atualizaStatus.id = hc.id;
-    this.atualizaStatus.statusId = 1;
-    this.atualizaStatus.observacao = '';
-
-    this.postNewStatus();
-  }
-
   postNewStatus() {
     this.testeArqService.updateHoraComplementarStatus(this.atualizaStatus)
     .subscribe(

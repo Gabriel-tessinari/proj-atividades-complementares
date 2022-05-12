@@ -10,6 +10,8 @@ import { HorasComplementaresJson } from '../json/horas-complementares.json';
 import { HorasComplementaresAtualizaStatusJson } from '../json/horas-complementares-atualiza-status.json';
 import { AtividadeJson } from '../json/atividade.json';
 import { GrupoAtividadesJson } from '../json/grupo-atividades.json';
+import { AreaJson } from '../json/area.json';
+
 
 @Injectable()
 export class TesteArqService extends ServiceBase {
@@ -57,6 +59,12 @@ export class TesteArqService extends ServiceBase {
     return this.get();
   }
 
+  getCursosByArea(areaId: number): Observable<Array<CursoJson>> {
+    if(environment.mock) return of(TesteArqMockService.prototype.getCursosByArea());
+    this.path = 'Curso/Area/' + areaId;
+    return this.get();
+  }
+
   //GRUPOS DE ATIVIDADES:
   getGruposAtividades(): Observable<Array<GrupoAtividadesJson>> {
     if(environment.mock) return of(TesteArqMockService.prototype.getGruposAtividades());
@@ -94,4 +102,14 @@ export class TesteArqService extends ServiceBase {
     this.path = 'HorasComplementares/AtualizaStatus';
     return this.post(updateStatus);
   }
+
+  //ÁREA:
+  getArea(): Observable<Array<AreaJson>> {
+    if(environment.mock) return of(TesteArqMockService.prototype.getArea());
+    this.path = 'Area';
+    return this.get();
+  }
+
+
+
 }

@@ -5,6 +5,7 @@ import { CursoJson } from "../json/curso.json";
 import { HorasComplementaresJson } from "../json/horas-complementares.json";
 import { AtividadeJson } from "../json/atividade.json";
 import { GrupoAtividadesJson } from "../json/grupo-atividades.json";
+import { AreaJson } from "../json/area.json";
 
 @Injectable()
 export class TesteArqMockService {
@@ -48,6 +49,16 @@ export class TesteArqMockService {
     return response;
   }
 
+  getCursosByArea(): Array<CursoJson> {
+    let response = [];
+    for(let i = 0; i < MockUtil.injectNumber(10); i++) {
+      response.push(CursoJson.prototype.mockObject());
+    }
+    return response;
+  }
+
+
+
   //GRUPOS DE ATIVIDADES:
   getGruposAtividades(): Array<GrupoAtividadesJson> {
     let response = [];
@@ -83,6 +94,17 @@ export class TesteArqMockService {
   }
 
   updateHoraComplementarStatus(): HorasComplementaresJson { 
-    return HorasComplementaresJson.prototype.mockObject();
+    return HorasComplementaresJson.prototype.
+    mockObject();
   }
+
+  //AREA:
+  getArea(): Array<AreaJson> {
+    let response = [];
+    for(let i = 0; i < MockUtil.injectNumber(10); i++) {
+      response.push(AreaJson.prototype.mockObject());
+    }
+    return response;
+  }
+
 }

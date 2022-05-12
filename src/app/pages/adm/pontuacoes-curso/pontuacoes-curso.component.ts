@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TesteArqService } from 'src/app/shared/services/testeArq.service';
 import { AreaJson } from 'src/app/shared/json/area.json';
 import { CursoJson } from 'src/app/shared/json/curso.json';
+import { GrupoAtividadesJson } from 'src/app/shared/json/grupo-atividades.json';
 
 @Component({
   selector: 'app-pontuacoes-curso',
@@ -16,13 +17,14 @@ export class PontuacoesCursoComponent implements OnInit {
   inputCursoSelecionado: string;
   idCursoSelecionado: number;
   desabilitaButton: boolean;
+  grupoAtividades: Array<GrupoAtividadesJson>;
 
   constructor(
     private testeArqService: TesteArqService
   ) { }
 
   ngOnInit(): void {
-
+    this.grupoAtividades = [];
     this.cursos = [];
     this.areas = [];
     this.idAreaSelecionada = 0;
@@ -47,7 +49,6 @@ export class PontuacoesCursoComponent implements OnInit {
 
 
   loadCursos() {   
-    console.log(this.idAreaSelecionada)
     this.testeArqService.getCursosByArea(this.idAreaSelecionada)
     .subscribe(
       response => {
@@ -72,6 +73,21 @@ export class PontuacoesCursoComponent implements OnInit {
     }
 
     this.desabilitaButton = (this.idCursoSelecionado == 0);
+  }
+
+  loadGrupoAtividades() {   
+
+    this.testeArqService.getGruposAtividades()
+    .subscribe(
+      response => {
+        this.grupoAtividades = response
+      },
+      error => {
+        console.log(error);
+        //this.alertas.curso = true;
+      }
+    );
+    console.log(this.grupoAtividades)
   }
 
 

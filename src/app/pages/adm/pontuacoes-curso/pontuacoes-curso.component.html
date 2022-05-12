@@ -15,7 +15,7 @@
             <datalist id="lista-cursos">
               <option *ngFor="let curso of cursos">{{curso.name}}</option>
             </datalist>
-          <button class="btn btn-white" [disabled]="desabilitaButton || cursos.length == 0" (click)="loadCursos()">
+          <button class="btn btn-white" [disabled]="desabilitaButton || cursos.length == 0" (click)="loadGrupoAtividades()">
             Buscar
           </button>
         </div>

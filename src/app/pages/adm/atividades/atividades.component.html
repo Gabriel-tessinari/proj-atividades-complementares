@@ -36,7 +36,8 @@
     </div>
     <div class="card-body" style="padding: 0;">
       <table id="myTable" class="table table-light table-bordered">
-        <col style="width: 95%">
+        <col style="width: 90%">
+        <col style="width: 5%">
         <col style="width: 5%">
         <thead>
           <tr></tr>
@@ -44,6 +45,11 @@
         <tbody>
           <tr *ngFor="let atividade of atividades">
             <td>{{atividade.nome}}</td>
+            <td class="center">
+              <i class="far fa-edit fa-2x" style="cursor: pointer;"
+              data-toggle="tooltip"
+              title="Editar esta atividade."></i>
+            </td>
             <td class="center">
               <i class="far fa-times-circle fa-2x" style="cursor: pointer;"
               (click)="openModalDeleteAtividade(atividade.id)" data-toggle="tooltip"

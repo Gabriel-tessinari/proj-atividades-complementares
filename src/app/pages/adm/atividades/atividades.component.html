@@ -27,6 +27,7 @@
 <div class="container-fluid" *ngIf="grupoSelecionado.id != undefined && grupoSelecionado.id != null">
   <div class="card">
     <div class="card-header">
+      <div class="row title-grupo">{{grupoSelecionado.nome}}</div>
       <i class="fas fa-user" style="margin-right: 10px;"></i>Criar nova atividade
       <input class="form-control form-control-card" [(ngModel)]="novaAtividade.nome">
       <button class="btn btn-white" (click)="createAtividade()"

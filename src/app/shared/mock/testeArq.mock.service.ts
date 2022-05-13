@@ -34,9 +34,12 @@ export class TesteArqMockService {
     return AtividadeJson.prototype.mockObject();
   }
 
+  updateAtividade(): AtividadeJson {
+    return AtividadeJson.prototype.mockObject();
+  }
+
   deleteAtividade(): void{
     console.log("TENTOU DELETAR UMA ATIVIDADE")
-
   }
   
   //CURSOS:

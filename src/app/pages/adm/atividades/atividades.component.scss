@@ -12,3 +12,12 @@
 input {
   min-width: 50%;
 }
+
+.modal-body-editar {
+  font-weight: bolder;
+  padding-bottom: 0;
+}
+
+.modal-body-editar, .modal-footer-editar {
+  background-color: map-get($colors, lggrey);
+}

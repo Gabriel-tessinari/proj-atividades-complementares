@@ -100,6 +100,7 @@ export class AtividadesComponent implements OnInit {
       }
     });
 
+    this.inputGrupoSelecionado = '';
     this.alertas.zeroAtividadeError = (this.atividades.length == 0);
   }
 

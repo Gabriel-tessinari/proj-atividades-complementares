@@ -273,7 +273,7 @@ export class AtividadesComponent implements OnInit {
       alert == 'updateAtividade' ?
       this.alertas.updateAtividadeSuccess = false :
       {}
-    }, 5000);
+    }, 3500);
   }
 }
 

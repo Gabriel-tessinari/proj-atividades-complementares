@@ -47,7 +47,7 @@
             <td>{{atividade.nome}}</td>
             <td class="center">
               <i class="far fa-edit fa-2x" style="cursor: pointer;"
-              data-toggle="tooltip"
+              (click)="openModalUpdateAtividade(atividade)" data-toggle="tooltip"
               title="Editar esta atividade."></i>
             </td>
             <td class="center">
@@ -72,6 +72,12 @@
   <div class="alert alerta-sucesso alert-dismissible fade show" role="alert" *ngIf="alertas.saveAtividadeSuccess">
     <i class="fas fa-times-circle fa-lg"></i>{{alertas.saveAtividadeSuccessMensagem}}
     <button type="button" class="close" aria-label="Close" (click)="alertas.saveAtividadeSuccess = false">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="alert alerta-sucesso alert-dismissible fade show" role="alert" *ngIf="alertas.updateAtividadeSuccess">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.updateAtividadeSuccessMensagem}}
+    <button type="button" class="close" aria-label="Close" (click)="alertas.updateAtividadeSuccess = false">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -105,6 +111,12 @@
   <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.saveAtividadeError">
     <i class="fas fa-times-circle fa-lg"></i>{{alertas.saveAtividadeErrorMensagem}}
     <button type="button" class="close" aria-label="Close" (click)="alertas.saveAtividadeError = false">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.updateAtividadeError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.updateAtividadeErrorMensagem}}
+    <button type="button" class="close" aria-label="Close" (click)="alertas.updateAtividadeError = false">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -186,6 +198,24 @@
         (click)="deleteAtividade(atividadeToDeleteId)">
           Confirmar
         </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-update-atividade" class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body modal-body-editar">
+        <div class="form-group">
+          <label>Novo nome da Atividade:</label>
+          <textarea class="form-control" rows="5" [(ngModel)]="atividadeToUpdate.nome"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer modal-footer-editar">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="updateAtividade()" data-dismiss="modal"
+        [disabled]="atividadeToUpdate.nome == ''">Enviar</button>
       </div>
     </div>
   </div>

@@ -11,6 +11,7 @@ import { HorasComplementaresAtualizaStatusJson } from '../json/horas-complementa
 import { AtividadeJson } from '../json/atividade.json';
 import { GrupoAtividadesJson } from '../json/grupo-atividades.json';
 import { AreaJson } from '../json/area.json';
+import { PontuacaoJson } from '../json/pontuacao.json';
 
 
 @Injectable()
@@ -108,5 +109,12 @@ export class TesteArqService extends ServiceBase {
     if(environment.mock) return of(TesteArqMockService.prototype.updateHoraComplementarStatus());
     this.path = 'HorasComplementares/AtualizaStatus';
     return this.post(updateStatus);
+  }
+
+  //PONTUAÇÕES:
+  getPontuacoes(): Observable<Array<PontuacaoJson>> {
+    if(environment.mock) return of(TesteArqMockService.prototype.getPontuacoes());
+    this.path = 'Pontuacao';
+    return this.get();
   }
 }

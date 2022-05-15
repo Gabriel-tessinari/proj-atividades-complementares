@@ -65,8 +65,8 @@
                           <col style="width: 10%">
                           <col style="width: 10%">
                           <tbody>
-                            <tr>
-                              <td>Nome da atividade</td>
+                            <tr *ngFor="let atv of item.atividades">
+                              <td>{{atv.atividade.nome}}</td>
                               <td>10</td>
                               <td>5</td>
                               <td>false</td>

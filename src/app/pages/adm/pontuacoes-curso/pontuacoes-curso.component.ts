@@ -22,6 +22,7 @@ export class PontuacoesCursoComponent implements OnInit {
   atividades: Array<AtividadeJson>;
   cursoSelecionado: CursoJson;
   tabela: Array<AtividadeTabela>;
+  pontuacoes: Array<PontuacaoJson>;
 
   constructor(
     private testeArqService: TesteArqService
@@ -33,6 +34,7 @@ export class PontuacoesCursoComponent implements OnInit {
     this.areas = [];
     this.atividades = [];
     this.tabela = [];
+    this.pontuacoes = [];
     this.idAreaSelecionada = 0;
     this.idCursoSelecionado = 0;
     this.inputCursoSelecionado = '';
@@ -126,11 +128,88 @@ export class PontuacoesCursoComponent implements OnInit {
     );
   }
 
+  loadPontuacoes() {
+    this.pontuacoes = [
+      {
+        pontos: 15,
+        numeroMaximo: 4,
+        cursoId: 1,
+        atividadeId: 1
+      } as PontuacaoJson,
+      {
+        pontos: 15,
+        numeroMaximo: 4,
+        cursoId: 1,
+        atividadeId: 2
+      } as PontuacaoJson,
+      {
+        pontos: 5,
+        numeroMaximo: 3,
+        cursoId: 1,
+        atividadeId: 3
+      } as PontuacaoJson
+    ];
+
+    /*this.testeArqService.getPontuacoes()
+    .subscribe(
+      response => {
+        this.pontuacoes = response;
+        this.setTabelaPontuacoes();
+      },
+      error => {  
+        console.log(error);
+        //TO DO: mensagem de erro
+      }
+    );*/
+  }
+
   setTabela() {
+    this.tabela = [];
+
     this.grupoAtividades.forEach(grupo => {
       let itemTabela: AtividadeTabela = new AtividadeTabela;
       itemTabela.grupo = grupo;
       this.tabela.push(itemTabela);
+    });
+
+    this.atividades.forEach(atividade => {
+      for(let i = 0; i < this.tabela.length; i++) {
+        if(atividade.grupoAtividadesId == this.tabela[i].grupo.id) {
+          let atv: Atividade = new Atividade;
+          atv.atividade = atividade;
+          this.tabela[i].atividades.push(atv);
+          i = this.tabela.length;
+        }
+      }
+    });
+
+    this.loadPontuacoes();
+  }
+
+  setTabelaPontuacoes() {
+    let isInList: boolean;
+    this.tabela.forEach(item => {
+      item.atividades.forEach(atv => {
+        isInList = false;
+
+        for(let i = 0; i < this.pontuacoes.length; i++) {
+          if(this.pontuacoes[i].cursoId == this.cursoSelecionado.id &&
+            this.pontuacoes[i].atividadeId == atv.atividade.id) {
+            atv.pontuacao = this.pontuacoes[i];
+            isInList = true;
+            i = this.pontuacoes.length;
+          }
+        }
+
+        if(!isInList) {
+          let pontuacao: PontuacaoJson = new PontuacaoJson;
+          pontuacao.pontos = 0;
+          pontuacao.numeroMaximo = 0;
+          pontuacao.atividadeId = atv.atividade.id;
+          pontuacao.cursoId = this.cursoSelecionado.id;
+          atv.pontuacao = pontuacao;
+        }
+      });
     });
   }
 }

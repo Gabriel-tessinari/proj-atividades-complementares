@@ -1,2 +1,7 @@
 @import '../../../../assets/scss/variables';
 @import '../../../../assets/scss/adm.scss';
+
+.vertical{
+    flex-direction: column;
+    background-color: rgb(0, 0, 0);
+}

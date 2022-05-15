@@ -10,7 +10,26 @@ select {
   justify-content: center;
 }
 
-.vertical{
-    flex-direction: column;
-    background-color: rgb(0, 0, 0);
+.table-collapse {
+  border-color: #FBFCFC;
+  padding: 0;
+}
+
+.header-collapse {
+  padding: .75rem 0;
+}
+
+.btn-collapse {
+  color: map-get($colors, dkgrey);
+  font-weight: bold;
+}
+
+.btn-collapse:focus {
+  box-shadow: none;
+  text-decoration: none;
+}
+
+.btn-collapse:hover {
+  color: black;
+  text-decoration: none;
 }

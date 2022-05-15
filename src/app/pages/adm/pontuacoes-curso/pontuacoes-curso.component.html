@@ -31,66 +31,41 @@
       <div class="card-header">
         <div class="row title-curso">{{cursoSelecionado.name}}</div>
       </div>
-      <div class="card-body vertical" style="padding: 0;">
+      <div class="card-body" style="padding: 0;">
         <table id="myTable" class="table table-light table-bordered">
-          <col style="width: 55%">
-          <col style="width: 15%">
-          <col style="width: 15%">
-          <col style="width: 15%">
+          <col style="width: 70%">
+          <col style="width: 10%">
+          <col style="width: 10%">
+          <col style="width: 10%">
           <thead>
             <tr>
-              <th>
-                Atividades
-              </th>
-              <th>
-                Pontuação
-              </th>
-              <th>
-                Número Máximo
-              </th>
-              <th>
-                ConverteHoras
-              </th>
+              <th style="cursor: default">Atividades</th>
+              <th style="cursor: default">Pontuação</th>
+              <th style="cursor: default">Número Máximo</th>
+              <th style="cursor: default">Converter Horas</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let grupo of grupoAtividades">
-              <td>
-                <div class="accordion" id="accordionExample">
-                  <div class="card">
-                    <div class="card-header" id={{grupo.id}}>
-                      <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" attr.data-target="#demo{{grupo.nome}}" aria-expanded="false" attr.aria-controls="#demo{{grupo.nome}}" (click)="filterAtividadesFromGrupo(atividades, grupo.id)">{{grupo.nome}}</button>
-                      </h2>
-                    </div>
-                    <div attr.id="demo{{grupo.nome}}" class="collapse show" attr.aria-labelledby="{{grupo.id}}" data-parent="#accordionExample">
+            <tr>
+              <th colspan="4" class="table-collapse">
+                <div class="accordion">
+                  <div class="card" *ngFor="let item of tabela">
+                    <div class="card-header header-collapse">
+                      <button class="btn btn-link btn-block btn-collapse text-left" type="button" data-toggle="collapse"
+                      [attr.data-target]="'#collapse'+item.grupo.id" aria-expanded="true">
+                        {{item.grupo.nome}}
+                      </button>
+                    </div>           
+                    <div id="collapse{{item.grupo.id}}" class="collapse">
                       <div class="card-body">
-                        {{grupo.nome}} Trabalhos desenvolvidos com orientação docente, apresentados na Instituição (extra sala de aula e extra disciplina específica), em eventos científicos específicos ou seminários multidisciplinares (dentre eles o Inovaweek).
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                       </div>
+                    </div>
                   </div>
-                  </div>
-            </div>
-              </td>
-              <td>teste</td>
-              <td>teste2</td>
-              <td>teste3</td>
-            
+                </div>
+              </th>
             </tr>
           </tbody>
         </table>
-        <div class="accordion" id="accordionExample">
-            <div class="card"  *ngFor="let grupo of grupoAtividades">
-              <div class="card-header" id={{grupo.id}}>
-                <h2 class="mb-0">
-                  <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" attr.data-target="#demo{{grupo.nome}}" aria-expanded="false" attr.aria-controls="#demo{{grupo.nome}}" (click)="filterAtividadesFromGrupo(atividades, 1)">{{grupo.nome}}</button>
-                </h2>
-              </div>
-              <div attr.id="demo{{grupo.nome}}" class="collapse show" attr.aria-labelledby="{{grupo.id}}" data-parent="#accordionExample">
-                <div class="card-body">
-                  {{grupo.nome}} Trabalhos desenvolvidos com orientação docente, apresentados na Instituição (extra sala de aula e extra disciplina específica), em eventos científicos específicos ou seminários multidisciplinares (dentre eles o Inovaweek).
-                </div>
-            </div>
-            </div>
-      </div>
     </div>
 </div>

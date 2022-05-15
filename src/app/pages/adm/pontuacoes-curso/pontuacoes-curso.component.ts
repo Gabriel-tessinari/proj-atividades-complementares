@@ -4,6 +4,7 @@ import { AreaJson } from 'src/app/shared/json/area.json';
 import { CursoJson } from 'src/app/shared/json/curso.json';
 import { GrupoAtividadesJson } from 'src/app/shared/json/grupo-atividades.json';
 import { AtividadeJson } from 'src/app/shared/json/atividade.json';
+import { PontuacaoJson } from 'src/app/shared/json/pontuacao.json';
 
 @Component({
   selector: 'app-pontuacoes-curso',
@@ -20,6 +21,7 @@ export class PontuacoesCursoComponent implements OnInit {
   grupoAtividades: Array<GrupoAtividadesJson>;
   atividades: Array<AtividadeJson>;
   cursoSelecionado: CursoJson;
+  tabela: Array<AtividadeTabela>;
 
   constructor(
     private testeArqService: TesteArqService
@@ -30,6 +32,7 @@ export class PontuacoesCursoComponent implements OnInit {
     this.cursos = [];
     this.areas = [];
     this.atividades = [];
+    this.tabela = [];
     this.idAreaSelecionada = 0;
     this.idCursoSelecionado = 0;
     this.inputCursoSelecionado = '';
@@ -42,7 +45,9 @@ export class PontuacoesCursoComponent implements OnInit {
     this.testeArqService.getAreas()
     .subscribe(
       response => {
-        this.areas = response
+        this.areas = response;
+        this.loadGrupoAtividades();
+        this.loadAtividades();
       },
       error => {
         console.log(error);
@@ -92,14 +97,14 @@ export class PontuacoesCursoComponent implements OnInit {
     this.inputCursoSelecionado = '';
     this.idCursoSelecionado = 0;
     this.desabilitaButton = (this.idCursoSelecionado == 0);
-    this.loadGrupoAtividades();
+    this.setTabela();
   }
 
   loadGrupoAtividades() {
     this.testeArqService.getGruposAtividades()
     .subscribe(
       response => {
-        this.grupoAtividades = response
+        this.grupoAtividades = response;
       },
       error => {
         console.log(error);
@@ -116,20 +121,38 @@ export class PontuacoesCursoComponent implements OnInit {
       },
       error => {  
         console.log(error);
+        //TO DO: mensagem de erro
       }
     );
   }
 
-  filterAtividadesFromGrupo(atividades: Array<AtividadeJson>, selected: number) {//carrega atividades quando clica no collapse, enviando o grupo clicado como parametro
-    this.atividades = [];
-
-    atividades.forEach(atividade => {
-      if(atividade.grupoAtividadesId == selected) {
-        this.atividades.push(atividade);
-      }
-      console.log(atividades)
+  setTabela() {
+    this.grupoAtividades.forEach(grupo => {
+      let itemTabela: AtividadeTabela = new AtividadeTabela;
+      itemTabela.grupo = grupo;
+      this.tabela.push(itemTabela);
     });
-
   }
+}
 
+
+class AtividadeTabela {
+  grupo: GrupoAtividadesJson;
+  atividades: Array<Atividade>;
+
+  constructor() {
+    this.grupo = new GrupoAtividadesJson;
+    this.atividades = [];
+  }
+}
+
+
+class Atividade {
+  atividade: AtividadeJson;
+  pontuacao: PontuacaoJson;
+
+  constructor() {
+    this.atividade = new AtividadeJson;
+    this.pontuacao = new PontuacaoJson;
+  }
 }

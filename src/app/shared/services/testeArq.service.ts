@@ -32,6 +32,13 @@ export class TesteArqService extends ServiceBase {
     return this.get();
   }
 
+  //ÁREAS:
+  getAreas(): Observable<Array<AreaJson>> {
+    if(environment.mock) return of(TesteArqMockService.prototype.getAreas());
+    this.path = 'Area';
+    return this.get();
+  }
+
   //ATIVIDADES:
   getAtividades(): Observable<Array<AtividadeJson>> {
     if(environment.mock) return of(TesteArqMockService.prototype.getAtividades());
@@ -102,14 +109,4 @@ export class TesteArqService extends ServiceBase {
     this.path = 'HorasComplementares/AtualizaStatus';
     return this.post(updateStatus);
   }
-
-  //ÁREA:
-  getArea(): Observable<Array<AreaJson>> {
-    if(environment.mock) return of(TesteArqMockService.prototype.getArea());
-    this.path = 'Area';
-    return this.get();
-  }
-
-
-
 }

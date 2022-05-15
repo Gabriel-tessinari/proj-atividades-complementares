@@ -11,7 +11,6 @@ import { AtividadeJson } from 'src/app/shared/json/atividade.json';
   styleUrls: ['./pontuacoes-curso.component.scss']
 })
 export class PontuacoesCursoComponent implements OnInit {
-
   cursos: Array<CursoJson>;
   areas: Array<AreaJson>;
   idAreaSelecionada: number;
@@ -20,6 +19,7 @@ export class PontuacoesCursoComponent implements OnInit {
   desabilitaButton: boolean;
   grupoAtividades: Array<GrupoAtividadesJson>;
   atividades: Array<AtividadeJson>;
+  cursoSelecionado: CursoJson;
 
   constructor(
     private testeArqService: TesteArqService
@@ -34,36 +34,39 @@ export class PontuacoesCursoComponent implements OnInit {
     this.idCursoSelecionado = 0;
     this.inputCursoSelecionado = '';
     this.desabilitaButton = true;
-    this.loadArea();
+    this.cursoSelecionado = new CursoJson;
+    this.loadAreas();
   }
 
-  loadArea() {   
-    this.testeArqService.getArea()
+  loadAreas() {   
+    this.testeArqService.getAreas()
     .subscribe(
       response => {
         this.areas = response
       },
       error => {
         console.log(error);
-        //this.alertas.grupo = true;
+        //TO DO: mensagem de erro
       }
     );
   }
 
+  loadCursos() {
+    this.inputCursoSelecionado = '';
+    this.idCursoSelecionado = 0;
+    this.desabilitaButton = (this.idCursoSelecionado == 0);
 
-  loadCursos() {   
     this.testeArqService.getCursosByArea(this.idAreaSelecionada)
     .subscribe(
       response => {
-        this.cursos = response
+        this.cursos = response;
       },
       error => {
         console.log(error);
-        //this.alertas.curso = true;
+        //TO DO: mensagem de erro
       }
     );
   }
-
 
   selectCurso(selected: string) {
     for(let i = 0; i < this.cursos.length; i++) {
@@ -78,8 +81,21 @@ export class PontuacoesCursoComponent implements OnInit {
     this.desabilitaButton = (this.idCursoSelecionado == 0);
   }
 
-  loadGrupoAtividades() {   
+  setSelectedCurso() {
+    for(let i = 0; i < this.cursos.length; i++) {
+      if(this.idCursoSelecionado == this.cursos[i].id) {
+        this.cursoSelecionado = this.cursos[i];
+        i = this.cursos.length;
+      }
+    }
 
+    this.inputCursoSelecionado = '';
+    this.idCursoSelecionado = 0;
+    this.desabilitaButton = (this.idCursoSelecionado == 0);
+    this.loadGrupoAtividades();
+  }
+
+  loadGrupoAtividades() {
     this.testeArqService.getGruposAtividades()
     .subscribe(
       response => {
@@ -87,10 +103,9 @@ export class PontuacoesCursoComponent implements OnInit {
       },
       error => {
         console.log(error);
-        //this.alertas.curso = true;
+        //TO DO: mensagem de erro
       }
     );
-    console.log(this.grupoAtividades)
   }
 
   loadAtividades() { 

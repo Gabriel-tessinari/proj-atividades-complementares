@@ -1,32 +1,35 @@
 <div class="container-fluid">
-    <div class="card">
-      <div class="card-header card-header-grey">
-        PONTUAÇÃO POR CURSO
-      </div>
-      <div class="card-body card-body-centered-lines">
-        <div class="row">
-          <h5>Área</h5>
-          <select name="selectArea" [(ngModel)]="idAreaSelecionada" (change)="loadCursos()">
-            <option *ngFor="let area of areas" [value]="area.id">{{area.name}}</option>
-          </select>         
-            <h5>Curso</h5>
-            <input #inputCurso class="form-control form-control-card" list="lista-cursos" placeholder="Escolha um curso"
-          (input)="selectCurso(inputCurso.value)" [(ngModel)]="inputCursoSelecionado">         
-            <datalist id="lista-cursos">
-              <option *ngFor="let curso of cursos">{{curso.name}}</option>
-            </datalist>
-          <button class="btn btn-white" [disabled]="desabilitaButton || cursos.length == 0" (click)="loadGrupoAtividades()">
-            Buscar
-          </button>
-        </div>
+  <div class="card">
+    <div class="card-header card-header-grey">
+      PONTUAÇÃO POR CURSO
+    </div>
+    <div class="card-body card-body-centered-lines">
+      <div class="row">
+        <h5>Área</h5>
+        <select name="selectArea" class="form-control form-control-card"
+        [(ngModel)]="idAreaSelecionada" (change)="loadCursos()">
+          <option hidden disabled selected [value]="0">Escolha uma área</option>
+          <option *ngFor="let area of areas" [value]="area.id">{{area.name}}</option>
+        </select>         
+        <h5>Curso</h5>
+        <input #inputCurso class="form-control form-control-card" list="lista-cursos" placeholder="Escolha um curso"
+        (input)="selectCurso(inputCurso.value)" [(ngModel)]="inputCursoSelecionado">         
+          <datalist id="lista-cursos">
+            <option *ngFor="let curso of cursos">{{curso.name}}</option>
+          </datalist>
+        <button class="btn btn-white" [disabled]="desabilitaButton || cursos.length == 0"
+        (click)="setSelectedCurso()">
+          Buscar
+        </button>
       </div>
     </div>
   </div>
+</div>
 
 <div class="container-fluid">
     <div class="card">
       <div class="card-header">
-        <i style="margin-right: 10px;"></i>Curso selecionado:
+        <div class="row title-curso">{{cursoSelecionado.name}}</div>
       </div>
       <div class="card-body vertical" style="padding: 0;">
         <table id="myTable" class="table table-light table-bordered">

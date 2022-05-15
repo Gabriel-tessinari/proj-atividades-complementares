@@ -1,6 +1,15 @@
 @import '../../../../assets/scss/variables';
 @import '../../../../assets/scss/adm.scss';
 
+select {
+  margin-right: 20px;
+}
+
+.title-curso {
+  font-size: x-large;
+  justify-content: center;
+}
+
 .vertical{
     flex-direction: column;
     background-color: rgb(0, 0, 0);

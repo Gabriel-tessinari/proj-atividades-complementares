@@ -22,6 +22,15 @@ export class TesteArqMockService {
     return AlunoJson.prototype.mockObject();
   }
 
+  //ÁREAS:
+  getAreas(): Array<AreaJson> {
+    let response = [];
+    for(let i = 0; i < MockUtil.injectNumber(10); i++) {
+      response.push(AreaJson.prototype.mockObject());
+    }
+    return response;
+  }
+
   //ATIVIDADES:
   getAtividades(): Array<AtividadeJson> {
     let response = [];
@@ -56,8 +65,6 @@ export class TesteArqMockService {
     }
     return response;
   }
-
-
 
   //GRUPOS DE ATIVIDADES:
   getGruposAtividades(): Array<GrupoAtividadesJson> {
@@ -97,14 +104,4 @@ export class TesteArqMockService {
     return HorasComplementaresJson.prototype.
     mockObject();
   }
-
-  //AREA:
-  getArea(): Array<AreaJson> {
-    let response = [];
-    for(let i = 0; i < MockUtil.injectNumber(10); i++) {
-      response.push(AreaJson.prototype.mockObject());
-    }
-    return response;
-  }
-
 }

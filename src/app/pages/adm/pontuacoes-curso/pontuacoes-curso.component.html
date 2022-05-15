@@ -27,65 +27,93 @@
 </div>
 
 <div class="container-fluid">
-    <div class="card">
-      <div class="card-header">
-        <div class="row title-curso">{{cursoSelecionado.name}}</div>
-      </div>
-      <div class="card-body" style="padding: 0;">
-        <table id="myTable" class="table table-light table-bordered">
-          <col style="width: 70%">
-          <col style="width: 10%">
-          <col style="width: 10%">
-          <col style="width: 10%">
-          <thead>
-            <tr>
-              <th style="cursor: default">Atividades</th>
-              <th style="cursor: default">Pontuação</th>
-              <th style="cursor: default">Número Máximo</th>
-              <th style="cursor: default">Converter Horas</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th colspan="4" class="table-collapse">
-                <div class="accordion">
-                  <div class="card" *ngFor="let item of tabela">
-                    <div class="card-header header-collapse">
-                      <button class="btn btn-link btn-block btn-collapse text-left dropdown-toggle" type="button" data-toggle="collapse"
-                      [attr.data-target]="'#collapse'+item.grupo.id" aria-expanded="true">
-                        {{item.grupo.nome}}
-                      </button>
-                    </div>           
-                    <div id="collapse{{item.grupo.id}}" class="collapse">
-                      <div class="card-body body-collapse">
-                        <table id="myTable" class="table table-light table-bordered mb-0"
-                        *ngIf="item.atividades.length > 0">
-                          <col style="width: 70%">
-                          <col style="width: 10%">
-                          <col style="width: 10%">
-                          <col style="width: 10%">
-                          <tbody>
-                            <tr *ngFor="let atv of item.atividades">
-                              <td>{{atv.atividade.nome}}</td>
-                              <td>10</td>
-                              <td>5</td>
-                              <td>false</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <div class="container container-alert" *ngIf="item.atividades.length == 0">
-                          <div class="alert alerta-aviso mb-0" role="alert">
-                            <i class="fas fa-exclamation-triangle fa-lg"></i>
-                            Não há Atividades cadastradas nesse Grupo de Atividades.
-                          </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="row title-curso">{{cursoSelecionado.name}}</div>
+    </div>
+    <div class="card-body" style="padding: 0;">
+      <table id="myTable" class="table table-light table-bordered">
+        <col style="width: 70%">
+        <col style="width: 10%">
+        <col style="width: 10%">
+        <col style="width: 10%">
+        <thead>
+          <tr>
+            <th style="cursor: default">Atividades</th>
+            <th style="cursor: default">Pontuação</th>
+            <th style="cursor: default">Número Máximo</th>
+            <th style="cursor: default">Converter Horas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th colspan="4" class="table-collapse">
+              <div class="accordion">
+                <div class="card" *ngFor="let item of tabela">
+                  <div class="card-header header-collapse">
+                    <button class="btn btn-link btn-block btn-collapse text-left dropdown-toggle"
+                    type="button" data-toggle="collapse" [attr.data-target]="'#collapse'+item.grupo.id"
+                    aria-expanded="true">
+                      {{item.grupo.nome}}
+                    </button>
+                  </div>           
+                  <div id="collapse{{item.grupo.id}}" class="collapse">
+                    <div class="card-body body-collapse">
+                      <table id="myTable" class="table table-light table-bordered mb-0"
+                      *ngIf="item.atividades.length > 0">
+                        <col style="width: 70%">
+                        <col style="width: 10%">
+                        <col style="width: 10%">
+                        <col style="width: 10%">
+                        <tbody>
+                          <tr *ngFor="let atv of item.atividades">
+                            <td>{{atv.atividade.nome}}</td>
+                            <td>
+                              <input class="form-control" type="text" [(ngModel)]="atv.pontuacao.pontos">
+                            </td>
+                            <td>
+                              <input class="form-control" type="text" [(ngModel)]="atv.pontuacao.numeroMaximo">                               
+                            </td>
+                            <td style="text-align: center;">
+                              <input type="checkbox" [(ngModel)]="atv.atividade.converterHoras">
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div class="container container-alert" *ngIf="item.atividades.length == 0">
+                        <div class="alert alerta-aviso mb-0" role="alert">
+                          <i class="fas fa-exclamation-triangle fa-lg"></i>
+                          Não há Atividades cadastradas nesse Grupo de Atividades.
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </th>
-            </tr>
-          </tbody>
-        </table>
+              </div>
+            </th>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
+</div>
+
+<div class="container container-alert"></div>
+
+<div class="container-fluid" style="padding-top: 0;">
+  <div class="row centered">
+    <button class="btn btn-white" [disabled]="pontuacoes.length == 0">
+      Salvar
+    </button>
+  </div>
+</div>
+
+<div class="container-fluid" style="padding-top: 0">
+  <div class="row">
+    <div class="col-12">
+      <a class="voltar" href="atividades">
+        <i class="fas fa-caret-left" style="margin-right: 5px"></i>Voltar
+      </a>
+    </div>
+  </div>
 </div>

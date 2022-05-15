@@ -161,6 +161,8 @@ export class PontuacoesCursoComponent implements OnInit {
         //TO DO: mensagem de erro
       }
     );*/
+
+    this.setTabelaPontuacoes();
   }
 
   setTabela() {
@@ -211,6 +213,10 @@ export class PontuacoesCursoComponent implements OnInit {
         }
       });
     });
+  }
+
+  save() {
+    
   }
 }
 

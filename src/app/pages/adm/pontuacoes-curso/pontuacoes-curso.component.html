@@ -51,14 +51,34 @@
                 <div class="accordion">
                   <div class="card" *ngFor="let item of tabela">
                     <div class="card-header header-collapse">
-                      <button class="btn btn-link btn-block btn-collapse text-left" type="button" data-toggle="collapse"
+                      <button class="btn btn-link btn-block btn-collapse text-left dropdown-toggle" type="button" data-toggle="collapse"
                       [attr.data-target]="'#collapse'+item.grupo.id" aria-expanded="true">
                         {{item.grupo.nome}}
                       </button>
                     </div>           
                     <div id="collapse{{item.grupo.id}}" class="collapse">
-                      <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                      <div class="card-body body-collapse">
+                        <table id="myTable" class="table table-light table-bordered mb-0"
+                        *ngIf="item.atividades.length > 0">
+                          <col style="width: 70%">
+                          <col style="width: 10%">
+                          <col style="width: 10%">
+                          <col style="width: 10%">
+                          <tbody>
+                            <tr>
+                              <td>Nome da atividade</td>
+                              <td>10</td>
+                              <td>5</td>
+                              <td>false</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="container container-alert" *ngIf="item.atividades.length == 0">
+                          <div class="alert alerta-aviso mb-0" role="alert">
+                            <i class="fas fa-exclamation-triangle fa-lg"></i>
+                            Não há Atividades cadastradas nesse Grupo de Atividades.
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

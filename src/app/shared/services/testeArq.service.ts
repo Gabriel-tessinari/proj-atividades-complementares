@@ -117,4 +117,10 @@ export class TesteArqService extends ServiceBase {
     this.path = 'Pontuacao';
     return this.get();
   }
+
+  saveOrUpdatePontuacao(pontuacao: PontuacaoJson): Observable<void> {
+    if(environment.mock) return of(TesteArqMockService.prototype.saveOrUpdatePontuacao());
+    this.path = 'Pontuacao';
+    return this.put(pontuacao);
+  }
 }

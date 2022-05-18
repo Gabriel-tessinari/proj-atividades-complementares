@@ -46,8 +46,7 @@ export class TesteArqMockService {
   }
 
   deleteAtividade(): void{
-    console.log("TENTOU DELETAR UMA ATIVIDADE")
-
+    console.log("TENTOU DELETAR UMA ATIVIDADE");
   }
   
   //CURSOS:
@@ -81,7 +80,7 @@ export class TesteArqMockService {
   }
 
   deleteGrupoAtividades(): void {
-    console.log("TENTOU DELETAR UM GRUPO DE ATIVIDADES")
+    console.log("TENTOU DELETAR UM GRUPO DE ATIVIDADES");
   }
 
   //HORAS COMPLEMENTARES:
@@ -113,5 +112,9 @@ export class TesteArqMockService {
       response.push(PontuacaoJson.prototype.mockObject());
     }
     return response;
+  }
+
+  saveOrUpdatePontuacao(): void {
+    console.log("TENTOU SALVAR UMA PONTUAÇÃO");
   }
 }

@@ -129,28 +129,7 @@ export class PontuacoesCursoComponent implements OnInit {
   }
 
   loadPontuacoes() {
-    this.pontuacoes = [
-      {
-        pontos: 15,
-        numeroMaximo: 4,
-        cursoId: 1,
-        atividadeId: 1
-      } as PontuacaoJson,
-      {
-        pontos: 15,
-        numeroMaximo: 4,
-        cursoId: 1,
-        atividadeId: 2
-      } as PontuacaoJson,
-      {
-        pontos: 5,
-        numeroMaximo: 3,
-        cursoId: 1,
-        atividadeId: 3
-      } as PontuacaoJson
-    ];
-
-    /*this.testeArqService.getPontuacoes()
+    this.testeArqService.getPontuacoes()
     .subscribe(
       response => {
         this.pontuacoes = response;
@@ -160,7 +139,7 @@ export class PontuacoesCursoComponent implements OnInit {
         console.log(error);
         //TO DO: mensagem de erro
       }
-    );*/
+    );
 
     this.setTabelaPontuacoes();
   }
@@ -216,7 +195,21 @@ export class PontuacoesCursoComponent implements OnInit {
   }
 
   save() {
-    
+    this.tabela.forEach(item => {
+      item.atividades.forEach(atv => {
+        this.testeArqService.saveOrUpdatePontuacao(atv.pontuacao)
+        .subscribe(
+          () => {
+            console.log('Sucesso ao salvar ou atualizar:');
+            console.log(atv.pontuacao);
+          },
+          error => {  
+            console.log(error);
+            //TO DO: mensagem de erro
+          }
+        );
+      });
+    });
   }
 }
 

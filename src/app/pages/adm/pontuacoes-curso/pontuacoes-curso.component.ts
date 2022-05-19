@@ -142,8 +142,6 @@ export class PontuacoesCursoComponent implements OnInit {
         this.alertas.loadPontuacoesError = true;
       }
     );
-
-    this.setTabelaPontuacoes();
   }
 
   setTabela() {

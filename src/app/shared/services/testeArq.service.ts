@@ -10,6 +10,9 @@ import { HorasComplementaresJson } from '../json/horas-complementares.json';
 import { HorasComplementaresAtualizaStatusJson } from '../json/horas-complementares-atualiza-status.json';
 import { AtividadeJson } from '../json/atividade.json';
 import { GrupoAtividadesJson } from '../json/grupo-atividades.json';
+import { AreaJson } from '../json/area.json';
+import { PontuacaoJson } from '../json/pontuacao.json';
+
 
 @Injectable()
 export class TesteArqService extends ServiceBase {
@@ -27,6 +30,13 @@ export class TesteArqService extends ServiceBase {
   getAlunoById(alunoId: number): Observable<AlunoJson> {
     if(environment.mock) return of(TesteArqMockService.prototype.getAlunoById());
     this.path = 'Aluno/' + alunoId;
+    return this.get();
+  }
+
+  //ÁREAS:
+  getAreas(): Observable<Array<AreaJson>> {
+    if(environment.mock) return of(TesteArqMockService.prototype.getAreas());
+    this.path = 'Area';
     return this.get();
   }
 
@@ -59,6 +69,12 @@ export class TesteArqService extends ServiceBase {
   getCursos(): Observable<Array<CursoJson>> {
     if(environment.mock) return of(TesteArqMockService.prototype.getCursos());
     this.path = 'Curso';
+    return this.get();
+  }
+
+  getCursosByArea(areaId: number): Observable<Array<CursoJson>> {
+    if(environment.mock) return of(TesteArqMockService.prototype.getCursosByArea());
+    this.path = 'Curso/Area/' + areaId;
     return this.get();
   }
 
@@ -98,5 +114,18 @@ export class TesteArqService extends ServiceBase {
     if(environment.mock) return of(TesteArqMockService.prototype.updateHoraComplementarStatus());
     this.path = 'HorasComplementares/AtualizaStatus';
     return this.post(updateStatus);
+  }
+
+  //PONTUAÇÕES:
+  getPontuacoes(): Observable<Array<PontuacaoJson>> {
+    if(environment.mock) return of(TesteArqMockService.prototype.getPontuacoes());
+    this.path = 'Pontuacao';
+    return this.get();
+  }
+
+  saveOrUpdatePontuacao(pontuacao: PontuacaoJson): Observable<void> {
+    if(environment.mock) return of(TesteArqMockService.prototype.saveOrUpdatePontuacao());
+    this.path = 'Pontuacao';
+    return this.put(pontuacao);
   }
 }

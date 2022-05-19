@@ -1,0 +1,59 @@
+@import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/adm.scss';
+
+select {
+  margin-right: 20px;
+}
+
+.title-curso {
+  font-size: x-large;
+  justify-content: center;
+}
+
+.table-collapse {
+  border-color: #FBFCFC;
+  padding: 0;
+}
+
+.header-collapse {
+  padding: .75rem 0;
+}
+
+.btn-collapse {
+  color: map-get($colors, dkgrey);
+  font-weight: bold;
+}
+
+.btn-collapse:focus {
+  box-shadow: none;
+  text-decoration: none;
+}
+
+.btn-collapse:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.body-collapse {
+  padding: 0;
+
+  td {
+    cursor: default;
+    font-weight: 400;
+  }
+}
+
+input[type="checkbox"] {
+  height: 2rem;
+  width: 2rem;
+}
+
+.centered {
+  justify-content: center;
+}
+
+.voltar {
+  color: black;
+  font-size: 20px;
+  text-decoration: none;
+}

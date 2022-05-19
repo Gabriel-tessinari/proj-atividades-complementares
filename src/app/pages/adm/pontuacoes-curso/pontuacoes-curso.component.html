@@ -1,0 +1,150 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header card-header-grey">
+      PONTUAÇÃO POR CURSO
+    </div>
+    <div class="card-body card-body-centered-lines">
+      <div class="row">
+        <h5>Área</h5>
+        <select name="selectArea" class="form-control form-control-card"
+        [(ngModel)]="idAreaSelecionada" (change)="loadCursos()">
+          <option hidden disabled selected [value]="0">Escolha uma área</option>
+          <option *ngFor="let area of areas" [value]="area.id">{{area.name}}</option>
+        </select>         
+        <h5>Curso</h5>
+        <input #inputCurso class="form-control form-control-card" list="lista-cursos" placeholder="Escolha um curso"
+        (input)="selectCurso(inputCurso.value)" [(ngModel)]="inputCursoSelecionado">         
+          <datalist id="lista-cursos">
+            <option *ngFor="let curso of cursos">{{curso.name}}</option>
+          </datalist>
+        <button class="btn btn-white" [disabled]="desabilitaButton || cursos.length == 0"
+        (click)="setSelectedCurso()">
+          Buscar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container container-alert">
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.loadAreaError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.loadAreaErrorMensagem}}
+  </div>
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.loadGrupoError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.loadGrupoErrorMensagem}}
+  </div>
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.loadAtividadeError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.loadAtividadeErrorMensagem}}
+  </div>
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.loadCursosError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.loadCursosErrorMensagem}}
+  </div>
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.loadPontuacoesError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.loadPontuacoesErrorMensagem}}
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      <div class="row title-curso">{{cursoSelecionado.name}}</div>
+    </div>
+    <div class="card-body" style="padding: 0;">
+      <table id="myTable" class="table table-light table-bordered">
+        <col style="width: 70%">
+        <col style="width: 10%">
+        <col style="width: 10%">
+        <col style="width: 10%">
+        <thead>
+          <tr>
+            <th style="cursor: default">Atividades</th>
+            <th style="cursor: default">Pontuação</th>
+            <th style="cursor: default">Número Máximo</th>
+            <th style="cursor: default">Converter Horas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th colspan="4" class="table-collapse">
+              <div class="accordion">
+                <div class="card" *ngFor="let item of tabela">
+                  <div class="card-header header-collapse">
+                    <button class="btn btn-link btn-block btn-collapse text-left dropdown-toggle"
+                    type="button" data-toggle="collapse" [attr.data-target]="'#collapse'+item.grupo.id"
+                    aria-expanded="true">
+                      {{item.grupo.nome}}
+                    </button>
+                  </div>           
+                  <div id="collapse{{item.grupo.id}}" class="collapse">
+                    <div class="card-body body-collapse">
+                      <table id="myTable" class="table table-light table-bordered mb-0"
+                      *ngIf="item.atividades.length > 0">
+                        <col style="width: 70%">
+                        <col style="width: 10%">
+                        <col style="width: 10%">
+                        <col style="width: 10%">
+                        <tbody>
+                          <tr *ngFor="let atv of item.atividades">
+                            <td>{{atv.atividade.nome}}</td>
+                            <td>
+                              <input class="form-control" type="text" [(ngModel)]="atv.pontuacao.pontos">
+                            </td>
+                            <td>
+                              <input class="form-control" type="text" [(ngModel)]="atv.pontuacao.numeroMaximo">                               
+                            </td>
+                            <td style="text-align: center;">
+                              <input type="checkbox" [(ngModel)]="atv.atividade.converterHoras">
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div class="container container-alert" *ngIf="item.atividades.length == 0">
+                        <div class="alert alerta-aviso mb-0" role="alert">
+                          <i class="fas fa-exclamation-triangle fa-lg"></i>
+                          Não há Atividades cadastradas nesse Grupo de Atividades.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="container container-alert">
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.savePontuacoesError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.savePontuacoesErrorMensagem}}
+    <button type="button" class="close" aria-label="Close" (click)="alertas.savePontuacoesError = false">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="alert alerta-sucesso alert-dismissible fade show" role="alert" *ngIf="alertas.savePontuacoesSuccess">
+    <i class="fas fa-check-circle fa-lg"></i>{{alertas.savePontuacoesSuccessMensagem}}
+    <button type="button" class="close" aria-label="Close" (click)="alertas.savePontuacoesSuccess = false">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+
+<div class="container-fluid" style="padding-top: 0;">
+  <div class="row centered">
+    <button class="btn btn-white" [disabled]="pontuacoes.length == 0" (click)="save()">
+      Salvar
+    </button>
+  </div>
+</div>
+
+<div class="container-fluid" style="padding-top: 0">
+  <div class="row">
+    <div class="col-12">
+      <a class="voltar" href="atividades">
+        <i class="fas fa-caret-left" style="margin-right: 5px"></i>Voltar
+      </a>
+    </div>
+  </div>
+</div>

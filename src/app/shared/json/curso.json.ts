@@ -11,7 +11,8 @@ export class CursoJson {
     return {
       id: MockUtil.injectNumber(),
       name: MockUtil.injectString(),
-      areaId: MockUtil.injectNumber(),
+      areaId: 1,
+      //areaId: MockUtil.injectNumber(),
       area: AreaJson.prototype.mockObject()
     } as CursoJson;
   }

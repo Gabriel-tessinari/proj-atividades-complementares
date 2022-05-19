@@ -23,6 +23,7 @@ export class PontuacoesCursoComponent implements OnInit {
   cursoSelecionado: CursoJson;
   tabela: Array<AtividadeTabela>;
   pontuacoes: Array<PontuacaoJson>;
+  alertas: Alertas;
 
   constructor(
     private testeArqService: TesteArqService
@@ -40,6 +41,7 @@ export class PontuacoesCursoComponent implements OnInit {
     this.inputCursoSelecionado = '';
     this.desabilitaButton = true;
     this.cursoSelecionado = new CursoJson;
+    this.alertas = new Alertas();
     this.loadAreas();
   }
 
@@ -53,7 +55,7 @@ export class PontuacoesCursoComponent implements OnInit {
       },
       error => {
         console.log(error);
-        //TO DO: mensagem de erro
+        this.alertas.loadAreaError = true;
       }
     );
   }
@@ -70,7 +72,7 @@ export class PontuacoesCursoComponent implements OnInit {
       },
       error => {
         console.log(error);
-        //TO DO: mensagem de erro
+        this.alertas.loadCursosError = true;
       }
     );
   }
@@ -110,7 +112,7 @@ export class PontuacoesCursoComponent implements OnInit {
       },
       error => {
         console.log(error);
-        //TO DO: mensagem de erro
+        this.alertas.loadGrupoError = true;
       }
     );
   }
@@ -123,7 +125,7 @@ export class PontuacoesCursoComponent implements OnInit {
       },
       error => {  
         console.log(error);
-        //TO DO: mensagem de erro
+        this.alertas.loadAtividadeError = true;
       }
     );
   }
@@ -137,7 +139,7 @@ export class PontuacoesCursoComponent implements OnInit {
       },
       error => {  
         console.log(error);
-        //TO DO: mensagem de erro
+        this.alertas.loadPontuacoesError = true;
       }
     );
 
@@ -195,6 +197,8 @@ export class PontuacoesCursoComponent implements OnInit {
   }
 
   save() {
+    let erros: number = 0;
+
     this.tabela.forEach(item => {
       item.atividades.forEach(atv => {
         this.testeArqService.saveOrUpdatePontuacao(atv.pontuacao)
@@ -205,11 +209,24 @@ export class PontuacoesCursoComponent implements OnInit {
           },
           error => {  
             console.log(error);
-            //TO DO: mensagem de erro
+            erros++;
           }
         );
       });
     });
+
+    if(erros == 0) {
+      this.alertas.savePontuacoesSuccess = true;
+      this.alertSuccessTimer();
+    } else {
+      this.alertas.savePontuacoesError = true;
+    }
+  }
+
+  alertSuccessTimer() {
+    setTimeout(() => {
+      this.alertas.savePontuacoesSuccess = false;
+    }, 3500);
   }
 }
 
@@ -232,5 +249,44 @@ class Atividade {
   constructor() {
     this.atividade = new AtividadeJson;
     this.pontuacao = new PontuacaoJson;
+  }
+}
+
+
+class Alertas {
+  loadAreaError: boolean;
+  loadGrupoError: boolean;
+  loadAtividadeError: boolean;
+  loadCursosError: boolean;
+  loadPontuacoesError: boolean;
+  savePontuacoesError: boolean;
+
+  savePontuacoesSuccess: boolean;
+ 
+  loadAreaErrorMensagem: string;
+  loadGrupoErrorMensagem: string;
+  loadAtividadeErrorMensagem: string;
+  loadCursosErrorMensagem: string;
+  loadPontuacoesErrorMensagem: string;
+  savePontuacoesErrorMensagem: string;
+
+  savePontuacoesSuccessMensagem: string;
+
+  constructor() {
+    this.loadAreaError = false;
+    this.loadGrupoError = false;
+    this.loadAtividadeError = false;
+    this.loadCursosError = false;
+    this.loadPontuacoesError = false;
+    this.savePontuacoesError = false;
+    this.loadAreaErrorMensagem = 'Erro ao carregar a lista de áreas. Tente novamente.';
+    this.loadGrupoErrorMensagem = 'Erro ao carregar a lista de grupos de atividades. Tente novamente.';
+    this.loadAtividadeErrorMensagem = 'Erro ao carregar a lista de atividades. Tente novamente.';
+    this.loadCursosErrorMensagem = 'Erro ao carregar os cursos da área selecionada. Tente novamente.';
+    this.loadPontuacoesErrorMensagem = 'Erro ao carregar as pontuações do curso selecionado. Tente novamente.';
+    this.savePontuacoesErrorMensagem = 'Erro ao salvar as pontuações. Tente novamente.';
+
+    this.savePontuacoesSuccess = false;
+    this.savePontuacoesSuccessMensagem = 'Pontuações salvas com sucesso.';
   }
 }

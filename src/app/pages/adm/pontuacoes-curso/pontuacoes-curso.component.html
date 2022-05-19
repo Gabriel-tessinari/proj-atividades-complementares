@@ -26,6 +26,24 @@
   </div>
 </div>
 
+<div class="container container-alert">
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.loadAreaError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.loadAreaErrorMensagem}}
+  </div>
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.loadGrupoError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.loadGrupoErrorMensagem}}
+  </div>
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.loadAtividadeError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.loadAtividadeErrorMensagem}}
+  </div>
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.loadCursosError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.loadCursosErrorMensagem}}
+  </div>
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.loadPontuacoesError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.loadPontuacoesErrorMensagem}}
+  </div>
+</div>
+
 <div class="container-fluid">
   <div class="card">
     <div class="card-header">
@@ -98,7 +116,20 @@
   </div>
 </div>
 
-<div class="container container-alert"></div>
+<div class="container container-alert">
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.savePontuacoesError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.savePontuacoesErrorMensagem}}
+    <button type="button" class="close" aria-label="Close" (click)="alertas.savePontuacoesError = false">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="alert alerta-sucesso alert-dismissible fade show" role="alert" *ngIf="alertas.savePontuacoesSuccess">
+    <i class="fas fa-check-circle fa-lg"></i>{{alertas.savePontuacoesSuccessMensagem}}
+    <button type="button" class="close" aria-label="Close" (click)="alertas.savePontuacoesSuccess = false">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
 
 <div class="container-fluid" style="padding-top: 0;">
   <div class="row centered">

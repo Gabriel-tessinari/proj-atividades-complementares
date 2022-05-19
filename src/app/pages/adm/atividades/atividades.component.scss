@@ -12,3 +12,18 @@
 input {
   min-width: 50%;
 }
+
+.title-grupo {
+  font-size: x-large;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.modal-body-editar {
+  font-weight: bolder;
+  padding-bottom: 0;
+}
+
+.modal-body-editar, .modal-footer-editar {
+  background-color: map-get($colors, lggrey);
+}

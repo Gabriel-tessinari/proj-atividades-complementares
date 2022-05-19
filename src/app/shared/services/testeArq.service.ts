@@ -47,11 +47,16 @@ export class TesteArqService extends ServiceBase {
     return this.get();
   }
 
-  createAtividade(newAtividade: GrupoAtividadesJson): Observable<AtividadeJson> {
-    console.log(newAtividade)
+  createAtividade(newAtividade: AtividadeJson): Observable<AtividadeJson> {
     if(environment.mock) return of(TesteArqMockService.prototype.createAtividade());
     this.path = 'Atividades';
     return this.post(newAtividade);
+  }
+
+  updateAtividade(atividade: AtividadeJson): Observable<AtividadeJson> {
+    if(environment.mock) return of(TesteArqMockService.prototype.updateAtividade());
+    this.path = 'Atividades';
+    return this.put(atividade);
   }
 
   deleteAtividade(id: number): Observable<void> {

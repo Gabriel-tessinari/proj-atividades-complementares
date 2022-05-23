@@ -53,9 +53,10 @@
               <a class="btn btn-danger" (click)="openModalRecusar(horaEnviada.horaComplementar)">Recusar</a>
             </td>
             <td class="center-double" *ngIf="horaEnviada.horaComplementar.status.descricao == 'Recusado'">
-              <a class="btn btn-primary" (click)="setStatusPendente(horaEnviada.horaComplementar)">Desfazer</a>
+              <a class="btn btn-success" (click)="openModalValidar(horaEnviada.horaComplementar)">Revalidar</a>
               <a class="btn btn-info" (click)="openModalRecusar(horaEnviada.horaComplementar)">Editar</a>
             </td>
+            <td class="center-double" *ngIf="horaEnviada.horaComplementar.status.descricao == 'Aprovado'"></td>
           </tr>
         </tbody>
       </table>

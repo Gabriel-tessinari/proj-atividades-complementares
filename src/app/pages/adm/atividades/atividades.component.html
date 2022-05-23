@@ -11,15 +11,15 @@
           <datalist id="lista-grupos">
             <option *ngFor="let grupo of grupos">{{grupo.nome}}</option>
           </datalist>
-        <button class="btn btn-white" [disabled]="desabilitaButton || grupos.length == 0" (click)="searchAtividadesByGrupo()">
-          Buscar
-        </button>
-      </div>
-      <div class="row centered">
-        <button class="btn btn-white mt-4" (click)="openModalAddGrupo()" [disabled]="alertas.grupo">
-          Novo Grupo
-        </button>
-      </div>     
+        <div class="btn-group" role="group">
+          <button class="btn btn-white" [disabled]="desabilitaButton || grupos.length == 0" (click)="searchAtividadesByGrupo()">
+            Buscar
+          </button>
+          <button class="btn btn-white" (click)="openModalAddGrupo()" [disabled]="alertas.grupoError">
+            Novo Grupo
+          </button>
+        </div> 
+      </div>    
     </div>
   </div>
 </div>
@@ -27,6 +27,7 @@
 <div class="container-fluid" *ngIf="grupoSelecionado.id != undefined && grupoSelecionado.id != null">
   <div class="card">
     <div class="card-header">
+      <div class="row title-grupo">{{grupoSelecionado.nome}}</div>
       <i class="fas fa-user" style="margin-right: 10px;"></i>Criar nova atividade
       <input class="form-control form-control-card" [(ngModel)]="novaAtividade.nome">
       <button class="btn btn-white" (click)="createAtividade()"
@@ -36,7 +37,8 @@
     </div>
     <div class="card-body" style="padding: 0;">
       <table id="myTable" class="table table-light table-bordered">
-        <col style="width: 95%">
+        <col style="width: 90%">
+        <col style="width: 5%">
         <col style="width: 5%">
         <thead>
           <tr></tr>
@@ -44,6 +46,11 @@
         <tbody>
           <tr *ngFor="let atividade of atividades">
             <td>{{atividade.nome}}</td>
+            <td class="center">
+              <i class="far fa-edit fa-2x" style="cursor: pointer;"
+              (click)="openModalUpdateAtividade(atividade)" data-toggle="tooltip"
+              title="Editar esta atividade."></i>
+            </td>
             <td class="center">
               <i class="far fa-times-circle fa-2x" style="cursor: pointer;"
               (click)="openModalDeleteAtividade(atividade.id)" data-toggle="tooltip"
@@ -57,33 +64,58 @@
 </div>
 
 <div class="container container-alert">
-  <div class="alert alerta-erro" role="alert" *ngIf="alertas.grupo">
-    <i class="fas fa-times-circle fa-lg"></i>{{alertas.grupoMensagem}}
+  <div class="alert alerta-erro" role="alert" *ngIf="alertas.grupoError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.grupoErrorMensagem}}
   </div>
-  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.saveGrupo">
-    <i class="fas fa-times-circle fa-lg"></i>{{alertas.saveGrupoMensagem}}
-    <button type="button" class="close" aria-label="Close" (click)="alertas.saveGrupo = false">
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.saveGrupoError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.saveGrupoErrorMensagem}}
+    <button type="button" class="close" aria-label="Close" (click)="alertas.saveGrupoError = false">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.deleteGrupo">
-    <i class="fas fa-times-circle fa-lg"></i>{{alertas.deleteGrupoMensagem}}
-    <button type="button" class="close" aria-label="Close" (click)="alertas.deleteGrupo = false">
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.deleteGrupoError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.deleteGrupoErrorMensagem}}
+    <button type="button" class="close" aria-label="Close" (click)="alertas.deleteGrupoError = false">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.deleteAtividade">
-    <i class="fas fa-times-circle fa-lg"></i>{{alertas.deleteAtividadeMensagem}}
-    <button type="button" class="close" aria-label="Close" (click)="alertas.deleteAtividade = false">
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.deleteAtividadeError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.deleteAtividadeErrorMensagem}}
+    <button type="button" class="close" aria-label="Close" (click)="alertas.deleteAtividadeError = false">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="alert alerta-aviso" role="alert" *ngIf="alertas.zeroAtividade">
-    <i class="fas fa-exclamation-triangle fa-lg"></i>{{alertas.zeroAtividadeMensagem}}
+  <div class="alert alerta-aviso" role="alert" *ngIf="alertas.zeroAtividadeError">
+    <i class="fas fa-exclamation-triangle fa-lg"></i>{{alertas.zeroAtividadeErrorMensagem}}
   </div>
-  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.saveAtividade">
-    <i class="fas fa-times-circle fa-lg"></i>{{alertas.saveAtividadeMensagem}}
-    <button type="button" class="close" aria-label="Close" (click)="alertas.saveAtividade = false">
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.saveAtividadeError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.saveAtividadeErrorMensagem}}
+    <button type="button" class="close" aria-label="Close" (click)="alertas.saveAtividadeError = false">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="alert alerta-erro alert-dismissible fade show" role="alert" *ngIf="alertas.updateAtividadeError">
+    <i class="fas fa-times-circle fa-lg"></i>{{alertas.updateAtividadeErrorMensagem}}
+    <button type="button" class="close" aria-label="Close" (click)="alertas.updateAtividadeError = false">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="alert alerta-sucesso alert-dismissible fade show" role="alert" *ngIf="alertas.saveGrupoSuccess">
+    <i class="fas fa-check-circle fa-lg"></i>{{alertas.saveGrupoSuccessMensagem}}
+    <button type="button" class="close" aria-label="Close" (click)="alertas.saveGrupoSuccess = false">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="alert alerta-sucesso alert-dismissible fade show" role="alert" *ngIf="alertas.saveAtividadeSuccess">
+    <i class="fas fa-check-circle fa-lg"></i>{{alertas.saveAtividadeSuccessMensagem}}
+    <button type="button" class="close" aria-label="Close" (click)="alertas.saveAtividadeSuccess = false">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="alert alerta-sucesso alert-dismissible fade show" role="alert" *ngIf="alertas.updateAtividadeSuccess">
+    <i class="fas fa-check-circle fa-lg"></i>{{alertas.updateAtividadeSuccessMensagem}}
+    <button type="button" class="close" aria-label="Close" (click)="alertas.updateAtividadeSuccess = false">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -95,7 +127,7 @@
     *ngIf="grupoSelecionado.id != undefined && grupoSelecionado.id != null">
       Excluir Grupo
     </button>
-    <a class="btn btn-white">Editar Pontuação</a>
+    <a href="pontuacoes/curso" class="btn btn-white">Editar Pontuação</a>
   </div>
 </div>
 
@@ -165,6 +197,24 @@
         (click)="deleteAtividade(atividadeToDeleteId)">
           Confirmar
         </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-update-atividade" class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body modal-body-editar">
+        <div class="form-group">
+          <label>Novo nome da Atividade:</label>
+          <textarea class="form-control" rows="5" [(ngModel)]="atividadeToUpdate.nome"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer modal-footer-editar">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="updateAtividade()" data-dismiss="modal"
+        [disabled]="atividadeToUpdate.nome == ''">Enviar</button>
       </div>
     </div>
   </div>

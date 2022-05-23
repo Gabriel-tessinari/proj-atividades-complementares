@@ -6,7 +6,8 @@ export class AreaJson {
 
   mockObject(): AreaJson {
     return {
-      id: MockUtil.injectNumber(),
+      id: 1,
+      //id: MockUtil.injectNumber(),
       name: MockUtil.injectString()
     } as AreaJson;
   }

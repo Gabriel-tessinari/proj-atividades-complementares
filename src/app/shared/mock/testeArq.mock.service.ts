@@ -5,6 +5,8 @@ import { CursoJson } from "../json/curso.json";
 import { HorasComplementaresJson } from "../json/horas-complementares.json";
 import { AtividadeJson } from "../json/atividade.json";
 import { GrupoAtividadesJson } from "../json/grupo-atividades.json";
+import { AreaJson } from "../json/area.json";
+import { PontuacaoJson } from "../json/pontuacao.json";
 
 @Injectable()
 export class TesteArqMockService {
@@ -21,6 +23,15 @@ export class TesteArqMockService {
     return AlunoJson.prototype.mockObject();
   }
 
+  //ÁREAS:
+  getAreas(): Array<AreaJson> {
+    let response = [];
+    for(let i = 0; i < MockUtil.injectNumber(10); i++) {
+      response.push(AreaJson.prototype.mockObject());
+    }
+    return response;
+  }
+
   //ATIVIDADES:
   getAtividades(): Array<AtividadeJson> {
     let response = [];
@@ -34,13 +45,24 @@ export class TesteArqMockService {
     return AtividadeJson.prototype.mockObject();
   }
 
-  deleteAtividade(): void{
-    console.log("TENTOU DELETAR UMA ATIVIDADE")
+  updateAtividade(): AtividadeJson {
+    return AtividadeJson.prototype.mockObject();
+  }
 
+  deleteAtividade(): void {
+    console.log("TENTOU DELETAR UMA ATIVIDADE");
   }
   
   //CURSOS:
   getCursos(): Array<CursoJson> {
+    let response = [];
+    for(let i = 0; i < MockUtil.injectNumber(10); i++) {
+      response.push(CursoJson.prototype.mockObject());
+    }
+    return response;
+  }
+
+  getCursosByArea(): Array<CursoJson> {
     let response = [];
     for(let i = 0; i < MockUtil.injectNumber(10); i++) {
       response.push(CursoJson.prototype.mockObject());
@@ -62,7 +84,7 @@ export class TesteArqMockService {
   }
 
   deleteGrupoAtividades(): void {
-    console.log("TENTOU DELETAR UM GRUPO DE ATIVIDADES")
+    console.log("TENTOU DELETAR UM GRUPO DE ATIVIDADES");
   }
 
   //HORAS COMPLEMENTARES:
@@ -83,6 +105,20 @@ export class TesteArqMockService {
   }
 
   updateHoraComplementarStatus(): HorasComplementaresJson { 
-    return HorasComplementaresJson.prototype.mockObject();
+    return HorasComplementaresJson.prototype.
+    mockObject();
+  }
+
+  //PONTUAÇÕES:
+  getPontuacoes(): Array<PontuacaoJson> {
+    let response = [];
+    for(let i = 0; i < MockUtil.injectNumber(10); i++) {
+      response.push(PontuacaoJson.prototype.mockObject());
+    }
+    return response;
+  }
+
+  saveOrUpdatePontuacao(): void {
+    console.log("TENTOU SALVAR UMA PONTUAÇÃO");
   }
 }

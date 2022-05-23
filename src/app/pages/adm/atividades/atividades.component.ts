@@ -21,6 +21,7 @@ export class AtividadesComponent implements OnInit {
   novaAtividade: AtividadeJson;
   atividades: Array<AtividadeJson>;
   atividadeToDeleteId: number;
+  atividadeToUpdate: AtividadeJson;
 
   constructor(
     private testeArqService: TesteArqService
@@ -36,6 +37,7 @@ export class AtividadesComponent implements OnInit {
     this.alertas = new Alertas();
     this.novoGrupo = new GrupoAtividadesJson();
     this.novaAtividade = new AtividadeJson();
+    this.atividadeToUpdate = new AtividadeJson();
     this.atividadeToDeleteId = 0;
     this.loadGrupos();
   }
@@ -48,7 +50,7 @@ export class AtividadesComponent implements OnInit {
       },
       error => {
         console.log(error);
-        this.alertas.grupo = true;
+        this.alertas.grupoError = true;
       }
     );
   }
@@ -98,7 +100,8 @@ export class AtividadesComponent implements OnInit {
       }
     });
 
-    this.alertas.zeroAtividade = (this.atividades.length == 0);
+    this.inputGrupoSelecionado = '';
+    this.alertas.zeroAtividadeError = (this.atividades.length == 0);
   }
 
   saveGrupo() {
@@ -107,13 +110,15 @@ export class AtividadesComponent implements OnInit {
       .subscribe(
         () => {
           this.ngOnInit();
+          this.alertas.saveGrupoSuccess = true;
+          this.alertSuccessTimer('grupo');
         },
         error => {
           console.log(error);
-          this.alertas.saveGrupo = true;
+          this.alertas.saveGrupoError = true;
         }
       );
-    } else this.alertas.saveGrupo = true;
+    } else this.alertas.saveGrupoError = true;
   }
 
   validaGrupo(): boolean {
@@ -135,7 +140,7 @@ export class AtividadesComponent implements OnInit {
       },
       error => {
         console.log(error);
-        this.alertas.deleteGrupo = true;
+        this.alertas.deleteGrupoError = true;
       }
     );
   }
@@ -165,7 +170,7 @@ export class AtividadesComponent implements OnInit {
       },
       error => {
         console.log(error);
-        this.alertas.deleteAtividade = true;
+        this.alertas.deleteAtividadeError = true;
       }
     );
   }
@@ -187,14 +192,16 @@ export class AtividadesComponent implements OnInit {
       .subscribe(
         () => {
           this.novaAtividade.nome = '';
+          this.alertas.saveAtividadeSuccess = true;
+          this.alertSuccessTimer('atividade');
           this.loadAtividades();
         },
         error => {
           console.log(error);
-          this.alertas.saveAtividade = true;
+          this.alertas.saveAtividadeError = true;
         }
       );
-    } else this.alertas.saveAtividade = true;
+    } else this.alertas.saveAtividadeError = true;
   }
 
   validaAtividade(): boolean {
@@ -204,6 +211,22 @@ export class AtividadesComponent implements OnInit {
     });
 
     return valida;
+  }
+
+  updateAtividade() {
+    this.testeArqService.updateAtividade(this.atividadeToUpdate)
+    .subscribe(
+      () => {
+        this.atividadeToUpdate = new AtividadeJson;
+        this.alertas.updateAtividadeSuccess = true;
+        this.alertSuccessTimer('updateAtividade');
+        this.loadAtividades();
+      },
+      error => {
+        console.log(error);
+        this.alertas.updateAtividadeError = true;
+      }
+    );
   }
 
   openModalAddGrupo() {
@@ -231,40 +254,81 @@ export class AtividadesComponent implements OnInit {
       backdrop: 'static'
     });
   }
+
+  openModalUpdateAtividade(atividade: AtividadeJson) {
+    this.atividadeToUpdate = atividade;
+
+    $("#modal-update-atividade").modal({
+      show: true,
+      keyboard: false,
+      backdrop: 'static'
+    });
+  }
+
+  alertSuccessTimer(alert: string) {
+    setTimeout(() => {
+      alert == 'grupo' ?
+      this.alertas.saveGrupoSuccess = false :
+      alert == 'atividade' ?
+      this.alertas.saveAtividadeSuccess = false :
+      alert == 'updateAtividade' ?
+      this.alertas.updateAtividadeSuccess = false :
+      {}
+    }, 3500);
+  }
 }
 
 
 class Alertas {
-  grupo: boolean;
-  saveGrupo: boolean;
-  deleteGrupo: boolean;
-  atividade: boolean;
-  zeroAtividade: boolean;
-  deleteAtividade: boolean;
-  saveAtividade: boolean;
+  grupoError: boolean;
+  saveGrupoError: boolean;
+  deleteGrupoError: boolean;
+  atividadeError: boolean;
+  zeroAtividadeError: boolean;
+  deleteAtividadeError: boolean;
+  saveAtividadeError: boolean;
+  updateAtividadeError: boolean;
+
+  saveGrupoSuccess: boolean;
+  saveAtividadeSuccess: boolean;
+  updateAtividadeSuccess: boolean;
  
-  grupoMensagem: string;
-  saveGrupoMensagem: string;
-  deleteGrupoMensagem: string;
-  atividadeMensagem: string;
-  zeroAtividadeMensagem: string;
-  deleteAtividadeMensagem: string;
-  saveAtividadeMensagem: string;
+  grupoErrorMensagem: string;
+  saveGrupoErrorMensagem: string;
+  deleteGrupoErrorMensagem: string;
+  atividadeErrorMensagem: string;
+  zeroAtividadeErrorMensagem: string;
+  deleteAtividadeErrorMensagem: string;
+  saveAtividadeErrorMensagem: string;
+  updateAtividadeErrorMensagem: string;
+
+  saveGrupoSuccessMensagem: string;
+  saveAtividadeSuccessMensagem: string;
+  updateAtividadeSuccessMensagem: string;
 
   constructor() {
-    this.grupo = false;
-    this.saveGrupo = false;
-    this.deleteGrupo = false;
-    this.atividade = false;
-    this.zeroAtividade = false;
-    this.deleteAtividade = false;
-    this.saveAtividade = false;
-    this.grupoMensagem = 'Erro ao carregar a lista de grupos de atividades.';
-    this.saveGrupoMensagem = 'Erro ao criar novo grupo de atividades. Tente novamente.';
-    this.deleteGrupoMensagem = 'Erro ao deletar grupo de atividades. Tente novamente.';
-    this.atividadeMensagem = 'Erro ao carregar as atividades do grupo selecionado.';
-    this.zeroAtividadeMensagem = 'Não há atividade no grupo selecionado.';
-    this.deleteAtividadeMensagem = 'Erro ao deletar atividade. Tente novamente.';
-    this.saveAtividadeMensagem = 'Erro ao criar nova atividade no grupo selecionado. Tente novamente.';
+    this.grupoError = false;
+    this.saveGrupoError = false;
+    this.deleteGrupoError = false;
+    this.atividadeError = false;
+    this.zeroAtividadeError = false;
+    this.deleteAtividadeError = false;
+    this.saveAtividadeError = false;
+    this.updateAtividadeError = false;
+    this.grupoErrorMensagem = 'Erro ao carregar a lista de grupos de atividades.';
+    this.saveGrupoErrorMensagem = 'Erro ao criar novo grupo de atividades. Tente novamente.';
+    this.deleteGrupoErrorMensagem = 'Erro ao deletar grupo de atividades. Tente novamente.';
+    this.atividadeErrorMensagem = 'Erro ao carregar as atividades do grupo selecionado.';
+    this.zeroAtividadeErrorMensagem = 'Não há atividade no grupo selecionado.';
+    this.deleteAtividadeErrorMensagem = 'Erro ao deletar atividade. Tente novamente.';
+    this.saveAtividadeErrorMensagem = 'Erro ao criar nova atividade no grupo selecionado. Tente novamente.';
+    this.updateAtividadeErrorMensagem = 'Erro ao salvar alterações da atividade no grupo selecionado. Tente novamente.'
+    
+    this.saveGrupoSuccess = false;
+    this.saveAtividadeSuccess = false;
+    this.updateAtividadeSuccess = false;
+    this.saveGrupoSuccessMensagem = 'Grupo de Atividades criado com sucesso.';
+    this.saveAtividadeSuccessMensagem = 'Atividade criada com sucesso.';
+    this.updateAtividadeSuccessMensagem = 'Atividade atualizada com sucesso.';
   }
 }

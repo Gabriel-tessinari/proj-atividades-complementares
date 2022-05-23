@@ -10,6 +10,9 @@ import { HorasComplementaresJson } from '../json/horas-complementares.json';
 import { HorasComplementaresAtualizaStatusJson } from '../json/horas-complementares-atualiza-status.json';
 import { AtividadeJson } from '../json/atividade.json';
 import { GrupoAtividadesJson } from '../json/grupo-atividades.json';
+import { AreaJson } from '../json/area.json';
+import { PontuacaoJson } from '../json/pontuacao.json';
+
 
 @Injectable()
 export class TesteArqService extends ServiceBase {
@@ -30,6 +33,13 @@ export class TesteArqService extends ServiceBase {
     return this.get();
   }
 
+  //ÁREAS:
+  getAreas(): Observable<Array<AreaJson>> {
+    if(environment.mock) return of(TesteArqMockService.prototype.getAreas());
+    this.path = 'Area';
+    return this.get();
+  }
+
   //ATIVIDADES:
   getAtividades(): Observable<Array<AtividadeJson>> {
     if(environment.mock) return of(TesteArqMockService.prototype.getAtividades());
@@ -37,11 +47,16 @@ export class TesteArqService extends ServiceBase {
     return this.get();
   }
 
-  createAtividade(newAtividade: GrupoAtividadesJson): Observable<AtividadeJson> {
-    console.log(newAtividade)
+  createAtividade(newAtividade: AtividadeJson): Observable<AtividadeJson> {
     if(environment.mock) return of(TesteArqMockService.prototype.createAtividade());
     this.path = 'Atividades';
     return this.post(newAtividade);
+  }
+
+  updateAtividade(atividade: AtividadeJson): Observable<AtividadeJson> {
+    if(environment.mock) return of(TesteArqMockService.prototype.updateAtividade());
+    this.path = 'Atividades';
+    return this.put(atividade);
   }
 
   deleteAtividade(id: number): Observable<void> {
@@ -54,6 +69,12 @@ export class TesteArqService extends ServiceBase {
   getCursos(): Observable<Array<CursoJson>> {
     if(environment.mock) return of(TesteArqMockService.prototype.getCursos());
     this.path = 'Curso';
+    return this.get();
+  }
+
+  getCursosByArea(areaId: number): Observable<Array<CursoJson>> {
+    if(environment.mock) return of(TesteArqMockService.prototype.getCursosByArea());
+    this.path = 'Curso/Area/' + areaId;
     return this.get();
   }
 
@@ -93,5 +114,18 @@ export class TesteArqService extends ServiceBase {
     if(environment.mock) return of(TesteArqMockService.prototype.updateHoraComplementarStatus());
     this.path = 'HorasComplementares/AtualizaStatus';
     return this.post(updateStatus);
+  }
+
+  //PONTUAÇÕES:
+  getPontuacoes(): Observable<Array<PontuacaoJson>> {
+    if(environment.mock) return of(TesteArqMockService.prototype.getPontuacoes());
+    this.path = 'Pontuacao';
+    return this.get();
+  }
+
+  saveOrUpdatePontuacao(pontuacao: PontuacaoJson): Observable<void> {
+    if(environment.mock) return of(TesteArqMockService.prototype.saveOrUpdatePontuacao());
+    this.path = 'Pontuacao';
+    return this.put(pontuacao);
   }
 }

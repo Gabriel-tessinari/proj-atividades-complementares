@@ -1,0 +1,73 @@
+.navheader-logo {
+  width: 150px;
+  padding: 15px 10px 15px 10px !important;
+  display: block;
+  margin: 0 auto;
+}
+
+.titulo-portal {
+  color: #353F7F;
+  padding-left: 30px;
+  margin-top: 31px;
+  font-size: 18px;
+  font-weight: bold;
+  border-left: 1px solid rgba(222, 222, 222, .96);
+}
+
+.navbar-static-side {
+  z-index: 1;
+  width: 280px;
+  float: left;
+  background-color: transparent;
+}
+
+.nav {
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+
+  li {
+    position: relative;
+    display: block;
+  }
+}
+
+.perfil-aluno {
+  padding: 15px;
+  background: url(../../../../assets/img/user-bg.jpg) no-repeat !important;
+  min-height: 230px;
+}
+
+.img-avatar {
+  border: 4px solid #FFFFFF;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+  display: block;
+  margin: 10px auto;
+  border-radius: 50%;
+}
+
+.perfil-aluno-nome {
+  color: #FFFFFF;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+
+.perfil-aluno-matricula {
+  color: #8DD8FF;
+  width: 100%;
+  margin-bottom: 0;
+  display: block;
+  text-align: center;
+}
+
+.curso-aluno {
+  color: #FFFFFF;
+  display: block;
+  text-align: center;
+}

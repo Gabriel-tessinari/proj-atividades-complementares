@@ -18,7 +18,8 @@
   z-index: 1;
   width: 280px;
   float: left;
-  background-color: transparent;
+  background-color: #2C2F43;
+  min-height: calc(100vh - 50px);
 }
 
 .nav {
@@ -29,7 +30,71 @@
   li {
     position: relative;
     display: block;
+    width: 100%;
+
+    a:hover {
+      background-color: #31354C !important;
+      color: #FFFFFF !important;
+      border-left: 4px solid #6A92CD;
+      padding-left: 25px !important;
+    }
+
+    a {
+      color: #C8C7D2;
+      display: block;
+      padding: 14px 15px;
+      position: relative;
+      text-decoration: none;
+
+      i {
+        font-size: 18px;
+        margin-right: 10px;
+        text-align: center;
+        width: 20px;
+      }
+    }
   }
+}
+
+.nav-second-level {
+  li {
+    a {
+      padding-left: 37px;
+    }
+  }
+}
+
+.collapse {
+  display: none;
+}
+
+.collapse.in {
+  display: block;
+}
+
+.btn-nav {
+  background-color: inherit;
+  border: 0;
+  color: #C8C7D2;
+  display: block;
+  padding: 14px 15px;
+  position: relative;
+  text-align: inherit;
+  width: 100%;
+
+  i {
+    font-size: 18px;
+    margin-right: 10px;
+    text-align: center;
+    width: 20px;
+  }
+}
+
+.btn-nav:hover {
+  background-color: #31354C !important;
+  color: #FFFFFF !important;
+  border-left: 4px solid #6A92CD;
+  padding-left: 25px !important;
 }
 
 .perfil-aluno {

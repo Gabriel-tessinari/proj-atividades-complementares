@@ -8,6 +8,7 @@ import { AlunoJson } from '../../json/aluno.json';
 })
 export class AlunoHeaderComponent implements OnInit {
   aluno: AlunoJson;
+  open: boolean;
 
   constructor() { }
 
@@ -22,5 +23,11 @@ export class AlunoHeaderComponent implements OnInit {
         name: 'Ciência da Computação'
       }
     } as AlunoJson;
+
+    this.open = false;
+  }
+
+  toggleOpen() {
+    this.open = !this.open;
   }
 }

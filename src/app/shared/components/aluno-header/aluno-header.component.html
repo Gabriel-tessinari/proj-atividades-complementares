@@ -22,7 +22,24 @@
       <div style="clear: both;"></div>
     </li>
     <li>
-      <a href="/aluno/view-horas"></a>
+      <button class="btn-nav" (click)="toggleOpen()">
+        <i class="fas fa-scroll"></i>
+        Atividades Complementares
+      </button>
     </li>
+    <ul class="nav nav-second-level collapse" [ngClass]="open ? 'in' : {}">
+      <li>
+        <a href="/aluno/add-horas">
+          <i class="fas fa-plus-circle"></i>
+          Adicionar Certificado
+        </a>
+      </li>
+      <li>
+        <a href="/aluno/view-horas">
+          <i class="far fa-eye"></i>
+          Visualizar Atividades
+        </a>
+      </li>
+    </ul>
   </ul>
 </div>

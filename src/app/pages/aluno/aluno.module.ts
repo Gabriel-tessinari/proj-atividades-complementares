@@ -6,12 +6,14 @@ import { AlunoRoutingModule } from './aluno-routing.module';
 import { TesteArqService } from 'src/app/shared/services/testeArq.service';
 import { AlunoAddHorasComponent } from './aluno-add-horas/aluno-add-horas.component';
 import { AlunoViewHorasComponent } from './aluno-view-horas/aluno-view-horas.component';
+import { AlunoEmptyComponent } from './aluno-empty/aluno-empty.component';
 
 
 @NgModule({
   declarations: [
     AlunoAddHorasComponent,
-    AlunoViewHorasComponent
+    AlunoViewHorasComponent,
+    AlunoEmptyComponent
   ],
   imports: [
     CommonModule,

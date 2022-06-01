@@ -1,2 +1,22 @@
 @import '../../../../assets/scss/variables';
 @import '../../../../assets/scss/aluno.scss';
+
+.pts-container {
+  padding: 18px;
+  text-align: center;
+  border-bottom: 1px solid black;
+  font-weight: bold;
+}
+
+.pts-label {
+  margin-right: 4rem;
+}
+
+.pts-pdt {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+
+  .pts {
+    color: red;
+  }
+}

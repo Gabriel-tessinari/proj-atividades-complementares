@@ -15,7 +15,54 @@
       </ol>
 
       <div class="conteudo col-xs-12 col-md-12 col-sm-12 col-lg-12">
+        <div class="row ml-0 mr-0 pts-container">
+          <div class="col-4">
+            <span class="pts-label">Pontuação Aprovada:</span>
+            <span>{{pontosApr}}</span>
+          </div>
+          <div class="col-4 pts-pdt">
+            <span class="pts-label">Pontuação Pendente:</span>
+            <span class="pts">{{pontosPdt}}</span>
+          </div>
+          <div class="col-4">
+            <span class="pts-label">Pontuação Mínima Necessária:</span>
+            <span>{{pontosMin}}</span>
+          </div>
+        </div>
 
+        <div class="card mt-5">
+          <div class="card-header">Atividades Enviadas</div>
+          <div class="card-body" style="padding: 0;">
+            <table id="myTable" class="table table-light table-bordered mb-0">
+              <col style="width: 15%">
+              <col style="width: 55%">
+              <col style="width: 15%">
+              <col style="width: 15%">
+              <thead>
+                <tr>
+                  <th>Data de Envio</th>
+                  <th>Atividade</th>
+                  <th>Situação</th>
+                  <th>Pontuação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let linha of tabela">
+                  <td>{{linha.data}}</td>
+                  <td>{{linha.atividade.nome}}</td>
+                  <td class="center"
+                  [ngStyle]="{'color': linha.hora.status.descricao == 'Aprovado'? 'lightgreen' : 
+                  (linha.hora.status.descricao == 'Recusado'? 'red' : 'orange')}">
+                    {{linha.hora.status.descricao}}
+                  </td>
+                  <td class="center">
+                    <span>{{linha.pontos}}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>

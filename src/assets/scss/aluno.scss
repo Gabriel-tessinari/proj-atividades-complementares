@@ -37,3 +37,27 @@
   padding-top: 15px;
   padding-bottom: 15px;
 }
+
+/*Tabelas*/
+th {
+  cursor: pointer;
+  background-color: map-get($colors, mdgrey);
+  padding: 16px;
+}
+
+th, td {
+  text-align: left;
+  border-color: map-get($colors, mdgrey);
+  vertical-align: middle;
+}
+
+td.center {
+  text-align: center;
+}
+
+td.center-double {
+  text-align: center;
+  a {
+    margin: 5px;
+  }
+}

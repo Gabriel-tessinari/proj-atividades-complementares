@@ -1,0 +1,38 @@
+.page {
+  margin: 40px 0 0 280px;
+  padding: 0 30px;
+}
+
+.page-header {
+  font-size: 28px;
+  color: #666666;
+  border: 0;
+  margin-bottom: 40px;
+  padding-bottom: 9px;
+}
+
+.breadcrumb {
+  padding: 8px 15px;
+  margin-bottom: 20px;
+  list-style: none;
+  background-color: #F5F5F5;
+  border-radius: 4px;
+
+  i {
+    padding: 0 5px;
+    color: #CCCCCC
+  }
+
+  li.active {
+    color: #999999;
+  }
+}
+
+.conteudo {
+  background-color: #FFFFFF;
+  box-shadow: 2px 2px 2px #DDDDDD;
+  min-height: 500px;
+  border: 1px solid #E7E7E7;
+  margin-bottom: 30px;
+  padding-top: 15px;
+}

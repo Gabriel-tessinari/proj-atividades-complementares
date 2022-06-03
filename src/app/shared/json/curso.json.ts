@@ -4,6 +4,7 @@ import { AreaJson } from "./area.json";
 export class CursoJson {
   id: number;
   name: string;
+  pontuacaoMin: number;
   areaId: number;
   area: AreaJson;
 
@@ -11,6 +12,7 @@ export class CursoJson {
     return {
       id: MockUtil.injectNumber(),
       name: MockUtil.injectString(),
+      pontuacaoMin: MockUtil.injectNumber(),
       areaId: 1,
       //areaId: MockUtil.injectNumber(),
       area: AreaJson.prototype.mockObject()

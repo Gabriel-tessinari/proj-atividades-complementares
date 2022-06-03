@@ -1,0 +1,140 @@
+.navheader-logo {
+  width: 150px;
+  padding: 15px 10px 15px 10px !important;
+  display: block;
+  margin: 0 auto;
+}
+
+.titulo-portal {
+  color: #353F7F;
+  padding-left: 30px;
+  margin-top: 31px;
+  font-size: 18px;
+  font-weight: bold;
+  border-left: 1px solid rgba(222, 222, 222, .96);
+}
+
+.navbar-static-side {
+  z-index: 1;
+  width: 280px;
+  float: left;
+  background-color: #2C2F43;
+  min-height: calc(100vh - 50px);
+}
+
+.nav {
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+
+  li {
+    position: relative;
+    display: block;
+    width: 100%;
+
+    a:hover {
+      background-color: #31354C !important;
+      color: #FFFFFF !important;
+      border-left: 4px solid #6A92CD;
+      padding-left: 25px !important;
+    }
+
+    a {
+      color: #C8C7D2;
+      display: block;
+      padding: 14px 15px;
+      position: relative;
+      text-decoration: none;
+
+      i {
+        font-size: 18px;
+        margin-right: 10px;
+        text-align: center;
+        width: 20px;
+      }
+    }
+  }
+}
+
+.nav-second-level {
+  width: 100%;
+  li {
+    width: 100%;
+    a {
+      padding-left: 37px;
+    }
+  }
+}
+
+.collapse {
+  display: none;
+}
+
+.collapse.in {
+  display: block;
+}
+
+.btn-nav {
+  background-color: inherit;
+  border: 0;
+  color: #C8C7D2;
+  display: block;
+  padding: 14px 15px;
+  position: relative;
+  text-align: inherit;
+  width: 100%;
+
+  i {
+    font-size: 18px;
+    margin-right: 10px;
+    text-align: center;
+    width: 20px;
+  }
+}
+
+.btn-nav:hover {
+  background-color: #31354C !important;
+  color: #FFFFFF !important;
+  border-left: 4px solid #6A92CD;
+  padding-left: 25px !important;
+}
+
+.perfil-aluno {
+  padding: 15px;
+  background: url(../../../../assets/img/user-bg.jpg) no-repeat !important;
+  min-height: 230px;
+}
+
+.img-avatar {
+  border: 4px solid #FFFFFF;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+  display: block;
+  margin: 10px auto;
+  border-radius: 50%;
+}
+
+.perfil-aluno-nome {
+  color: #FFFFFF;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+
+.perfil-aluno-matricula {
+  color: #8DD8FF;
+  width: 100%;
+  margin-bottom: 0;
+  display: block;
+  text-align: center;
+}
+
+.curso-aluno {
+  color: #FFFFFF;
+  display: block;
+  text-align: center;
+}

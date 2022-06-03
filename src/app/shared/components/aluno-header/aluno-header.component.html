@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0;">
+  <a class="navbar-brand" style="width: 250px;">
+    <img class="navheader-logo" src="../../../../assets/img/logouvv.png">
+  </a>
+  <p class="titulo-portal">Portal do Aluno</p>
+</nav>
+<div class="navbar-static-side">
+  <ul class="nav menu-nav">
+    <li class="perfil-aluno">
+      <div class="col-12">
+        <div class="img-avatar"></div>
+      </div>
+      <div class="col-12">
+        <p class="perfil-aluno-nome">{{aluno.nome}}</p>
+      </div>
+      <div class="col-12">
+        <p class="perfil-aluno-matricula">Matrícula: {{aluno.matricula}}</p>
+      </div>
+      <div class="col-12">
+        <p class="curso-aluno">{{aluno.curso.name}}</p>
+      </div>
+      <div style="clear: both;"></div>
+    </li>
+    <li>
+      <button class="btn-nav" (click)="toggleOpen()">
+        <i class="fas fa-scroll"></i>
+        Atividades Complementares
+      </button>
+    </li>
+    <ul class="nav nav-second-level collapse" [ngClass]="open ? 'in' : {}">
+      <li>
+        <a href="/aluno/add-horas">
+          <i class="fas fa-plus-circle"></i>
+          Adicionar Certificado
+        </a>
+      </li>
+      <li>
+        <a href="/aluno/view-horas">
+          <i class="far fa-eye"></i>
+          Visualizar Atividades
+        </a>
+      </li>
+    </ul>
+  </ul>
+</div>

@@ -1,0 +1,65 @@
+<div class="page">
+  <div class="row ml-0 mr-0"  style="display: block;">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12 col-md-12">
+          <h1 class="page-header">Adicionar Certificado</h1>
+        </div>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <a href="aluno">Minhas Disciplinas</a>
+        </li>
+        <i>/</i>
+        <li class="active">Adicionar Certificado</li>
+      </ol>
+
+      <div class="conteudo col-xs-12 col-md-12 col-sm-12 col-lg-12">
+        <div class="row">
+          <div class="col-12">
+            <h5>Grupo</h5>
+            <select name="selectGrupo" class="form-control"
+            [(ngModel)]="idGrupoSelecionado" (change)="loadAtividades()">
+              <option hidden disabled selected [value]="0">Selecione um grupo</option>
+              <option *ngFor="let grupo of grupos" [value]="grupo.id">{{grupo.nome}}</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-12">
+            <h5>Atividade</h5>
+            <select name="selectAtividade" class="form-control" [disabled]="idGrupoSelecionado == 0"
+            [(ngModel)]="idAtividadeSelecionada">
+              <option hidden disabled selected [value]="0">Selecione uma atividade</option>
+              <option *ngFor="let atividade of atividades" [value]="atividade.id">{{atividade.nome}}</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="exampleFormControlFile1"><b>Enviar certificado</b></label>
+              <input type="file" class="form-control-file" id="exampleFormControlFile1">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label><b>Escreva no campo abaixo a descrição do certificado</b></label>
+              <textarea class="form-control" rows="5" style="resize: none;"
+              [disabled]="idAtividadeSelecionada == 0"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <button type="button" class="btn btn-primary">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

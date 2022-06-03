@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { AdmDefaultComponent } from './adm-default/adm-default.component';
-import { AdmModule } from 'src/app/pages/adm/adm.module';
+import { AlunoDefaultComponent } from './aluno-default/aluno-default.component';
+import { AlunoModule } from 'src/app/pages/aluno/aluno.module';
 import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
-  declarations: [AdmDefaultComponent],
+  declarations: [AlunoDefaultComponent],
   imports: [
     CommonModule,
     RouterModule,
-    AdmModule,
+    AlunoModule,
     ComponentsModule
   ]
 })
-export class AdmDefaultModule { }
+export class AlunoDefaultModule { }
